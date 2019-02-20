@@ -18,19 +18,21 @@ exports.registration = (req, res) => {
         var responseResult = {}
         userService.registration(req.body, (err, result) => {
             if (err) {
-                responseResult.success = false;
+                responseResult.status = false;
+                responseResult.message = 'Registration Failed';
                 responseResult.error = err;
                 res.status(500).send(responseResult);
             }
             else {
-                responseResult.success = true;
-                responseResult.result = result;
-                const payload = {
-                    user_id: responseResult.result._id
-                }
-                console.log(payload);
-                const obj = token.GenerateToken(payload);
-                responseResult.token=obj;
+                responseResult.status = true;
+                responseResult.message = 'Registered Successfull';
+                // responseResult.result = result;
+                // const payload = {
+                //     user_id: responseResult.result._id
+                // }
+                // console.log(payload);
+                // const obj = token.GenerateToken(payload);
+                // responseResult.token = obj;
                 res.status(200).send(responseResult);
             }
         })
@@ -47,19 +49,21 @@ exports.login = (req, res) => {
         var responseResult = {};
         userService.login(req.body, (err, result) => {
             if (err) {
-                responseResult.success = false;
+                responseResult.status = false;
+                responseResult.message = 'Login Failed';
                 responseResult.error = err;
                 res.status(500).send(responseResult);
             }
             else {
-                responseResult.success = true;
+                responseResult.status = true;
+                responseResult.message = 'Login Successfully';
                 responseResult.result = result;
                 const payload = {
                     user_id: responseResult.result._id
                 }
                 console.log(payload);
                 const obj = token.GenerateToken(payload);
-                responseResult.token=obj;
+                responseResult.token = obj;
                 res.status(200).send(responseResult);
             }
         })
@@ -76,19 +80,21 @@ exports.forgotPassword = (req, res) => {
         var responseResult = {};
         userService.getUserEmail(req.body, (err, result) => {
             if (err) {
-                responseResult.success = false;
+                responseResult.status = false;
+                responseResult.message = 'Failed to sent link';
                 responseResult.error = err;
                 res.status(500).send(responseResult)
             }
             else {
-                responseResult.success = true;
-                responseResult.result = result;
-                const payload = {
-                    user_id: responseResult.result._id
-                }
-                console.log(payload);
-                const obj = token.GenerateToken(payload);
-                responseResult.token=obj;
+                responseResult.status = true;
+                responseResult.message = 'resetPassword link is sent to your registered email_Id';
+                // responseResult.result = result;
+                // const payload = {
+                //     user_id: responseResult.result._id
+                // }
+                // console.log(payload);
+                // const obj = token.GenerateToken(payload);
+                // responseResult.token = obj;
                 res.status(200).send(responseResult);
             }
         })
@@ -105,19 +111,21 @@ exports.resetPassword = (req, res) => {
         var responseResult = {};
         userService.resetpassword(req, (err, result) => {
             if (err) {
-                responseResult.success = false;
+                responseResult.status = false;
+                responseResult.message = 'Password Reset failed';
                 responseResult.error = err;
                 res.status(500).send(responseResult)
             }
             else {
-                responseResult.success = true;
+                responseResult.status = true;
+                responseResult.message = 'Password Reset Successfully';
                 responseResult.result = result;
                 const payload = {
                     user_id: responseResult.result._id
                 }
                 console.log(payload);
                 const obj = token.GenerateToken(payload);
-                responseResult.token=obj;
+                responseResult.token = obj;
                 res.status(200).send(responseResult);
             }
         })
@@ -134,12 +142,12 @@ exports.getAllUsers = (req, res) => {
         var responseResult = {}
         userService.getAllUsers((err, result) => {
             if (err) {
-                responseResult.success = false;
+                responseResult.status = false;
                 responseResult.error = err;
                 res.status(500).send(responseResult)
             }
             else {
-                responseResult.success = true;
+                responseResult.status = true;
                 responseResult.result = result;
                 res.status(200).send(responseResult);
             }

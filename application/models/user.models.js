@@ -27,9 +27,6 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String, require: [true, "password require"]
     },
-},
-    {
-        timestamps: true
     });
 var user = mongoose.model('User', UserSchema);
 function userModel() { }
@@ -103,16 +100,16 @@ userModel.prototype.login = (body, callback) => {
  * update the user password and store it in database
  */
 userModel.prototype.updateUserPassword = (req, callback) => {
-    console.log("request===>",req.decoded);
+    console.log("request===>", req.decoded);
     let newpassword = bcrypt.hashSync(req.body.password, saltRounds);
     console.log('new pass bcrypt--', newpassword);
     user.updateOne({ _id: req.decoded.payload.user_id }, { password: newpassword }, (err, result) => {
-        console.log("result ==>",result.newpassword)
+        console.log("result ==>", result.newpassword)
         if (err) {
             callback(err);
         }
         else {
-            console.log("result ==>",result);
+            console.log("result ==>", result);
             callback(null, result);
         }
     });
@@ -130,7 +127,7 @@ userModel.prototype.findUserEmail = (data, callback) => {
                 callback(null, result);
             }
             else {
-                callback("incorect mail")
+                callback("Incorrect mail")
             }
         }
     });

@@ -62,7 +62,7 @@ mongoose.connect(databaseConfig.url, {
 /**
  * define a simple route
  **/
-app.get('/', (req, res) => {
+app.get('/', (res) => {
     res.json({ "message": "Welcome to fundoo Notes App" });
 });
 /**

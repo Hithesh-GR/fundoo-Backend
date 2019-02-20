@@ -12,7 +12,7 @@ module.exports = {
  * @param {*} payload 
  */
     GenerateToken(payload) {
-        const token = jwt.sign({ payload }, 'secretkey', { expiresIn: 1000}) 
+        const token = jwt.sign({ payload }, 'secretkey', { expiresIn: 86400}) 
         const obj = {
             success: true,
             message: 'Token Generated Successfully!!',
