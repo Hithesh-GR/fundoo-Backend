@@ -7,9 +7,8 @@
  ******************************************************************************/
 var jwt = require('jsonwebtoken');
 exports.checkToken = (req, res, next) => {
-    var token1 = req.headers['token'];
-    console.log("token1=======>",token1);
-    
+    console.log("reuest===>", req.body);
+    var token1 = req.body.headers;
     /**
      * decode token
      **/
@@ -20,23 +19,21 @@ exports.checkToken = (req, res, next) => {
         jwt.verify(token1, 'secretkey', (err, decoded) => {
             if (err) {
                 return res.send({
-                    success: false,
+                    status: false,
                     message: 'Token is not valid..!'
                 });
-            }
-            else {
+            } else {
                 req.decoded = decoded;
                 next();
             }
         });
-    }
-    else {
+    } else {
         /**
          * if there is no token return an error
          **/
         return res.send({
-            success: false,
-            message: 'No token provided.'
+            status: false,
+            message: 'No token provided!!'
         });
     }
 }

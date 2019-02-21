@@ -9,7 +9,7 @@
  ******************************************************************************/
 const userModel = require('../application/models/user.models')
 /**
- * 
+ * it will send login data to model
  * @param {*} data 
  * @param {*} callback 
  */
@@ -20,8 +20,7 @@ exports.login = (data, callback) => {
             if (err) {
                 console.log("service error");
                 callback(err);
-            }
-            else {
+            } else {
                 console.log("In service", result);
                 callback(null, result);
             }
@@ -29,8 +28,9 @@ exports.login = (data, callback) => {
     } catch (error) {
         callback.send(error);
     }
-}/**
- * 
+}
+/**
+ *  it will send registration data to model
  * @param {*} data 
  * @param {*} callback 
  */
@@ -40,8 +40,7 @@ exports.registration = (data, callback) => {
             if (err) {
                 console.log("service error");
                 callback(err);
-            }
-            else {
+            } else {
                 console.log("In service", result);
                 callback(null, result);
             }
@@ -49,8 +48,9 @@ exports.registration = (data, callback) => {
     } catch (error) {
         callback.send(error);
     }
-}/**
- * 
+}
+/**
+ *  it will send forgotPassword data to model
  * @param {*} data 
  * @param {*} callback 
  */
@@ -68,14 +68,15 @@ exports.getUserEmail = (data, callback) => {
     } catch (error) {
         callback.send(error);
     }
-}/**
- * 
- * @param {*} req 
+}
+/**
+ *  it will send resetPassword data to model
+ * @param {*} data 
  * @param {*} callback 
  */
-exports.resetpassword = (req, callback) => {
+exports.resetpassword = (data, callback) => {
     try {
-        userModel.updateUserPassword(req, (err, result) => {
+        userModel.updateUserPassword(data, (err, result) => {
             if (err) {
                 console.log("service error");
                 callback(err);
@@ -87,19 +88,4 @@ exports.resetpassword = (req, callback) => {
     } catch (error) {
         callback.send(error);
     }
-}/**
- * 
- * @param {*} data 
- * @param {*} callback 
- */
-exports.getAllUsers = (data, callback) => {
-    userModel.getAllUsers(data, (err, result) => {
-        if (err) {
-            callback(err);
-        }
-        else {
-            callback(null, result);
-        }
-    })
-
 }

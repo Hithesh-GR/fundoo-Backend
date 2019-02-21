@@ -1,0 +1,19 @@
+{
+    "registrationData": {
+        "firstname": "lol",
+        "lastname": "ror",
+        "email": "mads@gmail.com",
+        "password": "2345678"
+    },
+    "loginData": {
+        "email": "mads@gmail.com",
+        "password": "2345678"
+    },
+    "forgotData": {
+        "email": "mads@gmail.com"
+    },
+    "resetData": {
+        "password": "123698547",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzZlODBhNjBkYzY3MDUwYzRjYmJiMmMifSwiaWF0IjoxNTUwNzQ2MDQ0LCJleHAiOjE1NTA4MzI0NDR9.LvWfFi1BWecat-5ZdedHFB4PoIFpmiXsyLc166rVaFo"
+    }
+}

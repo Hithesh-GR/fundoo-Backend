@@ -16,20 +16,30 @@ let saltRounds = 10;
  **/
 const UserSchema = mongoose.Schema({
     firstname: {
-        type: String, require: [true, "firstname require"]
+        type: String,
+        require: [true, "firstname require"]
     },
     lastname: {
-        type: String, require: [true, "lastname require"]
+        type: String,
+        require: [true, "lastname require"]
     },
     email: {
-        type: String, require: [true, "email require"]
+        type: String,
+        require: [true, "email require"]
     },
     password: {
-        type: String, require: [true, "password require"]
+        type: String,
+        require: [true, "password require"]
     },
-    });
+});
 var user = mongoose.model('User', UserSchema);
-function userModel() { }
+
+function userModel() {}
+
+function hash(password) {
+    var pass = bcrypt.hashSync(password, saltRounds);
+    return pass;
+}
 /**
  * Saving data into database using the user schema
  **/
@@ -37,26 +47,25 @@ userModel.prototype.registration = (body, callback) => {
     /**
      * Find the user by email in database if user with same email exists
      **/
-    user.find({ "email": body.email }, (err, data) => {
+    user.find({
+        "email": body.email
+    }, (err, data) => {
         if (err) {
             console.log("Error in registration");
             callback(err);
-        }
-        else {
-            if (data > 0) {
+        } else {
+            if (data.length > 0) {
                 console.log("email already exists");
                 callback("User already present");
-            }
-            else {
+            } else {
                 /**
                  * Create hash value of user password
                  **/
-                body.password = bcrypt.hashSync(body.password, saltRounds);
                 var newUser = new user({
                     "firstname": body.firstname,
                     "lastname": body.lastname,
                     "email": body.email,
-                    "password": body.password,
+                    "password": hash(body.password),
                 })
                 newUser.save((err, result) => {
                     if (err) {
@@ -76,11 +85,12 @@ userModel.prototype.registration = (body, callback) => {
  **/
 userModel.prototype.login = (body, callback) => {
     console.log("model ", body.password);
-    user.findOne({ "email": body.email }, (err, result) => {
+    user.findOne({
+        "email": body.email
+    }, (err, result) => {
         if (err) {
             callback(err);
-        }
-        else if (result != null) {
+        } else if (result != null) {
             bcrypt.compare(body.password, result.password).then(function (res) {
                 if (res) {
                     console.log("Login Succesfully");
@@ -102,13 +112,16 @@ userModel.prototype.login = (body, callback) => {
 userModel.prototype.updateUserPassword = (req, callback) => {
     console.log("request===>", req.decoded);
     let newpassword = bcrypt.hashSync(req.body.password, saltRounds);
-    console.log('new pass bcrypt--', newpassword);
-    user.updateOne({ _id: req.decoded.payload.user_id }, { password: newpassword }, (err, result) => {
+    console.log('new pass bcrypt==>', newpassword);
+    user.updateOne({
+        _id: req.decoded.payload.user_id
+    }, {
+        password: newpassword
+    }, (err, result) => {
         console.log("result ==>", result.newpassword)
         if (err) {
             callback(err);
-        }
-        else {
+        } else {
             console.log("result ==>", result);
             callback(null, result);
         }
@@ -118,29 +131,17 @@ userModel.prototype.updateUserPassword = (req, callback) => {
  * Finding user email into database using the findOne()
  */
 userModel.prototype.findUserEmail = (data, callback) => {
-    user.findOne({ "email": data.email }, (err, result) => {
-        if (err) {
-            callback(err);
-        }
-        else {
-            if (result !== null && data.email == result.email) {
-                callback(null, result);
-            }
-            else {
-                callback("Incorrect mail")
-            }
-        }
-    });
-}
-/**
- * get all users into the database using find()
- */
-userModel.prototype.getAllUsers = (callback) => {
-    user.find({}, (err, result) => {
+    user.findOne({
+        "email": data.email
+    }, (err, result) => {
         if (err) {
             callback(err);
         } else {
-            callback(null, result);
+            if (result !== null && data.email == result.email) {
+                callback(null, result);
+            } else {
+                callback("Incorrect mail")
+            }
         }
     });
 }

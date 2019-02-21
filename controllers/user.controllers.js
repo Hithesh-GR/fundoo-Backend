@@ -9,9 +9,9 @@ const userService = require('../services/user.services');
 const token = require('../token');
 const sent = require('../middleware/nodemailer');
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * It handles the registration data
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.registration = (req, res) => {
     try {
@@ -22,8 +22,7 @@ exports.registration = (req, res) => {
                 responseResult.message = 'Registration Failed';
                 responseResult.error = err;
                 res.status(500).send(responseResult);
-            }
-            else {
+            } else {
                 responseResult.status = true;
                 responseResult.message = 'Registered Successfull';
                 // responseResult.result = result;
@@ -39,10 +38,11 @@ exports.registration = (req, res) => {
     } catch (err) {
         res.send(err);
     }
-}/**
- * 
- * @param {*} req 
- * @param {*} res 
+}
+/**
+ * It handles the login data
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.login = (req, res) => {
     try {
@@ -53,8 +53,7 @@ exports.login = (req, res) => {
                 responseResult.message = 'Login Failed';
                 responseResult.error = err;
                 res.status(500).send(responseResult);
-            }
-            else {
+            } else {
                 responseResult.status = true;
                 responseResult.message = 'Login Successfully';
                 responseResult.result = result;
@@ -70,10 +69,11 @@ exports.login = (req, res) => {
     } catch (err) {
         res.send(err);
     }
-}/**
- * 
- * @param {*} req 
- * @param {*} res 
+}
+/**
+ * It handles the forgotPassword page
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.forgotPassword = (req, res) => {
     try {
@@ -84,27 +84,28 @@ exports.forgotPassword = (req, res) => {
                 responseResult.message = 'Failed to sent link';
                 responseResult.error = err;
                 res.status(500).send(responseResult)
-            }
-            else {
+            } else {
                 responseResult.status = true;
                 responseResult.message = 'resetPassword link is sent to your registered email_Id';
-                // responseResult.result = result;
-                // const payload = {
-                //     user_id: responseResult.result._id
-                // }
-                // console.log(payload);
-                // const obj = token.GenerateToken(payload);
-                // responseResult.token = obj;
-                res.status(200).send(responseResult);
+                responseResult.result = result;
+                const payload = {
+                    user_id: responseResult.result._id
+                }
+                console.log("payload in cntrl=>", payload);
+                const obj = token.GenerateToken(payload);
+                const url = `http://localhost:4000/resetPassword/${obj.token}`;
+                sent.sendEMailFunction(url);
+                res.status(200).send(url);
             }
         })
     } catch (err) {
         res.send(err);
     }
-}/**
- * 
- * @param {*} req 
- * @param {*} res 
+}
+/**
+ * It handles the resetPassword Page
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.resetPassword = (req, res) => {
     try {
@@ -115,41 +116,18 @@ exports.resetPassword = (req, res) => {
                 responseResult.message = 'Password Reset failed';
                 responseResult.error = err;
                 res.status(500).send(responseResult)
-            }
-            else {
+            } else {
                 responseResult.status = true;
                 responseResult.message = 'Password Reset Successfully';
-                responseResult.result = result;
-                const payload = {
-                    user_id: responseResult.result._id
-                }
-                console.log(payload);
-                const obj = token.GenerateToken(payload);
-                responseResult.token = obj;
+                // responseResult.result = result;
+                // const payload = {
+                //     user_id: responseResult.result._id
+                // }
+                // console.log(payload);
+                // const obj = token.GenerateToken(payload);
+                // responseResult.token = obj;
                 res.status(200).send(responseResult);
-            }
-        })
-    } catch (err) {
-        res.send(err);
-    }
-}/**
- * 
- * @param {*} req 
- * @param {*} res 
- */
-exports.getAllUsers = (req, res) => {
-    try {
-        var responseResult = {}
-        userService.getAllUsers((err, result) => {
-            if (err) {
-                responseResult.status = false;
-                responseResult.error = err;
-                res.status(500).send(responseResult)
-            }
-            else {
-                responseResult.status = true;
-                responseResult.result = result;
-                res.status(200).send(responseResult);
+
             }
         })
     } catch (err) {

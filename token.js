@@ -7,14 +7,18 @@
  ******************************************************************************/
 const jwt = require('jsonwebtoken');
 module.exports = {
-/**
- * importing token 
- * @param {*} payload 
- */
+    /**
+     * exporting token 
+     * @param {*it contains unique ID} payload 
+     */
     GenerateToken(payload) {
-        const token = jwt.sign({ payload }, 'secretkey', { expiresIn: 86400}) 
+        const token = jwt.sign({
+            payload
+        }, 'secretkey', {
+            expiresIn: '1D'
+        })
         const obj = {
-            success: true,
+            status: true,
             message: 'Token Generated Successfully!!',
             token: token
         }
