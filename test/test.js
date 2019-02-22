@@ -9,7 +9,7 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 chai.use(chaiHttp);
-var expect = chai.expect;
+chai.should();
 var server = require('../server')
 var fs = require('fs');
 
@@ -27,71 +27,77 @@ function readFile() {
 describe('Status and content', function () {
   describe('Registration page', function () {
     var data1 = readFile();
-    it('status ', function () {
+    it('status ', function (done) {
       chai.request(server)
         .post('/registration')
-        .send(data1.registrationData)
-        .then((res) => {
-          //console.log("expect ==>", expect(res).to.have.status(200));
-          expect(res).to.have.status(200);
+        .send(data1.registration)
+        .end((err, res) => {
+          if (err) {
+            console.log("expect ==>", err);
+            err.should.have.status(500);
+          } else {
+            console.log("expect ==>", res.body);
+            res.should.have.status(200);
+            /**
+             * test script for login
+             */
+            describe('Login page', function () {
+              it('status ', function (done) {
+                chai.request(server)
+                  .post('/login')
+                  .send(data1.login)
+                  .end((err, res) => {
+                    if (err) {
+                      console.log("expect ==>", err);
+                    } else {
+                      console.log("expect ==>", res.body);
+                      res.should.have.status(200);
+                      /**
+                       * test script for forgot password
+                       */
+                      describe('Forgot Password page', function () {
+                        it('status ', function (done) {
+                          chai.request(server)
+                            .post('/forgotPassword')
+                            .send(data1.forgot)
+                            .end((err, res) => {
+                              if (err) {
+                                console.log("expect ==>", err);
+                              } else {
+                                console.log("expect ==>", res.body);
+                                res.should.have.status(200);
+                                /**
+                                 * test script for reset password
+                                 */
+                                describe('Reset Password page', function () {
+                                  it('status ', function (done) {
+                                    chai.request(server)
+                                      .post('/resetPassword/:token')
+                                      .send(data1.reset)
+                                      .end((err, res) => {
+                                        if (err) {
+                                          console.log("expect ==>", err);
+                                        } else {
+                                          console.log("expect ==>", res.body);
+                                          res.should.have.status(200);
+                                        }
+                                        done()
+                                      })
+                                  })
+                                })
+                              }
+                              done()
+                            })
+                        })
+                      })
+                    }
+                    done()
+                  })
+              })
+            })
+          }
+          done()
         })
-        .catch((err) => {
-          throw err;
-        });
-    })
-  })
-  /**
-   * test script for login
-   */
-  describe('Login page', function () {
-    var data1 = readFile();
-    it('status ', function () {
-      chai.request(server)
-        .post('/login')
-        .send(data1.loginData)
-        .then((res) => {
-          //console.log("expect ==>", expect(res).to.have.status(200));
-          expect(res).to.have.status(200);
-        })
-        .catch((err) => {
-          throw err;
-        });
-    })
-    /**
-     * test script for forgot password
-     */
-    describe('Forgot Password page', function () {
-      var data1 = readFile();
-      it('status ', function () {
-        chai.request(server)
-          .post('/forgotPassword')
-          .send(data1.forgotData)
-          .then((res) => {
-            //console.log("expect ==>", expect(res).to.have.status(200));
-            expect(res).to.have.status(200);
-          })
-          .catch((err) => {
-            throw err;
-          });
-      })
-    })
-    /**
-     * test script for reset password
-     */
-    describe('Reset Password page', function () {
-      var data1 = readFile();
-      it('status ', function () {
-        chai.request(server)
-          .post('/resetPassword/:token')
-          .send(data1.resetData)
-          .then((res) => {
-            //console.log("expect ==>", expect(res).to.have.status(200));
-            expect(res).to.have.status(200);
-          })
-          .catch((err) => {
-            throw err;
-          });
-      })
     })
   })
 })

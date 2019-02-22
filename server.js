@@ -32,7 +32,9 @@ const mongoose = require('mongoose');
  * to connect server
  */
 require('http').createServer(app);
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 /**
  * parse requests of content-type - application/json
  **/
@@ -63,7 +65,9 @@ mongoose.connect(databaseConfig.url, {
  * define a simple route
  **/
 app.get('/', (res) => {
-    res.json({ "message": "Welcome to fundoo Notes App" });
+    res.json({
+        "message": "Welcome to fundoo Notes App"
+    });
 });
 /**
  * listen for requests
@@ -71,4 +75,4 @@ app.get('/', (res) => {
 app.listen(4000, () => {
     console.log("Server is listening on port 4000");
 });
-module.exports=app;
+module.exports = app;

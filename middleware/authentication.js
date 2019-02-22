@@ -14,7 +14,7 @@ exports.checkToken = (req, res, next) => {
      **/
     if (token1) {
         /**
-         * verifies secret and checks exp
+         * verifies secret and checks expression
          **/
         jwt.verify(token1, 'secretkey', (err, decoded) => {
             if (err) {

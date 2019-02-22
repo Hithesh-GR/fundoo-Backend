@@ -1,19 +1,19 @@
 {
-    "registrationData": {
+    "registration": {
         "firstname": "lol",
         "lastname": "ror",
-        "email": "mads@gmail.com",
+        "email": "777@gmail.com",
         "password": "2345678"
     },
-    "loginData": {
-        "email": "mads@gmail.com",
+    "login": {
+        "email": "777@gmail.com",
         "password": "2345678"
     },
-    "forgotData": {
-        "email": "mads@gmail.com"
+    "forgot": {
+        "email": "777@gmail.com"
     },
-    "resetData": {
-        "password": "123698547",
-        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzZlODBhNjBkYzY3MDUwYzRjYmJiMmMifSwiaWF0IjoxNTUwNzQ2MDQ0LCJleHAiOjE1NTA4MzI0NDR9.LvWfFi1BWecat-5ZdedHFB4PoIFpmiXsyLc166rVaFo"
+    "reset": {
+        "password": "777698547",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzZmZDRjY2YxZmNjMjQyNDY1Y2MxMTQifSwiaWF0IjoxNTUwODMyODU0LCJleHAiOjE1NTA5MTkyNTR9.vvlTpFNaIK60UVxpFRmRNqJviX4A9F0ZsDf2EaPqpno"
     }
 }
