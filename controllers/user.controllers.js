@@ -9,127 +9,177 @@ const userService = require('../services/user.services');
 const token = require('../token');
 const sent = require('../middleware/nodemailer');
 /**
- * It handles the registration data
+ * @description:It handles the registration data
  * @param {*request from frontend} req 
  * @param {*response from backend} res 
  */
 exports.registration = (req, res) => {
     try {
-        var responseResult = {}
-        userService.registration(req.body, (err, result) => {
-            if (err) {
-                responseResult.status = false;
-                responseResult.message = 'Registration Failed';
-                responseResult.error = err;
-                res.status(500).send(responseResult);
-            } else {
-                responseResult.status = true;
-                responseResult.message = 'Registered Successfull';
-                // responseResult.result = result;
-                // const payload = {
-                //     user_id: responseResult.result._id
-                // }
-                // console.log(payload);
-                // const obj = token.GenerateToken(payload);
-                // responseResult.token = obj;
-                res.status(200).send(responseResult);
-            }
-        })
+        req.checkBody('firstname', 'Invaild Firstname').isLength({
+            min: 3
+        }).isAlpha();
+        req.checkBody('lastname', 'Invaild Lastname').isLength({
+            min: 3
+        }).isAlpha();
+        req.checkBody('email', 'Invaild Email').isEmail();
+        req.checkBody('password', 'Invaild Password').isLength({
+            min: 4
+        });
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {}
+            userService.registration(req.body, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.message = 'Registration Failed';
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                } else {
+                    responseResult.status = true;
+                    responseResult.message = 'Registered Successfull';
+                    // responseResult.result = result;
+                    // const payload = {
+                    //     user_id: responseResult.result._id
+                    // }
+                    // console.log(payload);
+                    // const obj = token.GenerateToken(payload);
+                    // responseResult.token = obj;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
     } catch (err) {
         res.send(err);
     }
 }
 /**
- * It handles the login data
+ * @description:It handles the login data
  * @param {*request from frontend} req 
  * @param {*response from backend} res 
  */
 exports.login = (req, res) => {
     try {
-        var responseResult = {};
-        userService.login(req.body, (err, result) => {
-            if (err) {
-                responseResult.status = false;
-                responseResult.message = 'Login Failed';
-                responseResult.error = err;
-                res.status(500).send(responseResult);
-            } else {
-                responseResult.status = true;
-                responseResult.message = 'Login Successfully';
-                responseResult.result = result;
-                const payload = {
-                    user_id: responseResult.result._id
+        req.checkBody('email', 'Invaild Email').isEmail();
+        req.checkBody('password', 'Invaild Password').isLength({
+            min: 4
+        });
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            userService.login(req.body, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.message = 'Login Failed';
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                } else {
+                    responseResult.status = true;
+                    responseResult.message = 'Login Successfully';
+                    responseResult.result = result;
+                    const payload = {
+                        user_id: responseResult.result._id
+                    }
+                    console.log(payload);
+                    const obj = token.GenerateToken(payload);
+                    responseResult.token = obj;
+                    res.status(200).send(responseResult);
                 }
-                console.log(payload);
-                const obj = token.GenerateToken(payload);
-                responseResult.token = obj;
-                res.status(200).send(responseResult);
-            }
-        })
+            })
+        }
     } catch (err) {
         res.send(err);
     }
 }
 /**
- * It handles the forgotPassword page
+ * @description:It handles the forgotPassword page
  * @param {*request from frontend} req 
  * @param {*response from backend} res 
  */
 exports.forgotPassword = (req, res) => {
     try {
-        var responseResult = {};
-        userService.getUserEmail(req.body, (err, result) => {
-            if (err) {
-                responseResult.status = false;
-                responseResult.message = 'Failed to sent link';
-                responseResult.error = err;
-                res.status(500).send(responseResult)
-            } else {
-                responseResult.status = true;
-                responseResult.message = 'resetPassword link is sent to your registered email_Id';
-                responseResult.result = result;
-                const payload = {
-                    user_id: responseResult.result._id
+        req.checkBody('email', 'Invaild Email').isEmail();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            userService.getUserEmail(req.body, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.message = 'Failed to sent link';
+                    responseResult.error = err;
+                    res.status(500).send(responseResult)
+                } else {
+                    responseResult.status = true;
+                    //responseResult.message = 'resetPassword link is sent to your registered email_Id';
+                    responseResult.result = result;
+                    const payload = {
+                        user_id: responseResult.result._id
+                    }
+                    console.log("payload in cntrl=>", payload);
+                    const obj = token.GenerateToken(payload);
+                    const url = `http://localhost:4000/resetPassword/${obj.token}`;
+                    sent.sendEMailFunction(url);
+                    res.status(200).send(url);
                 }
-                console.log("payload in cntrl=>", payload);
-                const obj = token.GenerateToken(payload);
-                const url = `http://localhost:4000/resetPassword/${obj.token}`;
-                sent.sendEMailFunction(url);
-                res.status(200).send(url);
-            }
-        })
+            })
+        }
     } catch (err) {
         res.send(err);
     }
 }
 /**
- * It handles the resetPassword Page
+ * @description:It handles the resetPassword Page
  * @param {*request from frontend} req 
  * @param {*response from backend} res 
  */
 exports.resetPassword = (req, res) => {
     try {
-        var responseResult = {};
-        userService.resetpassword(req, (err, result) => {
-            if (err) {
-                responseResult.status = false;
-                responseResult.message = 'Password Reset failed';
-                responseResult.error = err;
-                res.status(500).send(responseResult)
-            } else {
-                responseResult.status = true;
-                responseResult.message = 'Password Reset Successfully';
-                // responseResult.result = result;
-                // const payload = {
-                //     user_id: responseResult.result._id
-                // }
-                // console.log(payload);
-                // const obj = token.GenerateToken(payload);
-                // responseResult.token = obj;
-                res.status(200).send(responseResult);
+        req.checkBody('password', 'Invaild Password').isLength({
+            min: 4
+        });
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            userService.resetpassword(req, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.message = 'Password Reset failed';
+                    responseResult.error = err;
+                    res.status(500).send(responseResult)
+                } else {
+                    responseResult.status = true;
+                    responseResult.message = 'Password Reset Successfully';
+                    // responseResult.result = result;
+                    // const payload = {
+                    //     user_id: responseResult.result._id
+                    // }
+                    // console.log(payload);
+                    // const obj = token.GenerateToken(payload);
+                    // responseResult.token = obj;
+                    res.status(200).send(responseResult);
 
-            }
-        })
+                }
+            })
+        }
     } catch (err) {
         res.send(err);
     }

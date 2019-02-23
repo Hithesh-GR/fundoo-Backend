@@ -6,31 +6,33 @@
  *  @since          : 19-02-2019
  ******************************************************************************/
 /**
- * Requiring Bcrypt to create hash of the user password stored in database
+ * @description:Requiring Bcrypt to create hash of the user password stored in database
  **/
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 let saltRounds = 10;
 /**
- * Creating user schema using mongoose
+ * @description:Creating user schema using mongoose
  **/
 const UserSchema = mongoose.Schema({
     firstname: {
         type: String,
-        require: [true, "firstname require"]
+        require: [true, "Firstname required"]
     },
     lastname: {
         type: String,
-        require: [true, "lastname require"]
+        require: [true, "Lastname required"]
     },
     email: {
         type: String,
-        require: [true, "email require"]
+        require: [true, "Email required"]
     },
     password: {
         type: String,
-        require: [true, "password require"]
+        require: [true, "Password required"]
     },
+}, {
+    timestamps: true
 });
 var user = mongoose.model('User', UserSchema);
 
@@ -41,11 +43,13 @@ function hash(password) {
     return pass;
 }
 /**
- * Saving data into database using the user schema
- **/
+ * @description:Saving data into database using the user schema
+ * @param {*request from frontend} body 
+ * @param {*response to backend} callback 
+ */
 userModel.prototype.registration = (body, callback) => {
     /**
-     * Find the user by email in database if user with same email exists
+     * @description:Find the user by email in database if user with same email exists
      **/
     user.find({
         "email": body.email
@@ -59,7 +63,7 @@ userModel.prototype.registration = (body, callback) => {
                 callback("User already present");
             } else {
                 /**
-                 * Create hash value of user password
+                 * @description:Create hash value of user password
                  **/
                 var newUser = new user({
                     "firstname": body.firstname,
@@ -81,8 +85,10 @@ userModel.prototype.registration = (body, callback) => {
     });
 }
 /**
- * Finding user into database using the findOne()
- **/
+ * @description:Finding user into database using the findOne()
+ * @param {*request from frontend} body 
+ * @param {*response to backend} callback 
+ */
 userModel.prototype.login = (body, callback) => {
     console.log("model ", body.password);
     user.findOne({
@@ -107,7 +113,9 @@ userModel.prototype.login = (body, callback) => {
     });
 }
 /**
- * update the user password and store it in database
+ * @description:update the user password and store it in database
+ * @param {*request from frontend} body 
+ * @param {*response to backend} callback 
  */
 userModel.prototype.updateUserPassword = (req, callback) => {
     console.log("request===>", req.decoded);
@@ -128,7 +136,9 @@ userModel.prototype.updateUserPassword = (req, callback) => {
     });
 }
 /**
- * Finding user email into database using the findOne()
+ * @description:Finding user email into database using the findOne()
+ * @param {*request from frontend} body 
+ * @param {*response to backend} callback 
  */
 userModel.prototype.findUserEmail = (data, callback) => {
     user.findOne({

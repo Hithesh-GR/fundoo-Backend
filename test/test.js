@@ -15,89 +15,99 @@ var fs = require('fs');
 
 function readFile() {
   /**
-   * read file from json
+   * @description:read file from json
    */
   var data = fs.readFileSync('../server/test/test1.json');
   var data1 = JSON.parse(data);
   return data1;
 }
 /**
- * test script for registration 
+ * @description:test script for registration 
  */
 describe('Status and content', function () {
   describe('Registration page', function () {
     var data1 = readFile();
     it('status ', function (done) {
-      chai.request(server)
-        .post('/registration')
-        .send(data1.registration)
-        .end((err, res) => {
-          if (err) {
-            console.log("expect ==>", err);
-            err.should.have.status(500);
-          } else {
-            console.log("expect ==>", res.body);
-            res.should.have.status(200);
-            /**
-             * test script for login
-             */
-            describe('Login page', function () {
-              it('status ', function (done) {
-                chai.request(server)
-                  .post('/login')
-                  .send(data1.login)
-                  .end((err, res) => {
-                    if (err) {
-                      console.log("expect ==>", err);
-                    } else {
-                      console.log("expect ==>", res.body);
-                      res.should.have.status(200);
-                      /**
-                       * test script for forgot password
-                       */
-                      describe('Forgot Password page', function () {
-                        it('status ', function (done) {
-                          chai.request(server)
-                            .post('/forgotPassword')
-                            .send(data1.forgot)
-                            .end((err, res) => {
-                              if (err) {
-                                console.log("expect ==>", err);
-                              } else {
-                                console.log("expect ==>", res.body);
-                                res.should.have.status(200);
-                                /**
-                                 * test script for reset password
-                                 */
-                                describe('Reset Password page', function () {
-                                  it('status ', function (done) {
-                                    chai.request(server)
-                                      .post('/resetPassword/:token')
-                                      .send(data1.reset)
-                                      .end((err, res) => {
-                                        if (err) {
-                                          console.log("expect ==>", err);
-                                        } else {
-                                          console.log("expect ==>", res.body);
-                                          res.should.have.status(200);
-                                        }
-                                        done()
-                                      })
-                                  })
-                                })
-                              }
-                              done()
+      chai.request(server).post('/registration').send(data1.registration).end((err, res) => {
+        if (err) {
+          console.log("expect ==>", err);
+          err.should.have.status(500);
+        } else {
+          console.log("expect ==>", res.body);
+          res.should.have.status(200);
+          /**
+           * @description:test script for login
+           */
+          describe('Login page', function () {
+            it('status ', function (done) {
+              chai.request(server).post('/login').send(data1.login).end((err, res) => {
+                if (err) {
+                  console.log("expect ==>", err);
+                } else {
+                  console.log("expect ==>", res.body);
+                  res.should.have.status(200);
+                  /**
+                   * @description:test script for forgot password
+                   */
+                  describe('Forgot Password page', function () {
+                    it('status ', function (done) {
+                      chai.request(server).post('/forgotPassword').send(data1.forgot).end((err, res) => {
+                        if (err) {
+                          console.log("expect ==>", err);
+                        } else {
+                          console.log("expect ==>", res.body);
+                          res.should.have.status(200);
+                          /**
+                           * @description:test script for reset password
+                           */
+                          describe('Reset Password page', function () {
+                            it('status ', function (done) {
+                              chai.request(server).post('/resetPassword/:token').send(data1.reset).end((err, res) => {
+                                if (err) {
+                                  console.log("expect ==>", err);
+                                } else {
+                                  console.log("expect ==>", res.body);
+                                  res.should.have.status(200);
+                                }
+                                done()
+                              })
                             })
-                        })
+                          })
+                        }
+                        done()
                       })
-                    }
-                    done()
+                    })
                   })
+                }
+                done()
               })
             })
-          }
-          done()
-        })
+          })
+        }
+        done()
+      })
     })
   })
 })
+
+// import chaiJsonSchema from 'chai-json-schema';
+// chai.use(chaiJsonSchema);
+// var chai = require('chai');
+// chai.use(require('chai-json-schema'));
+// var registration = {
+//     firstname: "lol",
+//     lastname: "ror",
+//     email: "777@gmail.com",
+//     password: 2345678
+// };
+// var login = {
+//     email: "777@gmail.com",
+//     password: 2345678
+// };
+// var forgot = {
+//     email: "777@gmail.com"
+// };
+//     var reset = {
+//     password: 777698547,
+//     headers: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzZmZDRjY2YxZmNjMjQyNDY1Y2MxMTQifSwiaWF0IjoxNTUwODMyODU0LCJleHAiOjE1NTA5MTkyNTR9.vvlTpFNaIK60UVxpFRmRNqJviX4A9F0ZsDf2EaPqpno"
+// }

@@ -7,62 +7,67 @@
  *  @since          : 19-02-2019
  ******************************************************************************/
 /**
- *  To give path to each file
+ *  @description:To give path to each file
  **/
 const router = require('../server/routes/routes');
 const express = require('express');
 /**
- * Parse the JSON request body
+ * @description:Parse the JSON request body
  **/
 var bodyParser = require('body-parser');
 /**
- * create express app
+ * @description:create express app
  */
 const app = express();
 /**
- * To get the path of database
+ * @description:use for validation
+ */
+var expressValidator = require('express-validator')
+app.use(expressValidator());
+/**
+ * @description:To get the path of database
  **/
 const databaseConfig = require('../server/configuration/db.configuration');
 /**
- * .env is used for 
+ * @description:.env is used for 
  */
 require('dotenv').config();
 const mongoose = require('mongoose');
 /**
- * to connect server
+ * @description:to connect server
  */
 require('http').createServer(app);
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 /**
- * parse requests of content-type - application/json
+ * @description:parse requests of content-type - application/json
  **/
 app.use(bodyParser.json())
 app.use('/', router);
 /**
- *  Configuring the database
+ *  @description:Configuring the database
  **/
 mongoose.Promise = global.Promise;
 /**
- * Connecting to the database
+ * @description:Connecting to the database
  **/
 mongoose.connect(databaseConfig.url, {
     useNewUrlParser: true
 }).then(() => {
     /**
-     * Promise is fullfilled
+     * @description:Promise is fullfilled
      **/
     console.log("Successfully connected to the database");
 }).catch(err => {
     /**
-     * Promise is rejected
+     * @description:Promise is rejected
      **/
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
 });
 /**
- * define a simple route
+ * @description:define a simple route
  **/
 app.get('/', (res) => {
     res.json({
@@ -70,7 +75,7 @@ app.get('/', (res) => {
     });
 });
 /**
- * listen for requests
+ * @description:listen for requests
  */
 app.listen(4000, () => {
     console.log("Server is listening on port 4000");

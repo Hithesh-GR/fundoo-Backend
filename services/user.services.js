@@ -9,9 +9,9 @@
  ******************************************************************************/
 const userModel = require('../application/models/user.models')
 /**
- * it will send login data to model
- * @param {*} data 
- * @param {*} callback 
+ * @description:it will send login data to model
+ * @param {*request from frontend} data 
+ * @param {*response to backend} callback 
  */
 exports.login = (data, callback) => {
     try {
@@ -30,9 +30,9 @@ exports.login = (data, callback) => {
     }
 }
 /**
- *  it will send registration data to model
- * @param {*} data 
- * @param {*} callback 
+ * @description:it will send registration data to model
+ * @param {*request from frontend} data 
+ * @param {*response to backend} callback 
  */
 exports.registration = (data, callback) => {
     try {
@@ -50,9 +50,9 @@ exports.registration = (data, callback) => {
     }
 }
 /**
- *  it will send forgotPassword data to model
- * @param {*} data 
- * @param {*} callback 
+ * @description:it will send forgotPassword data to model
+ * @param {*request from frontend} data 
+ * @param {*response to backend} callback  
  */
 exports.getUserEmail = (data, callback) => {
     try {
@@ -70,9 +70,9 @@ exports.getUserEmail = (data, callback) => {
     }
 }
 /**
- *  it will send resetPassword data to model
- * @param {*} data 
- * @param {*} callback 
+ * @description:it will send resetPassword data to model
+ * @param {*request from frontend} data 
+ * @param {*response to backend} callback 
  */
 exports.resetpassword = (data, callback) => {
     try {

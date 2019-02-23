@@ -1,14 +1,15 @@
-/******************************************************************************
+/********************************************************************************************
  *  @Purpose        : Create nodemailer to allow easy as cake email sending . 
  *  @file           : nodemailer.js        
  *  @author         : HITHESH G R
  *  @version        : v0.1
  *  @since          : 19-02-2019
- ******************************************************************************/
+ ********************************************************************************************/
 const nodemailer = require('nodemailer');
 /**
- * Here we are configuring our SMTP Server details.
- * SMTP is mail server which is responsible for sending and recieving email.
+ * @description:Here we are configuring our SMTP Server details.
+                SMTP is mail server which is responsible for sending and recieving email.
+ * @param {*} url 
  */
 exports.sendEMailFunction = (url) => {
     const transporter = nodemailer.createTransport({
@@ -21,7 +22,7 @@ exports.sendEMailFunction = (url) => {
     const mailOptions = {
         from: process.env.email, // sender address
         to: process.env.email, // list of receivers
-        subject: 'node.js(bridgelabz)', // Subject line
+        subject: 'Node.js', // Subject line
         text: 'Your Email verification link is:\n\n' + url
     };
     transporter.sendMail(mailOptions, (err, info) => {
@@ -31,3 +32,6 @@ exports.sendEMailFunction = (url) => {
             console.log('result on sending mails==> ', info);
     });
 }
+/**
+ * 
+ */

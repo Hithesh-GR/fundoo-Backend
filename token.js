@@ -8,7 +8,7 @@
 const jwt = require('jsonwebtoken');
 module.exports = {
     /**
-     * exporting token 
+     * @description:exporting token 
      * @param {*it contains unique ID} payload 
      */
     GenerateToken(payload) {
