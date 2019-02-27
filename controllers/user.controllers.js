@@ -14,6 +14,8 @@ const sent = require('../middleware/nodemailer');
  * @param {*response from backend} res 
  */
 exports.registration = (req, res) => {
+    //console.log("gfgfgfdgfgfdgfdg",res.body);
+    
     try {
         req.checkBody('firstname', 'Invaild Firstname').isLength({
             min: 3
@@ -42,7 +44,7 @@ exports.registration = (req, res) => {
                 } else {
                     responseResult.status = true;
                     responseResult.message = 'Registered Successfull';
-                    // responseResult.result = result;
+                    //responseResult.result = result;
                     // const payload = {
                     //     user_id: responseResult.result._id
                     // }
@@ -131,7 +133,7 @@ exports.forgotPassword = (req, res) => {
                     }
                     console.log("payload in cntrl=>", payload);
                     const obj = token.GenerateToken(payload);
-                    const url = `http://localhost:4000/resetPassword/${obj.token}`;
+                    const url = `http://localhost:3000/resetPassword/${obj.token}`;
                     sent.sendEMailFunction(url);
                     res.status(200).send(url);
                 }

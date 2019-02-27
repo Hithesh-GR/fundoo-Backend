@@ -32,6 +32,3 @@ exports.sendEMailFunction = (url) => {
             console.log('result on sending mails==> ', info);
     });
 }
-/**
- * 
- */

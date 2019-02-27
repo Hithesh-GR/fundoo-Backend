@@ -15,11 +15,11 @@ let saltRounds = 10;
  * @description:Creating user schema using mongoose
  **/
 const UserSchema = mongoose.Schema({
-    firstname: {
+    firstName: {
         type: String,
         require: [true, "Firstname required"]
     },
-    lastname: {
+    lastName: {
         type: String,
         require: [true, "Lastname required"]
     },
