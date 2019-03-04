@@ -1,16 +1,16 @@
 {
     "registration": {
-        "firstname": "lol",
-        "lastname": "ror",
-        "email": "777@gmail.com",
+        "firstname": "lll",
+        "lastname": "rrr",
+        "email": "qwertyy@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "777@gmail.com",
+        "email": "qwerty@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "777@gmail.com"
+        "email": "@gmail.com"
     },
     "reset": {
         "password": "777698547",
