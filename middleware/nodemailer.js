@@ -22,7 +22,7 @@ exports.sendEMailFunction = (url) => {
     const mailOptions = {
         from: process.env.email, // sender address
         to: process.env.email, // list of receivers
-        subject: 'Node.js', // Subject line
+        subject: 'Fundoo-Notes Reset Password Link', // Subject line
         text: 'Your Email verification link is:\n\n' + url
     };
     transporter.sendMail(mailOptions, (err, info) => {
