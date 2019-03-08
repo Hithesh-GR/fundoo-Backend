@@ -14,8 +14,6 @@ const sent = require('../middleware/nodemailer');
  * @param {*response from backend} res 
  */
 exports.registration = (req, res) => {
-    //console.log("gfgfgfdgfgfdgfdg",res.body);
-    
     try {
         req.checkBody('firstname', 'Invaild Firstname').isLength({
             min: 3
@@ -44,7 +42,7 @@ exports.registration = (req, res) => {
                 } else {
                     responseResult.status = true;
                     responseResult.message = 'Registered Successfull';
-                    //responseResult.result = result;
+                    // responseResult.result = result;
                     // const payload = {
                     //     user_id: responseResult.result._id
                     // }
@@ -170,13 +168,13 @@ exports.resetPassword = (req, res) => {
                 } else {
                     responseResult.status = true;
                     responseResult.message = 'Password Reset Successfully';
-                    // responseResult.result = result;
-                    // const payload = {
-                    //     user_id: responseResult.result._id
-                    // }
-                    // console.log(payload);
-                    // const obj = token.GenerateToken(payload);
-                    // responseResult.token = obj;
+                    responseResult.result = result;
+                    const payload = {
+                        user_id: responseResult.result._id
+                    }
+                    console.log(payload);
+                    const obj = token.GenerateToken(payload);
+                    responseResult.token = obj;
                     res.status(200).send(responseResult);
 
                 }

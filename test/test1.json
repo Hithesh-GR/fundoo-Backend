@@ -2,18 +2,18 @@
     "registration": {
         "firstname": "lll",
         "lastname": "rrr",
-        "email": "qwertyy@gmail.com",
+        "email": "dog@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "qwerty@gmail.com",
+        "email": "gog@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "@gmail.com"
+        "email": "dog@gmail.com"
     },
     "reset": {
-        "password": "777698547",
+        "password": "2345678",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzZmZDRjY2YxZmNjMjQyNDY1Y2MxMTQifSwiaWF0IjoxNTUwODMyODU0LCJleHAiOjE1NTA5MTkyNTR9.vvlTpFNaIK60UVxpFRmRNqJviX4A9F0ZsDf2EaPqpno"
     }
 }
