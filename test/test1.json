@@ -1,20 +1,26 @@
 {
     "registration": {
-        "firstname": "lll",
-        "lastname": "rrr",
-        "email": "dog@gmail.com",
+        "firstName": "div",
+        "lastName": "hit",
+        "email": "divvvv@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "gog@gmail.com",
+        "email": "divvvv@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "dog@gmail.com"
+        "email": "divvvv@gmail.com"
     },
     "reset": {
         "password": "2345678",
-        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzZmZDRjY2YxZmNjMjQyNDY1Y2MxMTQifSwiaWF0IjoxNTUwODMyODU0LCJleHAiOjE1NTA5MTkyNTR9.vvlTpFNaIK60UVxpFRmRNqJviX4A9F0ZsDf2EaPqpno"
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzgzNjE2NWVlMmM3ODIxMzRhYzlmZTYifSwiaWF0IjoxNTUyMTE0MDcxLCJleHAiOjE1NTIyMDA0NzF9.5Vm6sur7WCoiTZAkC1K_FZvyM5hUqLjntd32EyZWf-M"
+    },
+    "createNote":{
+        "userID":"5c836165ee2c782134ac9fe6",
+        "title":"hai",
+        "description":"byeeeeeeeeeeeeeeeeeee",
+        "reminder":"8am"
     }
 }
 

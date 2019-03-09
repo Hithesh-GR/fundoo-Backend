@@ -17,19 +17,19 @@ let saltRounds = 10;
 const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
-        require: [true, "Firstname required"]
+        required: [true, "Firstname required"]
     },
     lastName: {
         type: String,
-        require: [true, "Lastname required"]
+        required: [true, "Lastname required"]
     },
     email: {
         type: String,
-        require: [true, "Email required"]
+        required: [true, "Email required"]
     },
     password: {
         type: String,
-        require: [true, "Password required"]
+        required: [true, "Password required"]
     },
 }, {
     timestamps: true
@@ -66,8 +66,8 @@ userModel.prototype.registration = (body, callback) => {
                  * @description:Create hash value of user password
                  **/
                 var newUser = new user({
-                    "firstname": body.firstname,
-                    "lastname": body.lastname,
+                    "firstName": body.firstName,
+                    "lastName": body.lastName,
                     "email": body.email,
                     "password": hash(body.password),
                 })

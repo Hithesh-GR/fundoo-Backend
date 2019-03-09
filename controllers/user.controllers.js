@@ -15,10 +15,10 @@ const sent = require('../middleware/nodemailer');
  */
 exports.registration = (req, res) => {
     try {
-        req.checkBody('firstname', 'Invaild Firstname').isLength({
+        req.checkBody('firstName', 'Invaild Firstname').isLength({
             min: 3
         }).isAlpha();
-        req.checkBody('lastname', 'Invaild Lastname').isLength({
+        req.checkBody('lastName', 'Invaild Lastname').isLength({
             min: 3
         }).isAlpha();
         req.checkBody('email', 'Invaild Email').isEmail();

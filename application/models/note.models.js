@@ -10,17 +10,18 @@ const Schema = mongoose.Schema;
 var noteSchema = new mongoose.Schema({
     userID: {
         type: Schema.Types.ObjectId,
+        required: [true, "User_id required"],
         ref: 'Note'
     },
     title: {
         type: String,
-        require: true
+        required: [true, "Title required"]
     },
     description: {
         type: String,
-        require: true
+        required: [true, "Description required"]
     },
-    remindMe: {
+    reminder: {
         type: String
     },
 }, {
@@ -30,14 +31,13 @@ var note = mongoose.model('Note', noteSchema);
 
 function noteModel() {}
 noteModel.prototype.save = (objectNote, callback) => {
-    console.log("data", objectNote);
+    console.log("data====>", objectNote);
     const noteData = new note(objectNote);
     noteData.save((err, result) => {
         if (err) {
-            console.log("notemodel====>", err);
             callback(err);
         } else {
-            console.log("notemodel======>", result._id);
+            // console.log("notemodel======>", result._id);
             return callback(null, result);
         }
     })
