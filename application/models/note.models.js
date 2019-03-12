@@ -42,4 +42,16 @@ noteModel.prototype.save = (objectNote, callback) => {
         }
     })
 }
+noteModel.prototype.getNotes = (id, callback) => {
+    noteModel.find({
+        userID: id
+    }, (err, result) => {
+        if (err) {
+            callback(err)
+        } else {
+            // console.log("notes", result)
+            return callback(null, result)
+        }
+    })
+}
 module.exports = new noteModel();
