@@ -1,6 +1,6 @@
 const noteModel = require('../application/models/note.models')
 exports.createNote = (data, callback) => {
-    noteModel.save(data, (err, result) => {
+    noteModel.addNotes(data, (err, result) => {
         if (err) {
             console.log("service error");
             callback(err);
@@ -10,7 +10,6 @@ exports.createNote = (data, callback) => {
         }
     });
 }
-
 exports.getNotes = (data, callback) => {
     noteModel.getNotes(data, (err, result) => {
         if (err) {

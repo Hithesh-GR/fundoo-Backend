@@ -79,6 +79,22 @@ describe('Status and content', function () {
                                         } else {
                                           console.log("expect ==>", res.body);
                                           res.should.have.status(200);
+                                          /**
+                                           * @description:test script for create a new note
+                                           */
+                                          describe('get all created notes', function () {
+                                            it('status ', function (done) {
+                                              chai.request(server).get('/getNotes').send(data1.getNotes).end((err, res) => {
+                                                if (err) {
+                                                  console.log("expect ==>", err);
+                                                } else {
+                                                  console.log("expect ==>", res.body);
+                                                  res.should.have.status(200);
+                                                }
+                                                done()
+                                              })
+                                            })
+                                          })
                                         }
                                         done()
                                       })

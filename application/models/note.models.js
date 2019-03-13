@@ -8,7 +8,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var noteSchema = new mongoose.Schema({
-    userID: {
+    userId: {
         type: Schema.Types.ObjectId,
         required: [true, "User_id required"],
         ref: 'Note'
@@ -24,33 +24,46 @@ var noteSchema = new mongoose.Schema({
     reminder: {
         type: String
     },
+    color: {
+        type: String
+    },
+    image: {
+        type: String
+    },
+    archive: {
+        type: Boolean
+    },
+    pinned: {
+        type: Boolean
+    },
+    trash: {
+        type: Boolean
+    },
 }, {
     timestamps: true
 });
 var note = mongoose.model('Note', noteSchema);
 
 function noteModel() {}
-noteModel.prototype.save = (objectNote, callback) => {
+noteModel.prototype.addNotes = (objectNote, callback) => {
     console.log("data====>", objectNote);
-    const noteData = new note(objectNote);
-    noteData.save((err, result) => {
+    const noteModel = new note(objectNote);
+    noteModel.save((err, result) => {
         if (err) {
             callback(err);
         } else {
-            // console.log("notemodel======>", result._id);
-            return callback(null, result);
+            callback(null, result);
         }
     })
 }
 noteModel.prototype.getNotes = (id, callback) => {
-    noteModel.find({
-        userID: id
+    note.find({
+        userId: id.decoded.payload.user_id
     }, (err, result) => {
         if (err) {
             callback(err)
         } else {
-            // console.log("notes", result)
-            return callback(null, result)
+            callback(null, result)
         }
     })
 }

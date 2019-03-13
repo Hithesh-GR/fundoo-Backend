@@ -2,25 +2,33 @@
     "registration": {
         "firstName": "div",
         "lastName": "hit",
-        "email": "divvvv@gmail.com",
+        "email": "hithuuudd@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "divvvv@gmail.com",
+        "email": "hithuuudd@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "divvvv@gmail.com"
+        "email": "hithuuudd@gmail.com"
     },
     "reset": {
         "password": "2345678",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzgzNjE2NWVlMmM3ODIxMzRhYzlmZTYifSwiaWF0IjoxNTUyMTE0MDcxLCJleHAiOjE1NTIyMDA0NzF9.5Vm6sur7WCoiTZAkC1K_FZvyM5hUqLjntd32EyZWf-M"
     },
     "createNote":{
-        "userID":"5c836165ee2c782134ac9fe6",
+        "userId":"5c88e33f1e5b754d3becf62c",
         "title":"hai",
         "description":"byeeeeeeeeeeeeeeeeeee",
-        "reminder":"8am"
+        "reminder":"8am",
+        "color":"red",
+        "image":"hithu.jpg",
+        "archive":"true",
+        "pinned":"true",
+        "trash":"true"
+    },
+    "getNotes":{
+        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzg4ODE0MGY4NTJmYTE4MmYyZGE5M2EifSwiaWF0IjoxNTUyNDczODAzLCJleHAiOjE1NTI1NjAyMDN9.BLKySracNuS920kFAve3vMqdAnRpoDJkOyd4v4uaw5s"
     }
 }
 
