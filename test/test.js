@@ -80,7 +80,7 @@ describe('Status and content', function () {
                                           console.log("expect ==>", res.body);
                                           res.should.have.status(200);
                                           /**
-                                           * @description:test script for create a new note
+                                           * @description:test script for get a newly created note
                                            */
                                           describe('get all created notes', function () {
                                             it('status ', function (done) {
