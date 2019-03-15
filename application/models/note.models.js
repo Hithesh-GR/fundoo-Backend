@@ -56,50 +56,15 @@ noteModel.prototype.addNotes = (objectNote, callback) => {
         }
     })
 }
+noteModel.prototype.getNotes = (id, callback) => {
+    note.find({
+        userId: id.decoded.payload.user_id
+    }, (err, result) => {
+        if (err) {
+            callback(err)
+        } else {
+            callback(null, result)
+        }
+    })
+}
 module.exports = new noteModel();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// noteModel.prototype.getNotes = (id, callback) => {
-//     note.find({
-//         userId: id.decoded.payload.user_id
-//     }, (err, result) => {
-//         if (err) {
-//             callback(err)
-//         } else {
-//             callback(null, result)
-//         }
-//     })
-// }

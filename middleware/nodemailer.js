@@ -9,7 +9,7 @@ const nodemailer = require('nodemailer');
 /**
  * @description:Here we are configuring our SMTP Server details.
                 SMTP is mail server which is responsible for sending and recieving email.
- * @param {*} url 
+ * @param {*sent url to gmail} url 
  */
 exports.sendEMailFunction = (url) => {
     const transporter = nodemailer.createTransport({
@@ -21,7 +21,7 @@ exports.sendEMailFunction = (url) => {
     });
     const mailOptions = {
         from: process.env.email, // sender address
-        to: process.env.email, // list of receivers
+        to: process.env.email,  // list of receivers
         subject: 'Fundoo-Notes Reset Password Link', // Subject line
         text: 'Your Email verification link is:\n\n' + url
     };

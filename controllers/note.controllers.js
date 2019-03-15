@@ -22,6 +22,27 @@ exports.createNote = (req, res) => {
         res.send(err);
     }
 }
+exports.getNotes = (req, res) => {
+    // try {
+       // console.log("note Controller", req);
+        var responseResult = {};
+        noteService.getNotes(req, (err, result) => {
+            if (err) {
+                responseResult.status = false;
+                responseResult.message = 'Failed to generate note';
+                responseResult.error = err;
+                res.status(200).send(responseResult);
+            } else {
+                responseResult.status = true;
+                responseResult.message = 'Note generated';
+                responseResult.data = result;
+                res.status(200).send(responseResult);
+            }
+        })
+    // } catch (error) {
+    //     res.send(err)
+    // }
+}
 
 
 
@@ -62,27 +83,3 @@ exports.createNote = (req, res) => {
 
 
 
-
-
-
-// exports.getNotes = (req, res) => {
-//     // try {
-//        // console.log("note Controller", req);
-//         var responseResult = {};
-//         noteService.getNotes(req, (err, result) => {
-//             if (err) {
-//                 responseResult.status = false;
-//                 responseResult.message = 'Failed to generate note';
-//                 responseResult.error = err;
-//                 res.status(200).send(responseResult);
-//             } else {
-//                 responseResult.status = true;
-//                 responseResult.message = 'Note generated';
-//                 responseResult.data = result;
-//                 res.status(200).send(responseResult);
-//             }
-//         })
-//     // } catch (error) {
-//     //     res.send(err)
-//     // }
-// }
