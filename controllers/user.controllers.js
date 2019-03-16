@@ -8,6 +8,9 @@
 const userService = require('../services/user.services');
 const token = require('../token');
 const sent = require('../middleware/nodemailer');
+const express = require('express');
+const responseTime = require('response-time')
+const redis = require('redis');
 /**
  * @description:It handles the registration data
  * @param {*request from frontend} req 
@@ -47,7 +50,7 @@ exports.registration = (req, res) => {
                     //     user_id: responseResult.result._id
                     // }
                     // console.log(payload);
-                    // const obj = token.GenerateToken(payload);
+                    // const obj = token.GenerateTokenAuth(payload);
                     // responseResult.token = obj;
                     res.status(200).send(responseResult);
                 }
@@ -75,24 +78,56 @@ exports.login = (req, res) => {
             response.error = errors;
             return res.status(422).send(response);
         } else {
-            var responseResult = {};
-            userService.login(req.body, (err, result) => {
-                if (err) {
-                    responseResult.status = false;
-                    responseResult.message = 'Login Failed';
-                    responseResult.error = err;
-                    res.status(500).send(responseResult);
+            const app = express();
+            console.log("qwertyuiop[]");
+            // create and connect redis client to local instance.
+            const client = redis.createClient();
+            // Print redis errors to the console
+            client.on('error', (err) => {
+                console.log("Error " + err);
+            });
+            app.use(responseTime());
+            // Extract the query from url and trim trailing spaces
+            // const query = (req.body.email+req.body._id).trim();
+            // Build the Wikipedia API url
+            const redisKey = req.body.email;
+            // Try fetching the result from Redis first in case we have it cached
+            return client.get(redisKey, (err, result) => {
+                // If that key exist in Redis store
+                // console.log("result==>", result);
+                // console.log("hasi");
+                if (result) {
+                    console.log('inside if ===>' + result);
+                    const resultJSON = JSON.parse(result);
+                    return res.status(200).send(resultJSON);
                 } else {
-                    responseResult.status = true;
-                    responseResult.message = 'Login Successfully';
-                    responseResult.result = result;
-                    const payload = {
-                        user_id: responseResult.result._id
-                    }
-                    console.log(payload);
-                    const obj = token.GenerateToken(payload);
-                    responseResult.token = obj;
-                    res.status(200).send(responseResult);
+                    var responseResult = {};
+                    userService.login(req.body, (err, result) => {
+                        if (err) {
+                            responseResult.status = false;
+                            responseResult.message = 'Login Failed';
+                            responseResult.error = err;
+                            res.status(500).send(responseResult);
+                        } else {
+                            console.log("result for login", result);
+                            // responseResult.status = true;
+                            // responseResult.message = 'Login Successfully';
+                            // responseResult.result = result;
+                            const payload = {
+                                user_id: result._id,
+                                username: result.firstName,
+                                email: result.email,
+                                sucess: true
+                            }
+                            console.log(payload);
+                            const obj = token.GenerateTokenAuth(payload);
+                            responseResult.token = obj;
+                            const redisKey = result.email;
+                            console.log("rediskey", redisKey);
+                            client.setex(redisKey, 36000, JSON.stringify(responseResult.token.token));
+                            res.status(200).send(responseResult.token.token);
+                        }
+                    })
                 }
             })
         }
@@ -130,7 +165,7 @@ exports.forgotPassword = (req, res) => {
                         user_id: responseResult.result._id
                     }
                     console.log("payload in cntrl=>", payload);
-                    const obj = token.GenerateToken(payload);
+                    const obj = token.GenerateTokenResetPassword(payload);
                     const url = `http://localhost:3000/resetPassword/${obj.token}`;
                     sent.sendEMailFunction(url);
                     res.status(200).send(url);
@@ -173,7 +208,7 @@ exports.resetPassword = (req, res) => {
                         user_id: responseResult.result._id
                     }
                     console.log(payload);
-                    const obj = token.GenerateToken(payload);
+                    const obj = token.GenerateTokenAuth(payload);
                     responseResult.token = obj;
                     res.status(200).send(responseResult);
 

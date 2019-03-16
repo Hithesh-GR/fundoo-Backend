@@ -1,8 +1,20 @@
+/******************************************************************************
+ *  @Purpose        : To create note controller to handle the incoming data. 
+ *  @file           : note.controllers.js        
+ *  @author         : HITHESH G R
+ *  @version        : v0.1
+ *  @since          : 23-02-2019
+ ******************************************************************************/
 const noteService = require('../services/note.services');
+/**
+ * @description:it handles the creating note data
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
+ */
 exports.createNote = (req, res) => {
     try {
         var responseResult = {};
-        noteService.createNote(req.body, (err, result) => {
+        noteService.createNote(req, (err, result) => {
             if (err) {
                 responseResult.status = false;
                 responseResult.message = 'Failed to create note';
@@ -22,9 +34,14 @@ exports.createNote = (req, res) => {
         res.send(err);
     }
 }
+/**
+ * @description:it handles get the created note with data 
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res
+ */
 exports.getNotes = (req, res) => {
-    // try {
-       // console.log("note Controller", req);
+    try {
+        console.log("note Controller", req);
         var responseResult = {};
         noteService.getNotes(req, (err, result) => {
             if (err) {
@@ -39,47 +56,7 @@ exports.getNotes = (req, res) => {
                 res.status(200).send(responseResult);
             }
         })
-    // } catch (error) {
-    //     res.send(err)
-    // }
+    } catch (error) {
+        res.send(err)
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

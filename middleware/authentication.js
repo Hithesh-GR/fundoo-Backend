@@ -19,9 +19,9 @@ exports.checkToken = (req, res, next) => {
          **/
         jwt.verify(token1, 'secretkey', (err, decoded) => {
             if (err) {
-                return res.send({
+                return res.status(401).send({
                     status: false,
-                    message: 'Token is not valid..!'
+                    message: 'Unauthorised access, please provide valid token!'
                 });
             } else {
                 req.decoded = decoded;
