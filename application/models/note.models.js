@@ -55,7 +55,7 @@ function noteModel() {}
  */
 noteModel.prototype.addNotes = (objectNote, callback) => {
     console.log("data====>", objectNote);
-    const noteModel = new note(objectNote);
+    const noteModel = new note(objectNote.body);
     noteModel.save((err, result) => {
         if (err) {
             callback(err);

@@ -51,7 +51,7 @@ exports.getNotes = (req, res) => {
                 res.status(200).send(responseResult);
             } else {
                 responseResult.status = true;
-                responseResult.message = 'Note generated';
+                responseResult.message = 'List of notes:';
                 responseResult.data = result;
                 res.status(200).send(responseResult);
             }

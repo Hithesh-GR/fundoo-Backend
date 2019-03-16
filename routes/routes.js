@@ -13,7 +13,7 @@ const middle = require('../middleware/authentication')
 router.post('/login', userController.login);
 router.post('/registration', userController.registration);
 router.post('/forgotPassword', userController.forgotPassword);
-router.post('/resetPassword/:token', middle.checkToken, userController.resetPassword);
-router.post('/createNote',middle.checkToken,  noteController.createNote);
-router.get("/getNotes",middle.checkToken, noteController.getNotes);
+router.post('/resetPassword/:token', middle.checkTokenResetPassword, userController.resetPassword);
+router.post('/createNote', middle.checkTokenAuth, noteController.createNote);
+router.get("/getNotes", middle.checkTokenAuth, noteController.getNotes);
 module.exports = router;
