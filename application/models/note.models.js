@@ -28,7 +28,8 @@ var noteSchema = new mongoose.Schema({
         type: String
     },
     color: {
-        type: String
+        type: String,
+        required: [true, "Color required"]
     },
     image: {
         type: String
