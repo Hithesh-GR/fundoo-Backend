@@ -19,7 +19,7 @@ exports.createNote = (data, callback) => {
             console.log("service error");
             callback(err);
         } else {
-            console.log("In service", result);
+            // console.log("In service", result);
             callback(null, result);
         }
     });
@@ -35,7 +35,7 @@ exports.getNotes = (data, callback) => {
             console.log("service error");
             callback(err);
         } else {
-            console.log("In service", result);
+            // console.log("In service", result);
             callback(null, result);
         }
     });

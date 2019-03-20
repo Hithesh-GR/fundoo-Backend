@@ -15,13 +15,13 @@ const userModel = require('../application/models/user.models')
  */
 exports.login = (data, callback) => {
     try {
-        console.log("services use data:", data);
+       //  console.log("services use data:", data);
         userModel.login(data, (err, result) => {
             if (err) {
                 console.log("service error");
                 callback(err);
             } else {
-                console.log("In service", result);
+                // console.log("In service", result);
                 callback(null, result);
             }
         })
@@ -41,7 +41,7 @@ exports.registration = (data, callback) => {
                 console.log("service error");
                 callback(err);
             } else {
-                console.log("In service", result);
+                // console.log("In service", result);
                 callback(null, result);
             }
         })
@@ -61,7 +61,7 @@ exports.getUserEmail = (data, callback) => {
                 console.log("service error");
                 callback(err);
             } else {
-                console.log("In service", result);
+                // console.log("In service", result);
                 callback(null, result);
             }
         })
@@ -81,7 +81,7 @@ exports.resetpassword = (data, callback) => {
                 console.log("service error");
                 callback(err);
             } else {
-                console.log("In service", result);
+                // console.log("In service", result);
                 callback(null, result);
             }
         })

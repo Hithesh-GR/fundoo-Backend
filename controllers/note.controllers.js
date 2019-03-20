@@ -13,23 +13,37 @@ const noteService = require('../services/note.services');
  */
 exports.createNote = (req, res) => {
     try {
-        var responseResult = {};
-        noteService.createNote(req, (err, result) => {
-            if (err) {
-                responseResult.status = false;
-                responseResult.message = 'Failed to create note';
-                responseResult.error = err;
-                res.status(500).send(responseResult);
-            } else {
-                var userNote = {
-                    note: result,
+        // req.checkBody('title', 'Title required').not({
+        //     min: 3
+        // }).isAlpha();
+        // req.checkBody('description', 'Description required').not({
+        //     min: 3
+        // }).isAlpha();
+        // var errors = req.validationErrors();
+        // var response = {};
+        // if (errors) {
+        //     response.status = false;
+        //     response.error = errors;
+        //     return res.status(422).send(response);
+        // } else {
+            var responseResult = {};
+            noteService.createNote(req, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.message = 'Failed to create note';
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                } else {
+                    var userNote = {
+                        note: result,
+                    }
+                    responseResult.status = true;
+                    responseResult.message = result;
+                    responseResult.data = userNote;
+                    res.status(200).send(responseResult);
                 }
-                responseResult.status = true;
-                responseResult.message = result;
-                responseResult.data = userNote;
-                res.status(200).send(responseResult);
-            }
-        })
+            })
+        // }
     } catch (err) {
         res.send(err);
     }
@@ -41,14 +55,14 @@ exports.createNote = (req, res) => {
  */
 exports.getNotes = (req, res) => {
     try {
-        console.log("note Controller", req);
+        // console.log("note Controller", req);
         var responseResult = {};
         noteService.getNotes(req, (err, result) => {
             if (err) {
                 responseResult.status = false;
                 responseResult.message = 'Failed to generate note';
                 responseResult.error = err;
-                res.status(200).send(responseResult);
+                res.status(500).send(responseResult);
             } else {
                 responseResult.status = true;
                 responseResult.message = 'List of notes:';

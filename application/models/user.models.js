@@ -90,7 +90,7 @@ userModel.prototype.registration = (body, callback) => {
  * @param {*response to backend} callback 
  */
 userModel.prototype.login = (body, callback) => {
-    console.log("model ", body.password);
+    console.log("model===> ", body.password);
     user.findOne({
         "email": body.email
     }, (err, result) => {

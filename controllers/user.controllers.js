@@ -79,7 +79,6 @@ exports.login = (req, res) => {
             return res.status(422).send(response);
         } else {
             const app = express();
-            console.log("qwertyuiop[]");
             // create and connect redis client to local instance.
             const client = redis.createClient();
             // Print redis errors to the console
@@ -95,7 +94,6 @@ exports.login = (req, res) => {
             return client.get(redisKey, (err, result) => {
                 // If that key exist in Redis store
                 // console.log("result==>", result);
-                // console.log("hasi");
                 if (result) {
                     console.log('inside if ===>' + result);
                     const resultJSON = JSON.parse(result);
@@ -109,10 +107,9 @@ exports.login = (req, res) => {
                             responseResult.error = err;
                             res.status(500).send(responseResult);
                         } else {
-                            console.log("result for login", result);
-                            // responseResult.status = true;
-                            // responseResult.message = 'Login Successfully';
-                            // responseResult.result = result;
+                            responseResult.status = true;
+                            responseResult.message = 'Login Successfully';
+                            responseResult.result = result;
                             const payload = {
                                 user_id: result._id,
                                 username: result.firstName,
