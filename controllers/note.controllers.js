@@ -1,10 +1,10 @@
-/******************************************************************************
+/*****************************************************************************************
  *  @Purpose        : To create note controller to handle the incoming data. 
  *  @file           : note.controllers.js        
  *  @author         : HITHESH G R
  *  @version        : v0.1
  *  @since          : 23-02-2019
- ******************************************************************************/
+ *****************************************************************************************/
 const noteService = require('../services/note.services');
 /**
  * @description:it handles the creating note data
@@ -13,19 +13,15 @@ const noteService = require('../services/note.services');
  */
 exports.createNote = (req, res) => {
     try {
-        // req.checkBody('title', 'Title required').not({
-        //     min: 3
-        // }).isAlpha();
-        // req.checkBody('description', 'Description required').not({
-        //     min: 3
-        // }).isAlpha();
-        // var errors = req.validationErrors();
-        // var response = {};
-        // if (errors) {
-        //     response.status = false;
-        //     response.error = errors;
-        //     return res.status(422).send(response);
-        // } else {
+        req.checkBody('title', 'Title should not be empty').not().isEmpty();
+        req.checkBody('description', 'Description should not be empty').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
             var responseResult = {};
             noteService.createNote(req, (err, result) => {
                 if (err) {
@@ -43,7 +39,7 @@ exports.createNote = (req, res) => {
                     res.status(200).send(responseResult);
                 }
             })
-        // }
+        }
     } catch (err) {
         res.send(err);
     }
@@ -72,5 +68,75 @@ exports.getNotes = (req, res) => {
         })
     } catch (error) {
         res.send(err)
+    }
+}
+/**
+ * @description: 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.updateColor = (req, res) => {
+    try {
+        req.checkBody('noteID', 'noteID required').not().isEmpty();
+        req.checkBody('color', 'color should not be empty').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            noteID = req.body.noteID;
+            color = req.body.color;
+            noteService.updateColor(noteID, color, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                } else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+        res.send(error);
+    }
+}
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.deleteNote = (req, res) => {
+    try {
+        req.checkBody('noteID', 'noteID required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            // noteID = req.body.noteID;
+            noteService.deleteNote(req, (err, result) => {
+                if (err) {
+
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);;
+                } else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+
+        res.send(error)
     }
 }

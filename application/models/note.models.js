@@ -81,4 +81,47 @@ noteModel.prototype.getNotes = (id, callback) => {
         }
     })
 }
+/**
+ * @description:
+ * @param {*} noteID 
+ * @param {*} updateParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.updateColor = (noteID, updateParams, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                color: updateParams
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                return callback(null, result);
+            }
+        });
+};
+/**
+ * @description:
+ * @param {*} data 
+ * @param {*} callback 
+ */
+noteModel.prototype.deleteNote = (data, callback) => {
+    note.deleteOne({
+        _id: data.body.noteID
+    }, (err, result) => {
+        if (err) {
+            callback(err)
+        } else {
+            const obj = {
+                status: 200,
+                msg: "note is deleted successfully"
+            }
+            return callback(null, obj)
+        }
+    })
+}
+
 module.exports = new noteModel();

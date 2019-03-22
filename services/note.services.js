@@ -40,3 +40,33 @@ exports.getNotes = (data, callback) => {
         }
     });
 }
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} paramData 
+ * @param {*} callback 
+ */
+exports.updateColor = (paramID, paramData, callback) => {
+    // console.log("in services", paramID, paramData);
+    noteModel.updateColor(paramID, paramData, (err, result) => {
+        if (err) {
+            console.log("service error");
+            callback(err);
+        } else {
+            return callback(null, result);
+        }
+    })
+}
+
+exports.deleteNote = (noteID, callback) => {
+    noteModel.deleteNote(noteID, (err, result) => {
+        if (err) {
+            console.log("service error");
+
+            callback(err)
+        } else {
+            return callback(null, result)
+        }
+    })
+
+}

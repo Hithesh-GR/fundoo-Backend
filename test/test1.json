@@ -2,33 +2,41 @@
     "registration": {
         "firstName": "div",
         "lastName": "hit",
-        "email": "hithuuudd@gmail.com",
+        "email": "dimand@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "hithuuudd@gmail.com",
+        "email": "dimand@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "hithuuudd@gmail.com"
+        "email": "dimand@gmail.com"
     },
     "reset": {
         "password": "2345678",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzgzNjE2NWVlMmM3ODIxMzRhYzlmZTYifSwiaWF0IjoxNTUyMTE0MDcxLCJleHAiOjE1NTIyMDA0NzF9.5Vm6sur7WCoiTZAkC1K_FZvyM5hUqLjntd32EyZWf-M"
     },
-    "createNote":{
-        "userId":"5c88e33f1e5b754d3becf62c",
-        "title":"hai",
-        "description":"byeeeeeeeeeeeeeeeeeee",
-        "reminder":"8am",
-        "color":"red",
-        "image":"hithu.jpg",
-        "archive":"true",
-        "pinned":"true",
-        "trash":"true"
+    "createNote": {
+        "userId": "5c91ba7037f7a60ed234fc87",
+        "title": "hai",
+        "description": "byeeeeeeeeeeeeeeeeeee",
+        "reminder": "8am",
+        "color": "red",
+        "image": "hithu.jpg",
+        "archive": "true",
+        "pinned": "true",
+        "trash": "true"
     },
-    "getNotes":{
-        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzhjYTc2YjBlZWI3OTMxMzAyYjQ4MzIiLCJ1c2VybmFtZSI6IkFsb25lIiwiZW1haWwiOiJoaXRodS5nb3dkYTJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUyNzIxNzc4LCJleHAiOjE1NTI4MDgxNzh9.fzZGr_KpmBS2tRmJEFev1Splhg14WuxIDrqaS0ej734"
+    "getNotes": {
+        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
+    },
+    "updateColor": {
+        "noteID": "5c91ba7037f7a60ed234fc87",
+        "color": "pink",
+        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
+    },
+    "deleteNote":{
+        "noteID": "5c91ba7037f7a60ed234fc87",
+        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
     }
 }
-

@@ -113,6 +113,26 @@ userModel.prototype.login = (body, callback) => {
     });
 }
 /**
+ * @description:Finding user email into database using the findOne()
+ * @param {*request from frontend} body 
+ * @param {*response to backend} callback 
+ */
+userModel.prototype.findUserEmail = (data, callback) => {
+    user.findOne({
+        "email": data.email
+    }, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            if (result !== null && data.email == result.email) {
+                callback(null, result);
+            } else {
+                callback("Incorrect mail")
+            }
+        }
+    });
+}
+/**
  * @description:update the user password and store it in database
  * @param {*request from frontend} body 
  * @param {*response to backend} callback 
@@ -132,26 +152,6 @@ userModel.prototype.updateUserPassword = (req, callback) => {
         } else {
             console.log("result ==>", result);
             callback(null, result);
-        }
-    });
-}
-/**
- * @description:Finding user email into database using the findOne()
- * @param {*request from frontend} body 
- * @param {*response to backend} callback 
- */
-userModel.prototype.findUserEmail = (data, callback) => {
-    user.findOne({
-        "email": data.email
-    }, (err, result) => {
-        if (err) {
-            callback(err);
-        } else {
-            if (result !== null && data.email == result.email) {
-                callback(null, result);
-            } else {
-                callback("Incorrect mail")
-            }
         }
     });
 }
