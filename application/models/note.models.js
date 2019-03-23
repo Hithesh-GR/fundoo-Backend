@@ -99,7 +99,7 @@ noteModel.prototype.updateColor = (noteID, updateParams, callback) => {
             if (err) {
                 callback(err)
             } else {
-                return callback(null, result);
+                return callback(null, updateParams);
             }
         });
 };
@@ -123,5 +123,68 @@ noteModel.prototype.deleteNote = (data, callback) => {
         }
     })
 }
-
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} archiveParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.isArchived = (noteID, archiveNote, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                archive: archiveNote,
+                trash: false,
+                pinned: false
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                return callback(null, archiveNote)
+            }
+        });
+};
+/**
+ * 
+ * @param {*} id 
+ * @param {*} callback 
+ */
+noteModel.prototype.getTrashStatus = (id, callback) => {
+    note.findOne({
+        _id: id
+    }, (err, result) => {
+        if (err) {
+            callback(err)
+        } else {
+            return callback(null, result.trash)
+        }
+    })
+}
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} trashStatus 
+ * @param {*} callback 
+ */
+noteModel.prototype.isTrashed = (noteID, trashNote, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                trash: trashNote,
+                pinned: false,
+                archive: false
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                return callback(null, trashNote)
+            }
+        });
+};
 module.exports = new noteModel();

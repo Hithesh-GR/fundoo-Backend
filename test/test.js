@@ -90,7 +90,6 @@ describe('Status and content', function () {
                                                 } else {
                                                   console.log("expect ==>", res.body);
                                                   res.should.have.status(200);
-
                                                   /**
                                                    * @description:test script for updating the color to note
                                                    */
@@ -102,7 +101,6 @@ describe('Status and content', function () {
                                                         } else {
                                                           console.log("expect ==>", res.body);
                                                           res.should.have.status(200);
-
                                                           /**
                                                            * @description:test script for delete the note 
                                                            */
@@ -114,6 +112,22 @@ describe('Status and content', function () {
                                                                 } else {
                                                                   console.log("expect ==>", res.body);
                                                                   res.should.have.status(200);
+                                                                  /**
+                                                                   * @description:test script for archive the note 
+                                                                   */
+                                                                  describe('archive the note', function () {
+                                                                    it('status ', function (done) {
+                                                                      chai.request(server).put('/isArchived').send(data1.isArchived).end((err, res) => {
+                                                                        if (err) {
+                                                                          console.log("expect ==>", err);
+                                                                        } else {
+                                                                          console.log("expect ==>", res.body);
+                                                                          res.should.have.status(200);
+                                                                        }
+                                                                        done()
+                                                                      })
+                                                                    })
+                                                                  })
                                                                 }
                                                                 done()
                                                               })

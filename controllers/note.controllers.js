@@ -106,7 +106,7 @@ exports.updateColor = (req, res) => {
     }
 }
 /**
- * 
+ * @description: 
  * @param {*} req 
  * @param {*} res 
  */
@@ -124,7 +124,6 @@ exports.deleteNote = (req, res) => {
             // noteID = req.body.noteID;
             noteService.deleteNote(req, (err, result) => {
                 if (err) {
-
                     responseResult.status = false;
                     responseResult.error = err;
                     res.status(500).send(responseResult);;
@@ -137,6 +136,74 @@ exports.deleteNote = (req, res) => {
         }
     } catch (error) {
 
+        res.send(error)
+    }
+}
+/**
+ * @description: 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.isTrashed = (req, res) => {
+    try {
+        req.checkBody('noteID', 'noteID required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            noteID = req.body.noteID;
+            noteService.isTrashed(noteID, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                } else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+        res.send(error)
+    }
+}
+/**
+ * @description: 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.isArchived = (req, res) => {
+    try {
+        req.checkBody('noteID', 'noteID required').not().isEmpty();
+        req.checkBody('archive', 'archive required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            noteID = req.body.noteID;
+            archive = req.body.archive;
+            noteService.isArchived(noteID, archive, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                } else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
         res.send(error)
     }
 }

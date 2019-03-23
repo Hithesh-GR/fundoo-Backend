@@ -57,7 +57,11 @@ exports.updateColor = (paramID, paramData, callback) => {
         }
     })
 }
-
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} callback 
+ */
 exports.deleteNote = (noteID, callback) => {
     noteModel.deleteNote(noteID, (err, result) => {
         if (err) {
@@ -68,5 +72,58 @@ exports.deleteNote = (noteID, callback) => {
             return callback(null, result)
         }
     })
+}
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} callback 
+ */
+exports.isTrashed = (paramID, callback) => {
+    console.log("in services", paramID);
+    noteModel.getTrashStatus(paramID, (err, status) => {
+        if (err) {
+            callback(err);
+        } else {
+            if (status === true) {
+                let data = {
+                    status: false
+                }
+                noteModel.isTrashed(paramID, data, (err, result) => {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        return callback(null, result)
+                    }
+                })
+            } else if (status === false) {
+                let data = {
+                    status: true
+                }
+                noteModel.isTrashed(paramID, data, (err, result) => {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        return callback(null, result)
+                    }
+                })
+            }
 
+        }
+    })
+}
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} paramData 
+ * @param {*} callback 
+ */
+exports.isArchived = (paramID, paramData, callback) => {
+    console.log("in services", paramID, paramData);
+    noteModel.isArchived(paramID, paramData, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            return callback(null, result)
+        }
+    })
 }

@@ -2,15 +2,15 @@
     "registration": {
         "firstName": "div",
         "lastName": "hit",
-        "email": "dimand@gmail.com",
+        "email": "kkokol@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "dimand@gmail.com",
+        "email": "kkokol@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "dimand@gmail.com"
+        "email": "kkokol@gmail.com"
     },
     "reset": {
         "password": "2345678",
@@ -28,15 +28,20 @@
         "trash": "true"
     },
     "getNotes": {
-        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
     },
     "updateColor": {
         "noteID": "5c91ba7037f7a60ed234fc87",
         "color": "pink",
-        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
     },
-    "deleteNote":{
+    "deleteNote": {
         "noteID": "5c91ba7037f7a60ed234fc87",
-        "headers":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U"
+    },
+    "isArchived": {
+        "noteID": "5c91ba7037f7a60ed234fc87",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1YzkxYmE3MDM3ZjdhNjBlZDIzNGZjODciLCJ1c2VybmFtZSI6Imhhc3NhbiIsImVtYWlsIjoidGlnZXJAZ21haWwuY29tIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTUzMjI5MDc3LCJleHAiOjE1NTMzMTU0Nzd9.gyJ0HKMC9oPmvF_7SaKuSfHx1t-4qrrwzyZ1oBaKp_U",
+        "archive": "true"
     }
 }
