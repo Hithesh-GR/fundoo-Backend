@@ -127,3 +127,20 @@ exports.isArchived = (paramID, paramData, callback) => {
         }
     })
 }
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} paramData 
+ * @param {*} callback 
+ */
+exports.reminder = (paramID, paramData, callback) => {
+    console.log("in services", paramID, paramData);
+
+    noteModel.reminder(paramID, paramData, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            return callback(null, result)
+        }
+    })
+}

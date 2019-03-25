@@ -159,6 +159,8 @@ noteModel.prototype.getTrashStatus = (id, callback) => {
         if (err) {
             callback(err)
         } else {
+            console.log("trash status ",result);
+            
             return callback(null, result.trash)
         }
     })
@@ -174,7 +176,7 @@ noteModel.prototype.isTrashed = (noteID, trashNote, callback) => {
             _id: noteID
         }, {
             $set: {
-                trash: trashNote,
+                trash: trashNote.status,
                 pinned: false,
                 archive: false
             }
@@ -183,7 +185,29 @@ noteModel.prototype.isTrashed = (noteID, trashNote, callback) => {
             if (err) {
                 callback(err)
             } else {
-                return callback(null, trashNote)
+                return callback(null, trashNote.status)
+            }
+        });
+}
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} reminderParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.reminder = (noteID, reminderParams, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                reminder: reminderParams
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                return callback(null, reminderParams)
             }
         });
 };

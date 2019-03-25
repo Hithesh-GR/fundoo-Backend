@@ -20,4 +20,5 @@ router.put('/updateColor', middle.checkTokenAuth, noteController.updateColor);
 router.put('/isArchived', middle.checkTokenAuth, noteController.isArchived);
 router.put('/isTrashed', middle.checkTokenAuth, noteController.isTrashed);
 router.delete('/deleteNote', middle.checkTokenAuth, noteController.deleteNote);
+router.put('/reminder', middle.checkTokenAuth, noteController.reminder);
 module.exports = router;
