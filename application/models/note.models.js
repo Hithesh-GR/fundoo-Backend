@@ -159,8 +159,8 @@ noteModel.prototype.getTrashStatus = (id, callback) => {
         if (err) {
             callback(err)
         } else {
-            console.log("trash status ",result);
-            
+            console.log("trash status ", result);
+
             return callback(null, result.trash)
         }
     })
@@ -208,6 +208,51 @@ noteModel.prototype.reminder = (noteID, reminderParams, callback) => {
                 callback(err)
             } else {
                 return callback(null, reminderParams)
+            }
+        });
+};
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} titleParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.editTitle = (noteID, titleParams, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                title: titleParams,
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                return callback(null, titleParams)
+            }
+
+        });
+}
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} descParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.editDescription = (noteID, descParams, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                description: descParams,
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                return callback(null, descParams)
             }
         });
 };

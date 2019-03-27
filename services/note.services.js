@@ -135,8 +135,39 @@ exports.isArchived = (paramID, paramData, callback) => {
  */
 exports.reminder = (paramID, paramData, callback) => {
     console.log("in services", paramID, paramData);
-
     noteModel.reminder(paramID, paramData, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            return callback(null, result)
+        }
+    })
+}
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} paramData 
+ * @param {*} callback 
+ */
+exports.editTitle = (paramID, paramData, callback) => {
+    console.log("in services", paramID, paramData);
+    noteModel.editTitle(paramID, paramData, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            return callback(null, result)
+        }
+    })
+}
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} paramData 
+ * @param {*} callback 
+ */
+exports.editDescription = (paramID, paramData, callback) => {
+    console.log("in services", paramID, paramData);
+    noteModel.editDescription(paramID, paramData, (err, result) => {
         if (err) {
             callback(err);
         } else {
