@@ -175,3 +175,19 @@ exports.editDescription = (paramID, paramData, callback) => {
         }
     })
 }
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} paramData 
+ * @param {*} callback 
+ */
+exports.isPinned = (paramID, paramData, callback) => {
+    console.log("in services", paramID, paramData);
+    noteModel.isPinned(paramID, paramData, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            return callback(null, result)
+        }
+    })
+}

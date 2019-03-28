@@ -256,4 +256,29 @@ noteModel.prototype.editDescription = (noteID, descParams, callback) => {
             }
         });
 };
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} pinParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.isPinned = (noteID, pinParams, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                pinned: pinParams,
+                trash: false,
+                archive: false
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+
+                return callback(null, pinParams)
+            }
+        });
+};
 module.exports = new noteModel();
