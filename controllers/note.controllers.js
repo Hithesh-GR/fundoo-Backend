@@ -192,9 +192,6 @@ exports.isArchived = (req, res) => {
             noteID = req.body.noteID;
             archive = req.body.archive;
             noteService.isArchived(noteID, archive, (err, result) => {
-                // if (err) {
-                //     responseRhived(noteID, archive, (err, result) => {
-                //     }
                 if (err) {
                     responseResult.status = false;
                     responseResult.error = err;
@@ -332,7 +329,6 @@ exports.isPinned = (req, res) => {
             pinned = req.body.pinned;
             noteService.isPinned(noteID, pinned, (err, result) => {
                 if (err) {
-
                     responseResult.status = false;
                     responseResult.error = err;
                     res.status(500).send(responseResult);
@@ -345,5 +341,40 @@ exports.isPinned = (req, res) => {
         }
     } catch (error) {
         res.send(error)
+    }
+}
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.updateImage = (req, res) => {
+    console.log("in controller");
+    try {
+        req.checkBody('noteID', 'noteID required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            noteID = req.body.noteID;
+            let imageUp=(req.file.location);
+            noteService.updateImage(noteID, imageUp, (err, result) => {
+                if (err) {
+                    responseResult.success = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult)
+                } else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+        res.send(error);
     }
 }

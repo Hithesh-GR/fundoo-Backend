@@ -276,8 +276,30 @@ noteModel.prototype.isPinned = (noteID, pinParams, callback) => {
             if (err) {
                 callback(err)
             } else {
-
                 return callback(null, pinParams)
+            }
+        });
+};
+/**
+ * 
+ * @param {*} noteID 
+ * @param {*} updateNote 
+ * @param {*} callback 
+ */
+noteModel.prototype.updateImage = (noteID, updateNote, callback) => {
+    note.findOneAndUpdate({
+            _id: noteID
+        }, {
+            $set: {
+                image: updateNote
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                console.log("updated image successfully...")
+                return callback(null, updateNote)
             }
         });
 };

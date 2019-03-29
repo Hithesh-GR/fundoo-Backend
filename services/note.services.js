@@ -66,7 +66,6 @@ exports.deleteNote = (noteID, callback) => {
     noteModel.deleteNote(noteID, (err, result) => {
         if (err) {
             console.log("service error");
-
             callback(err)
         } else {
             return callback(null, result)
@@ -90,6 +89,7 @@ exports.isTrashed = (paramID, callback) => {
                 }
                 noteModel.isTrashed(paramID, data, (err, result) => {
                     if (err) {
+                        console.log("service error");
                         callback(err);
                     } else {
                         return callback(null, result)
@@ -101,6 +101,7 @@ exports.isTrashed = (paramID, callback) => {
                 }
                 noteModel.isTrashed(paramID, data, (err, result) => {
                     if (err) {
+                        console.log("service error");
                         callback(err);
                     } else {
                         return callback(null, result)
@@ -121,6 +122,7 @@ exports.isArchived = (paramID, paramData, callback) => {
     console.log("in services", paramID, paramData);
     noteModel.isArchived(paramID, paramData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
@@ -137,6 +139,7 @@ exports.reminder = (paramID, paramData, callback) => {
     console.log("in services", paramID, paramData);
     noteModel.reminder(paramID, paramData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
@@ -153,6 +156,7 @@ exports.editTitle = (paramID, paramData, callback) => {
     console.log("in services", paramID, paramData);
     noteModel.editTitle(paramID, paramData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
@@ -169,6 +173,7 @@ exports.editDescription = (paramID, paramData, callback) => {
     console.log("in services", paramID, paramData);
     noteModel.editDescription(paramID, paramData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
@@ -185,8 +190,27 @@ exports.isPinned = (paramID, paramData, callback) => {
     console.log("in services", paramID, paramData);
     noteModel.isPinned(paramID, paramData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
+            return callback(null, result)
+        }
+    })
+}
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} image 
+ * @param {*} callback 
+ */
+exports.updateImage = (paramID,image,callback) => {   
+    console.log("in services for upload image",paramID,image);
+    noteModel.updateImage(paramID,image, (err, result) => {
+        if (err) {
+            console.log("service error");
+            callback(err);
+        } else {
+            console.log("in image service...");
             return callback(null, result)
         }
     })
