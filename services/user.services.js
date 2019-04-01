@@ -15,7 +15,7 @@ const userModel = require('../application/models/user.models')
  */
 exports.login = (data, callback) => {
     try {
-       //  console.log("services use data:", data);
+        //  console.log("services use data:", data);
         userModel.login(data, (err, result) => {
             if (err) {
                 console.log("service error");
@@ -83,6 +83,26 @@ exports.resetpassword = (data, callback) => {
             } else {
                 // console.log("In service", result);
                 callback(null, result);
+            }
+        })
+    } catch (error) {
+        callback.send(error);
+    }
+}
+/**
+ * 
+ * @param {*} paramID 
+ * @param {*} image 
+ * @param {*} callback 
+ */
+exports.setProfilePic = (paramID, image, callback) => {
+    console.log("in services");
+    try {
+        userModel.setProfilePic(paramID, image, (err, result) => {
+            if (err) {
+                callback(err);
+            } else {
+                return callback(null, result)
             }
         })
     } catch (error) {

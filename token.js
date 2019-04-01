@@ -24,12 +24,14 @@ module.exports = {
         }
         return obj;
     },
-     /**
+    /**
      * @description:exporting token 
      * @param {*it contains unique ID} payload 
      */
     GenerateTokenAuth(payload) {
-        const token = jwt.sign({   payload  }, 'secretkey-auth', {
+        const token = jwt.sign({
+            payload
+        }, 'secretkey-auth', {
             expiresIn: '1D'
         })
         const obj = {

@@ -111,7 +111,7 @@ exports.login = (req, res) => {
                             responseResult.message = 'Login Successfully';
                             responseResult.result = result;
                             const payload = {
-                                user_id: result._id,
+                                user_id: result.user_id,
                                 username: result.firstName,
                                 email: result.email,
                                 sucess: true
@@ -214,5 +214,30 @@ exports.resetPassword = (req, res) => {
         }
     } catch (err) {
         res.send(err);
+    }
+}
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.setProfilePic = (req, res) => {
+    try {
+        var responseResult = {};
+        userId = req.decoded._id;
+        let image = (req.file.location)
+        userService.setProfilePic(userID, image, (err, result) => {
+            if (err) {
+                responseResult.success = false;
+                responseResult.error = err;
+                res.status(500).send(responseResult)
+            } else {
+                responseResult.status = true;
+                responseResult.data = result;
+                res.status(200).send(responseResult);
+            }
+        })
+    } catch (error) {
+        res.send(error);
     }
 }

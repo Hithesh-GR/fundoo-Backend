@@ -348,7 +348,7 @@ exports.isPinned = (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-exports.updateImage = (req, res) => {
+exports. updateImage = (req, res) => {
     try {
         req.checkBody('noteID', 'noteID required').not().isEmpty();
         var errors = req.validationErrors();

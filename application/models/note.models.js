@@ -55,7 +55,7 @@ function noteModel() {}
  * @param {*response to backend} callback 
  */
 noteModel.prototype.addNotes = (objectNote, callback) => {
-    console.log("data====>", objectNote);
+   // console.log("data====>", objectNote);
     const noteModel = new note(objectNote.body);
     noteModel.save((err, result) => {
         if (err) {

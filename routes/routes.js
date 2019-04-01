@@ -41,4 +41,6 @@ router.put('/isPinned', middle.checkTokenAuth, noteController.isPinned);
 
 router.put('/uploadImage', middle.checkTokenAuth, upload.single('image'), noteController.updateImage);
 
+router.put('/setProfilePic', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic);
+
 module.exports = router;

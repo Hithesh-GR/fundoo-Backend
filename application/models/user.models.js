@@ -31,6 +31,9 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: [true, "Password required"]
     },
+    profilePic:{
+        type: String,
+    }
 }, {
     timestamps: true
 });
@@ -155,4 +158,27 @@ userModel.prototype.updateUserPassword = (req, callback) => {
         }
     });
 }
+/**
+ * 
+ * @param {*} userID 
+ * @param {*} image 
+ * @param {*} callback 
+ */
+userModel.prototype.setProfilePic = (userID, image, callback) => {
+    user.findOneAndUpdate({
+            _id: userID
+        }, {
+            $set: {
+                profilePic: image
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                console.log("updated user successfully...")
+                return callback(null, image)
+            }
+        });
+};
 module.exports = new userModel();
