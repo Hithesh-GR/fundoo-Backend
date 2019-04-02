@@ -18,7 +18,7 @@ exports.login = (data, callback) => {
         //  console.log("services use data:", data);
         userModel.login(data, (err, result) => {
             if (err) {
-                console.log("service error");
+                console.log("service error in login");
                 callback(err);
             } else {
                 // console.log("In service", result);
@@ -38,7 +38,7 @@ exports.registration = (data, callback) => {
     try {
         userModel.registration(data, (err, result) => {
             if (err) {
-                console.log("service error");
+                console.log("service error in registration");
                 callback(err);
             } else {
                 // console.log("In service", result);
@@ -58,7 +58,7 @@ exports.getUserEmail = (data, callback) => {
     try {
         userModel.findUserEmail(data, (err, result) => {
             if (err) {
-                console.log("service error");
+                console.log("service error in forgot password");
                 callback(err);
             } else {
                 // console.log("In service", result);
@@ -78,7 +78,7 @@ exports.resetpassword = (data, callback) => {
     try {
         userModel.updateUserPassword(data, (err, result) => {
             if (err) {
-                console.log("service error");
+                console.log("service error in reset password");
                 callback(err);
             } else {
                 // console.log("In service", result);
@@ -100,9 +100,10 @@ exports.setProfilePic = (paramID, image, callback) => {
     try {
         userModel.setProfilePic(paramID, image, (err, result) => {
             if (err) {
+                console.log("service error in setProfile pic");
                 callback(err);
             } else {
-                return callback(null, result)
+                 callback(null, result)
             }
         })
     } catch (error) {

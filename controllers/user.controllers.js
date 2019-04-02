@@ -101,6 +101,8 @@ exports.login = (req, res) => {
                 } else {
                     var responseResult = {};
                     userService.login(req.body, (err, result) => {
+                        console.log("loggggggggggggggg=>",result);
+                        
                         if (err) {
                             responseResult.status = false;
                             responseResult.message = 'Login Failed';
@@ -111,7 +113,7 @@ exports.login = (req, res) => {
                             responseResult.message = 'Login Successfully';
                             responseResult.result = result;
                             const payload = {
-                                user_id: result.user_id,
+                                user_id: result._id,
                                 username: result.firstName,
                                 email: result.email,
                                 sucess: true
@@ -208,7 +210,6 @@ exports.resetPassword = (req, res) => {
                     const obj = token.GenerateTokenAuth(payload);
                     responseResult.token = obj;
                     res.status(200).send(responseResult);
-
                 }
             })
         }
@@ -226,7 +227,7 @@ exports.setProfilePic = (req, res) => {
         var responseResult = {};
         userId = req.decoded._id;
         let image = (req.file.location)
-        userService.setProfilePic(userID, image, (err, result) => {
+        userService.setProfilePic(userId, image, (err, result) => {
             if (err) {
                 responseResult.success = false;
                 responseResult.error = err;

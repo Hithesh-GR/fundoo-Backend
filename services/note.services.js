@@ -15,6 +15,8 @@ const noteModel = require('../application/models/note.models');
  */
 exports.createNote = (data, callback) => {
     noteModel.addNotes(data, (err, result) => {
+        console.log("=================",data);
+        
         if (err) {
             console.log("service error");
             callback(err);

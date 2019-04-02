@@ -2,15 +2,15 @@
     "registration": {
         "firstName": "div",
         "lastName": "hit",
-        "email": "daddy@gmail.com",
+        "email": "dadadadada@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "daddy@gmail.com",
+        "email": "dadadadada@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "daddy@gmail.com"
+        "email": "dadadadada@gmail.com"
     },
     "reset": {
         "password": "2345678",

@@ -1,16 +1,17 @@
 const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+require('dotenv').config();
 const s3 = new aws.S3({
     secretAccessKey: process.env.secretAccessKey,
     accessKeyId: process.env.accessKeyId,
-    region: process.env.region
+    region: 'us-east-1'
 });
-const fileFilter = (req, file, cb) => {
+const fileFilter = (req, file, callback) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-        cb(null, true)
+        callback(null, true)
     } else {
-        cb(new Error('Invalid Mime Type, only JPEG and PNG'), false);
+        callback(new Error('Invalid Mime Type, only JPEG and PNG'), false);
     }
 }
 const upload = multer({
@@ -19,13 +20,13 @@ const upload = multer({
         s3,
         bucket: 'fundoonote',
         acl: 'public-read',
-        metadata: function (req, file, cb) {
-            cb(null, {
+        metadata: function (req, file, callback) {
+            callback(null, {
                 fieldName: 'TESTING_META_DATA!'
             });
         },
-        key: function (req, file, cb) {
-            cb(null, Date.now().toString())
+        key: function (req, file, callback) {
+            callback(null, Date.now().toString())
         }
     })
 })
