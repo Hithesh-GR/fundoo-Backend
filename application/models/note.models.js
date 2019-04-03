@@ -18,18 +18,15 @@ var noteSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required: [true, "Title required"]
     },
     description: {
         type: String,
-        required: [true, "Description required"]
     },
     reminder: {
         type: String
     },
     color: {
         type: String,
-        required: [true, "Color required"]
     },
     image: {
         type: String
@@ -298,7 +295,7 @@ noteModel.prototype.updateImage = (noteID, updateNote, callback) => {
             if (err) {
                 callback(err)
             } else {
-                console.log("updated image successfully...")
+                console.log("updated image to note successfully")
                 return callback(null, updateNote)
             }
         });

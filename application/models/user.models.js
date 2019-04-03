@@ -31,7 +31,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: [true, "Password required"]
     },
-    profilePic:{
+    profilePic: {
         type: String,
     }
 }, {
@@ -73,6 +73,7 @@ userModel.prototype.registration = (body, callback) => {
                     "lastName": body.lastName,
                     "email": body.email,
                     "password": hash(body.password),
+                    "profilePic": body.profilePic
                 })
                 newUser.save((err, result) => {
                     if (err) {
@@ -165,6 +166,8 @@ userModel.prototype.updateUserPassword = (req, callback) => {
  * @param {*} callback 
  */
 userModel.prototype.setProfilePic = (userID, image, callback) => {
+    // console.log("ID=====================",userID);
+    // console.log("image=====================",image);
     user.findOneAndUpdate({
             _id: userID
         }, {
@@ -176,7 +179,7 @@ userModel.prototype.setProfilePic = (userID, image, callback) => {
             if (err) {
                 callback(err)
             } else {
-                console.log("updated user successfully...")
+                console.log("updated image successfully")
                 return callback(null, image)
             }
         });

@@ -77,59 +77,61 @@ exports.login = (req, res) => {
             response.status = false;
             response.error = errors;
             return res.status(422).send(response);
+            // } else {
+            //     const app = express();
+            //     // create and connect redis client to local instance.
+            //     const client = redis.createClient();
+            //     // Print redis errors to the console
+            //     client.on('error', (err) => {
+            //         console.log("Error " + err);
+            //     });
+            //     app.use(responseTime());
+            //     // Extract the query from url and trim trailing spaces
+            //     // const query = (req.body.email+req.body._id).trim();
+            //     // Build the Wikipedia API url
+            //     const redisKey = req.body.email;
+            //     // Try fetching the result from Redis first in case we have it cached
+            //     return client.get(redisKey, (err, result) => {
+            //         // If that key exist in Redis store
+            //         // console.log("result==>", result);
+            //         if (result) {
+            //             console.log('inside if ===>' + result);
+            //             const resultJSON = JSON.parse(result);
+            //             return res.status(200).send(resultJSON);
         } else {
-            const app = express();
-            // create and connect redis client to local instance.
-            const client = redis.createClient();
-            // Print redis errors to the console
-            client.on('error', (err) => {
-                console.log("Error " + err);
-            });
-            app.use(responseTime());
-            // Extract the query from url and trim trailing spaces
-            // const query = (req.body.email+req.body._id).trim();
-            // Build the Wikipedia API url
-            const redisKey = req.body.email;
-            // Try fetching the result from Redis first in case we have it cached
-            return client.get(redisKey, (err, result) => {
-                // If that key exist in Redis store
-                // console.log("result==>", result);
-                if (result) {
-                    console.log('inside if ===>' + result);
-                    const resultJSON = JSON.parse(result);
-                    return res.status(200).send(resultJSON);
+            var responseResult = {};
+            userService.login(req.body, (err, result) => {
+                console.log("loggggggggggggggg=>", result);
+
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.message = 'Login Failed';
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
                 } else {
-                    var responseResult = {};
-                    userService.login(req.body, (err, result) => {
-                        console.log("loggggggggggggggg=>",result);
-                        
-                        if (err) {
-                            responseResult.status = false;
-                            responseResult.message = 'Login Failed';
-                            responseResult.error = err;
-                            res.status(500).send(responseResult);
-                        } else {
-                            responseResult.status = true;
-                            responseResult.message = 'Login Successfully';
-                            responseResult.result = result;
-                            const payload = {
-                                user_id: result._id,
-                                username: result.firstName,
-                                email: result.email,
-                                sucess: true
-                            }
-                            console.log(payload);
-                            const obj = token.GenerateTokenAuth(payload);
-                            responseResult.token = obj;
-                            const redisKey = result.email;
-                            console.log("rediskey", redisKey);
-                            client.setex(redisKey, 36000, JSON.stringify(responseResult.token.token));
-                            res.status(200).send(responseResult.token.token);
-                        }
-                    })
+
+                    responseResult.status = true;
+                    responseResult.message = 'Login Successfully';
+                    responseResult.result = result;
+                    const payload = {
+                        user_id: result._id,
+                        username: result.firstName,
+                        email: result.email,
+                        profilePic: result.profilePic,
+                        sucess: true
+                    }
+                    console.log(payload);
+                    const obj = token.GenerateTokenAuth(payload);
+                    responseResult.token = obj;
+                    //const redisKey = result.email;
+                    // console.log("rediskey", redisKey);
+                    //   client.setex(redisKey, 36000, JSON.stringify(responseResult.token.token));
+                    res.status(200).send(responseResult.token.token);
                 }
             })
         }
+        //     })
+        // }
     } catch (err) {
         res.send(err);
     }
@@ -224,10 +226,13 @@ exports.resetPassword = (req, res) => {
  */
 exports.setProfilePic = (req, res) => {
     try {
+        // console.log("req-------------------->",req.decoded);
+        // console.log("req-------------------->",req.file.location)
         var responseResult = {};
-        userId = req.decoded._id;
+        userId = req.decoded.payload.user_id;
         let image = (req.file.location)
         userService.setProfilePic(userId, image, (err, result) => {
+            // console.log("imageeeeeeeeeeeeeeeeeeeeeeee=>", result);
             if (err) {
                 responseResult.success = false;
                 responseResult.error = err;

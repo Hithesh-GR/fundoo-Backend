@@ -15,8 +15,7 @@ const noteModel = require('../application/models/note.models');
  */
 exports.createNote = (data, callback) => {
     noteModel.addNotes(data, (err, result) => {
-        console.log("=================",data);
-        
+        // console.log("=================",data);
         if (err) {
             console.log("service error");
             callback(err);
@@ -205,9 +204,9 @@ exports.isPinned = (paramID, paramData, callback) => {
  * @param {*} image 
  * @param {*} callback 
  */
-exports.updateImage = (paramID,image,callback) => {   
-    console.log("in services for upload image",paramID,image);
-    noteModel.updateImage(paramID,image, (err, result) => {
+exports.updateImage = (paramID, image, callback) => {
+    console.log("in services for upload image", paramID);
+    noteModel.updateImage(paramID, image, (err, result) => {
         if (err) {
             console.log("service error");
             callback(err);

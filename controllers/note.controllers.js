@@ -13,8 +13,8 @@ const noteService = require('../services/note.services');
  */
 exports.createNote = (req, res) => {
     try {
-        req.checkBody('title', 'Title should not be empty').not().isEmpty();
-        req.checkBody('description', 'Description should not be empty').not().isEmpty();
+        // req.checkBody('title', 'Title should not be empty');
+        // req.checkBody('description', 'Description should not be empty');
         var errors = req.validationErrors();
         var response = {};
         if (errors) {
@@ -348,9 +348,7 @@ exports.isPinned = (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-exports. updateImage = (req, res) => {
-    console.log("--------------------------",req.body);
-    
+exports.updateImage = (req, res) => {
     try {
         req.checkBody('noteID', 'noteID required').not().isEmpty();
         var errors = req.validationErrors();
@@ -361,9 +359,10 @@ exports. updateImage = (req, res) => {
             return res.status(422).send(response);
         } else {
             var responseResult = {};
-            noteID = req.body.noteID;
-            let imageUp=(req.file.location);
-            noteService.updateImage( (err, result) => {
+            noteID = req.body.noteId;
+            console.log("noteIDDDDDDDDDDDDDDDDDDDDdd",noteID);
+            let imageUp = (req.file.location);
+            noteService.updateImage(noteID, imageUp,(err, result) => {
                 console.log("imageeeeeeeeeeeeeeeeeee",result);
                 if (err) {
                     responseResult.success = false;

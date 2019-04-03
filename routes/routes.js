@@ -11,6 +11,7 @@ const userController = require("../controllers/user.controllers");
 const noteController = require("../controllers/note.controllers");
 const middle = require('../middleware/authentication');
 const upload = require('../services/fileUpload');
+
 router.post('/login', userController.login);
 
 router.post('/registration', userController.registration);
@@ -39,8 +40,8 @@ router.put('/editDescription', middle.checkTokenAuth, noteController.editDescrip
 
 router.put('/isPinned', middle.checkTokenAuth, noteController.isPinned);
 
-router.post('/uploadImage', middle.checkTokenAuth, upload.single('image'), noteController.updateImage);
+router.put('/uploadImage', middle.checkTokenAuth, upload.single('image'), noteController.updateImage);
 
-router.post('/setProfilePic', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic);
+router.put('/setProfilePic', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic);
 
 module.exports = router;
