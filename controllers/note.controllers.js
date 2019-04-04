@@ -350,6 +350,8 @@ exports.isPinned = (req, res) => {
  */
 exports.updateImage = (req, res) => {
     try {
+        console.log("req.file------>",req.file);
+        
         req.checkBody('noteID', 'noteID required').not().isEmpty();
         var errors = req.validationErrors();
         var response = {};
@@ -359,11 +361,10 @@ exports.updateImage = (req, res) => {
             return res.status(422).send(response);
         } else {
             var responseResult = {};
-            noteID = req.body.noteId;
-            console.log("noteIDDDDDDDDDDDDDDDDDDDDdd",noteID);
-            let imageUp = (req.file.location);
+            noteID = req.body.noteID;
+            let imageUp = req.body.image;
+            // let imageUp = (req.file.location);
             noteService.updateImage(noteID, imageUp,(err, result) => {
-                console.log("imageeeeeeeeeeeeeeeeeee",result);
                 if (err) {
                     responseResult.success = false;
                     responseResult.error = err;

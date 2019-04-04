@@ -205,8 +205,8 @@ exports.isPinned = (paramID, paramData, callback) => {
  * @param {*} callback 
  */
 exports.updateImage = (paramID, image, callback) => {
-    console.log("in services for upload image", paramID);
     noteModel.updateImage(paramID, image, (err, result) => {
+        // console.log("in services result in note image",result);
         if (err) {
             console.log("service error");
             callback(err);

@@ -20,7 +20,7 @@ router.post('/forgotPassword', userController.forgotPassword);
 
 router.post('/resetPassword/:token', middle.checkTokenResetPassword, userController.resetPassword);
 
-router.post('/createNote', middle.checkTokenAuth, noteController.createNote);
+router.post('/createNote', middle.checkTokenAuth, upload.single('image'), noteController.createNote);
 
 router.get('/getNotes', middle.checkTokenAuth, noteController.getNotes);
 
@@ -40,8 +40,11 @@ router.put('/editDescription', middle.checkTokenAuth, noteController.editDescrip
 
 router.put('/isPinned', middle.checkTokenAuth, noteController.isPinned);
 
-router.put('/uploadImage', middle.checkTokenAuth, upload.single('image'), noteController.updateImage);
+router.put('/uploadImage', middle.checkTokenAuth, noteController.updateImage);
 
 router.put('/setProfilePic', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic);
+
+router.put('/setProfilePic1', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic1);
+
 
 module.exports = router;
