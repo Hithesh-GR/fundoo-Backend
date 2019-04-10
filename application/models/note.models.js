@@ -23,28 +23,33 @@ var noteSchema = new mongoose.Schema({
         type: String,
     },
     reminder: {
-        type: String
+        type: String,
     },
     color: {
         type: String,
     },
     image: {
-        type: String
+        type: String,
     },
     archive: {
-        type: Boolean
+        type: Boolean,
     },
     pinned: {
-        type: Boolean
+        type: Boolean,
     },
     trash: {
-        type: Boolean
+        type: Boolean,
     },
+    label: [
+        {
+            type: String,
+            ref:"labelSchema"
+        }
+    ]
 }, {
     timestamps: true
 });
 var note = mongoose.model('Note', noteSchema);
-
 function noteModel() {}
 /**
  * @description:it will add the notes data using note schema and save the data into the database
@@ -63,7 +68,8 @@ noteModel.prototype.addNotes = (req, callback) => {
         "image": req.body.image,
         "archive": req.body.archive,
         "pinned": req.body.pinned,
-        "trash": req.body.trash
+        "trash": req.body.trash,
+        "label": req.body.label
     });
     noteModel.save((err, result) => {
         if (err) {
@@ -241,7 +247,7 @@ noteModel.prototype.editTitle = (noteID, titleParams, callback) => {
             }
 
         });
-}
+};
 /**
  * 
  * @param {*} noteID 
@@ -308,6 +314,185 @@ noteModel.prototype.updateImage = (noteID, updateNote, callback) => {
             } else {
                 console.log("updated image to note successfully")
                 return callback(null, updateNote)
+            }
+        });
+};
+
+var labelSchema = new mongoose.Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'UserSchema'
+    },
+    label: {
+        type: String,
+        require: [true, "Label require"],
+        unique: true
+    }
+},{
+    timestamps:true
+}
+)
+var label = mongoose.model('Label', labelSchema);
+/**
+ * 
+ * @param {*} labelData 
+ * @param {*} callback 
+ */
+noteModel.prototype.addLabel = (labelData, callback) => {
+    console.log("ultimate save", labelData);
+    const Data = new label(labelData);
+    Data.save((err, result) => {
+        if (err) {
+            console.log(err);
+            callback(err);
+        } else {
+            console.log("label result", result);
+            return callback(null, result);
+        }
+    })
+};
+/**
+ * 
+ * @param {*} id 
+ * @param {*} callback 
+ */
+noteModel.prototype.getLabels = (id, callback) => {
+    console.log("in model", id);
+    label.find({ userId: id.userId }, (err, result) => {
+        if (err) {
+            callback(err)
+        } else {
+            console.log("labels", result)
+            return callback(null, result)
+        }
+    })
+};
+/**
+ * 
+ * @param {*} id 
+ * @param {*} callback 
+ */
+noteModel.prototype.deleteLabel = (id, callback) => {
+    console.log("in model", id);
+    label.deleteOne({ _id: id.labelID }, (err, result) => {
+        if (err) {
+            callback(err)
+        } else {
+            console.log("labels", result)
+            return callback(null, result)
+        }
+    })
+};
+/**
+ * 
+ * @param {*} changedLabel 
+ * @param {*} callback 
+ */
+noteModel.prototype.updateLabel = (changedLabel, callback) => {
+    var editLabel = null;
+    var labelId = null;
+    console.log("in model", changedLabel);
+    if (changedLabel != null) {
+        editLabel = changedLabel.editLabel;
+        labelId = changedLabel.labelID
+    } else {
+        callback("Pinned note not found")
+    }
+    label.findOneAndUpdate(
+        {
+            _id: labelId
+        },
+        {
+            $set: {
+                label: editLabel
+            }
+        },
+        (err, result) => {
+            if (err) {
+                console.log("in modelerr");
+                callback(err)
+            } else {
+                console.log("in modelsuccess");
+                return callback(null, changedLabel)
+            }
+        });
+};
+/**
+ * 
+ * @param {*} labelParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.saveLabelToNote = (labelParams, callback) => {
+    console.log("in model", labelParams.noteID);
+    var labelledNote = null;
+    var noteID = null;
+    if (labelParams != null) {
+        labelledNote = labelParams.label;
+        noteID = labelParams.noteID;
+    } else {
+        console.log("in modelerr");
+
+        callback("Pinned note not found")
+    }
+    note.findOneAndUpdate(
+        {
+            _id: noteID
+        },
+        {
+            $push: {
+                label: labelledNote,
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                console.log("in model success");
+                let res = result.label;
+                res.push(labelledNote);
+                return callback(null, res)
+            }
+        });
+};
+/**
+ * 
+ * @param {*} labelParams 
+ * @param {*} callback 
+ */
+noteModel.prototype.deleteLabelToNote = (labelParams, callback) => {
+    console.log("in model", labelParams.noteID);
+    var labelledNote = null;
+    var noteID = null;
+    if (labelParams != null) {
+        labelledNote = labelParams.value;
+        noteID = labelParams.noteID;
+    } else {
+        console.log("in modelerr");
+
+        callback("Pinned note not found")
+    }
+    note.findOneAndUpdate(
+        {
+            _id: noteID
+        },
+        {
+            $pull: {
+                label: labelledNote,
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                let newArray = result.label;
+                console.log("in model success result",result);
+
+                for (let i = 0; i < newArray.length; i++) {
+                    if (newArray[i] === labelledNote) {
+                        newArray.splice(i, 1);
+                        return callback(null, newArray)
+                    }
+                }
             }
         });
 };

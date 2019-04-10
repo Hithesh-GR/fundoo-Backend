@@ -9,7 +9,10 @@
 /**
  *  @description:To give path to each file
  **/
-const router = require('../server/routes/routes');
+const userRouter = require('../server/routes/user.routes');
+
+const noteRouter = require('../server/routes/note.routes');
+
 const express = require('express');
 /**
  * @description:Parse the JSON request body
@@ -44,7 +47,8 @@ app.use(bodyParser.urlencoded({
  * @description:parse requests of content-type - application/json
  **/
 app.use(bodyParser.json())
-app.use('/', router);
+app.use('/', userRouter);
+app.use('/', noteRouter);
 /**
  *  @description:Configuring the database
  **/

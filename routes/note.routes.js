@@ -1,24 +1,15 @@
 /****************************************************************************************
  *  @Purpose        : To provide routes to each webpages. 
- *  @file           : routes.js        
+ *  @file           : note.routes.js        
  *  @author         : HITHESH G R
  *  @version        : v0.1
  *  @since          : 02-02-2019
  *****************************************************************************************/
 const express = require('express');
 const router = express.Router();
-const userController = require("../controllers/user.controllers");
 const noteController = require("../controllers/note.controllers");
 const middle = require('../middleware/authentication');
-const upload = require('../services/fileUpload');
-
-router.post('/login', userController.login);
-
-router.post('/registration', userController.registration);
-
-router.post('/forgotPassword', userController.forgotPassword);
-
-router.post('/resetPassword/:token', middle.checkTokenResetPassword, userController.resetPassword);
+const upload = require('../middleware/fileUpload');
 
 router.post('/createNote', middle.checkTokenAuth, upload.single('image'), noteController.createNote);
 
@@ -42,8 +33,16 @@ router.put('/isPinned', middle.checkTokenAuth, noteController.isPinned);
 
 router.put('/uploadImage', middle.checkTokenAuth, noteController.updateImage);
 
-router.put('/setProfilePic', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic);
+router.post('/addLabel', middle.checkTokenAuth, noteController.addLabel);
 
-router.put('/setProfilePic1', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic1);
+router.get('/getLabels', middle.checkTokenAuth, noteController.getLabels);
+
+router.post('/deleteLabel', middle.checkTokenAuth, noteController.deleteLabel);
+
+router.put('/updateLabel', middle.checkTokenAuth, noteController.updateLabel);
+
+router.post('/saveLabelToNote', middle.checkTokenAuth, noteController.saveLabelToNote);
+
+router.post('/deleteLabelToNote', middle.checkTokenAuth, noteController.deleteLabelToNote)
 
 module.exports = router;
