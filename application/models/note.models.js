@@ -319,7 +319,7 @@ noteModel.prototype.updateImage = (noteID, updateNote, callback) => {
 };
 
 var labelSchema = new mongoose.Schema({
-    userId: {
+    userID: {
         type: Schema.Types.ObjectId,
         ref: 'UserSchema'
     },
@@ -358,7 +358,7 @@ noteModel.prototype.addLabel = (labelData, callback) => {
  */
 noteModel.prototype.getLabels = (id, callback) => {
     console.log("in model", id);
-    label.find({ userId: id.userId }, (err, result) => {
+    label.find({ userID: id.userID }, (err, result) => {
         if (err) {
             callback(err)
         } else {

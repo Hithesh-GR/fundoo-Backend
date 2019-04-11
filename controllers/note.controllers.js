@@ -398,7 +398,7 @@ exports.addLabel = (req, res) => {
         } else {
             var responseResult = {};
             const labelData = {
-                userId: req.decoded.payload.user_id,
+                userID: req.decoded.payload.user_id,
                 label: req.body.label
             }
             noteService.addLabel(labelData, (err, result) => {
