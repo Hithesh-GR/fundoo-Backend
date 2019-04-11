@@ -7,16 +7,16 @@
  *  @since          : 19-02-2019
  ******************************************************************************/
 /**
- * @description:express module is one of the light weight framework
- */
-const express = require('express');
-/**
  *  @description:To give path to each file
  **/
 // const userRouter = require('../server/routes/user.routes');
 
-const router = require('../server/routes/routes');
-
+const userRouter = require('../server/routes/user.routes');
+const noteRouter = require('../server/routes/note.routes');
+/**
+ * @description:express module is one of the light weight framework
+ */
+const express = require('express');
 /**
  * @description:Parse the JSON request body
  **/
@@ -50,7 +50,8 @@ app.use(bodyParser.urlencoded({
  * @description:parse requests of content-type - application/json
  **/
 app.use(bodyParser.json())
-app.use('/', router);
+app.use('/', userRouter);
+app.use('/', noteRouter);
 // app.use('/', noteRouter);
 /**
  *  @description:Configuring the database
