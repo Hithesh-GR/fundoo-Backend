@@ -9,10 +9,8 @@
 /**
  *  @description:To give path to each file
  **/
-// const userRouter = require('../server/routes/user.routes');
-
-const userRouter = require('../server/routes/user.routes');
-const noteRouter = require('../server/routes/note.routes');
+const userRouter = require('./routes/user.routes');
+const noteRouter = require('./routes/note.routes');
 /**
  * @description:express module is one of the light weight framework
  */
@@ -33,7 +31,7 @@ app.use(expressValidator());
 /**
  * @description:To get the path of database
  **/
-const databaseConfig = require('../server/configuration/db.configuration');
+const databaseConfig = require('./configuration/db.configuration');
 /**
  * @description:.env is used for 
  */

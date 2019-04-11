@@ -8,9 +8,9 @@
 const userService = require('../services/user.services');
 const token = require('../token');
 const sent = require('../middleware/nodemailer');
-const express = require('express');
-const responseTime = require('response-time')
-const redis = require('redis');
+// const express = require('express');
+// const responseTime = require('response-time')
+// const redis = require('redis');
 /**
  * @description:It handles the registration data
  * @param {*request from frontend} req 
