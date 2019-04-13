@@ -75,10 +75,8 @@ mongoose.connect(databaseConfig.url, {
 /**
  * @description:define a simple route
  **/
-app.get('/', (res) => {
-    res.json(
-     "Welcome to fundoo Notes App"
-    );
+app.get('/', (req, res) => {
+    res.json("Welcome to fundoo Notes App");
 });
 /**
  * @description:listen for requests
