@@ -178,6 +178,134 @@ describe('Status and content', function () {
                                                                                                                 } else {
                                                                                                                   console.log("expect ==>", res.body);
                                                                                                                   res.should.have.status(200);
+                                                                                                                  /**
+                                                                                                                    * @description:test script for uploading image to note
+                                                                                                                    */
+                                                                                                                  describe('upload image to note', function () {
+                                                                                                                    it('status ', function (done) {
+                                                                                                                      chai.request(server).put('/uploadImage').send(data1.uploadImage).end((err, res) => {
+                                                                                                                        if (err) {
+                                                                                                                          console.log("expect ==>", err);
+                                                                                                                        } else {
+                                                                                                                          console.log("expect ==>", res.body);
+                                                                                                                          res.should.have.status(200);
+                                                                                                                          /**
+                                                                                                                            * @description:test script for add labels to note 
+                                                                                                                            */
+                                                                                                                          describe('add labels to note', function () {
+                                                                                                                            it('status ', function (done) {
+                                                                                                                              chai.request(server).post('/addLabel').send(data1.addLabel).end((err, res) => {
+                                                                                                                                if (err) {
+                                                                                                                                  console.log("expect ==>", err);
+                                                                                                                                } else {
+                                                                                                                                  console.log("expect ==>", res.body);
+                                                                                                                                  res.should.have.status(200);
+                                                                                                                                  /**
+                                                                                                                                    * @description:test script for get labels from note 
+                                                                                                                                    */
+                                                                                                                                  describe('get labels from note', function () {
+                                                                                                                                    it('status ', function (done) {
+                                                                                                                                      chai.request(server).get('/getLabels').send(data1.getLabels).end((err, res) => {
+                                                                                                                                        if (err) {
+                                                                                                                                          console.log("expect ==>", err);
+                                                                                                                                        } else {
+                                                                                                                                          console.log("expect ==>", res.body);
+                                                                                                                                          res.should.have.status(200);
+                                                                                                                                          /**
+                                                                                                                                           * @description:test script for delete label from note
+                                                                                                                                           */
+                                                                                                                                          describe('delete label from note', function () {
+                                                                                                                                            it('status ', function (done) {
+                                                                                                                                              chai.request(server).post('/deleteLabel').send(data1.deleteLabel).end((err, res) => {
+                                                                                                                                                if (err) {
+                                                                                                                                                  console.log("expect ==>", err);
+                                                                                                                                                } else {
+                                                                                                                                                  console.log("expect ==>", res.body);
+                                                                                                                                                  res.should.have.status(200);
+                                                                                                                                                  /**
+                                                                                                                                                   * @description:test script for update labels to note
+                                                                                                                                                  */
+                                                                                                                                                  describe('update label to note', function () {
+                                                                                                                                                    it('status ', function (done) {
+                                                                                                                                                      chai.request(server).put('/updateLabel').send(data1.updateLabel).end((err, res) => {
+                                                                                                                                                        if (err) {
+                                                                                                                                                          console.log("expect ==>", err);
+                                                                                                                                                        } else {
+                                                                                                                                                          console.log("expect ==>", res.body);
+                                                                                                                                                          res.should.have.status(200);
+                                                                                                                                                          /**
+                                                                                                                                                           * @description:test script for save label to note 
+                                                                                                                                                           */
+                                                                                                                                                          describe('save label to note', function () {
+                                                                                                                                                            it('status ', function (done) {
+                                                                                                                                                              chai.request(server).post('/saveLabelToNote').send(data1.saveLabelToNote).end((err, res) => {
+                                                                                                                                                                if (err) {
+                                                                                                                                                                  console.log("expect ==>", err);
+                                                                                                                                                                } else {
+                                                                                                                                                                  console.log("expect ==>", res.body);
+                                                                                                                                                                  res.should.have.status(200);
+                                                                                                                                                                  /**
+                                                                                                                                                                   * @description:test script for delete label to note 
+                                                                                                                                                                   */
+                                                                                                                                                                  describe('delete label to note', function () {
+                                                                                                                                                                    it('status ', function (done) {
+                                                                                                                                                                      chai.request(server).post('/deleteLabelToNote').send(data1.deleteLabelToNote).end((err, res) => {
+                                                                                                                                                                        if (err) {
+                                                                                                                                                                          console.log("expect ==>", err);
+                                                                                                                                                                        } else {
+                                                                                                                                                                          console.log("expect ==>", res.body);
+                                                                                                                                                                          res.should.have.status(200);
+                                                                                                                                                                          /**
+                                                                                                                                                                           * @description:test script for setting an user profile pic 
+                                                                                                                                                                          */
+                                                                                                                                                                          describe('set an profile pic for user', function () {
+                                                                                                                                                                            it('status ', function (done) {
+                                                                                                                                                                              chai.request(server).put('/setProfilePic').send(data1.setProfilePic).end((err, res) => {
+                                                                                                                                                                                if (err) {
+                                                                                                                                                                                  console.log("expect ==>", err);
+                                                                                                                                                                                } else {
+                                                                                                                                                                                  console.log("expect ==>", res.body);
+                                                                                                                                                                                  res.should.have.status(200);
+                                                                                                                                                                                }
+                                                                                                                                                                                done()
+                                                                                                                                                                              })
+                                                                                                                                                                            })
+                                                                                                                                                                          })
+                                                                                                                                                                        }
+                                                                                                                                                                        done()
+                                                                                                                                                                      })
+                                                                                                                                                                    })
+                                                                                                                                                                  })
+                                                                                                                                                                }
+                                                                                                                                                                done()
+                                                                                                                                                              })
+                                                                                                                                                            })
+                                                                                                                                                          })
+                                                                                                                                                        }
+                                                                                                                                                        done()
+                                                                                                                                                      })
+                                                                                                                                                    })
+                                                                                                                                                  })
+                                                                                                                                                }
+                                                                                                                                                done()
+                                                                                                                                              })
+                                                                                                                                            })
+                                                                                                                                          })
+                                                                                                                                        }
+                                                                                                                                        done()
+                                                                                                                                      })
+                                                                                                                                    })
+                                                                                                                                  })
+                                                                                                                                }
+                                                                                                                                done()
+                                                                                                                              })
+                                                                                                                            })
+                                                                                                                          })
+                                                                                                                        }
+                                                                                                                        done()
+                                                                                                                      })
+                                                                                                                    })
+                                                                                                                  })
                                                                                                                 }
                                                                                                                 done()
                                                                                                               })

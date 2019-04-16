@@ -2,15 +2,15 @@
     "registration": {
         "firstName": "div",
         "lastName": "hit",
-        "email": "dadadadada@gmail.com",
+        "email": "gowramma@gmail.com",
         "password": "2345678"
     },
     "login": {
-        "email": "dadadadada@gmail.com",
+        "email": "gowramma@gmail.com",
         "password": "2345678"
     },
     "forgot": {
-        "email": "dadadadada@gmail.com"
+        "email": "gowramma@gmail.com"
     },
     "reset": {
         "password": "2345678",
@@ -32,41 +32,76 @@
     },
     "updateColor": {
         "color": "pink",
-        "noteID": "5c9c6f55be885f272fe5eccd",
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0"
     },
     "deleteNote": {
-        "noteID": "5c9c6f55be885f272fe5eccd",
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0"
     },
     "isArchived": {
-        "noteID": "5c9c6f55be885f272fe5eccd",
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0",
         "archive": "true"
     },
     "isTrashed": {
-        "noteID": "5c9c6f55be885f272fe5eccd",
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0",
         "trash": "true"
     },
     "reminder": {
-        "noteID": "5c9c6f55be885f272fe5eccd",
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0",
         "reminder": "12pm"
     },
     "editTitle": {
-        "noteID": "5c9c6f55be885f272fe5eccd",
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0",
         "title": "hiiiiiiiiiiii"
     },
     "editDescription": {
-        "noteID": "5c9c6f55be885f272fe5eccd",
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0",
         "description": "Hloooooooooo"
     },
-    "isPinned":{
-        "noteID": "5c9c6f55be885f272fe5eccd",
+    "isPinned": {
+        "noteID": "5ca474b5783e553aa31f4711",
         "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Yzk2MzFlN2UwNGNmYzA0Y2NlYjIxNzUiLCJ1c2VybmFtZSI6ImZ1bmRvbyIsImVtYWlsIjoiZnVuZG9vQGdtYWlsLmNvbSIsInN1Y2VzcyI6dHJ1ZX0sImlhdCI6MTU1Mzc0NTkyNCwiZXhwIjoxNTUzODMyMzI0fQ.UkY1IhS7lIoOw9WdM3f7wax5chXj1aWr3BziVsl_kY0",
         "pinned": "true"
+    },
+    "uploadImage": {
+        "noteID": "5ca474b5783e553aa31f4711",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Y2E3MDUxNjQyZTU2NDRjM2UwZGViNWUiLCJ1c2VybmFtZSI6IlJPQ0taIiwiZW1haWwiOiJyb2NrekBnbWFpbC5jb20iLCJwcm9maWxlUGljIjoiaHR0cHM6Ly9mdW5kb29ub3RlLnMzLmFwLXNvdXRoLTEuYW1hem9uYXdzLmNvbS8xNTU0OTU3MTA5MjgwIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTU1MzkxMjg0LCJleHAiOjE1NTU0Nzc2ODR9.JBQwPANfL6HtwzAAY10MRbgwyyGKcORORENfcu9wct0",
+        "image": "hithu.jpg"
+    },
+    "addLabel": {
+        "userId": "5c91ba7037f7a60ed234fc87",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Y2E3MDUxNjQyZTU2NDRjM2UwZGViNWUiLCJ1c2VybmFtZSI6IlJPQ0taIiwiZW1haWwiOiJyb2NrekBnbWFpbC5jb20iLCJwcm9maWxlUGljIjoiaHR0cHM6Ly9mdW5kb29ub3RlLnMzLmFwLXNvdXRoLTEuYW1hem9uYXdzLmNvbS8xNTU0OTU3MTA5MjgwIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTU1MzkxMjg0LCJleHAiOjE1NTU0Nzc2ODR9.JBQwPANfL6HtwzAAY10MRbgwyyGKcORORENfcu9wct0",
+        "label": "goood"
+    },
+    "getLabels": {
+        "userId": "5c91ba7037f7a60ed234fc87",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Y2E3MDUxNjQyZTU2NDRjM2UwZGViNWUiLCJ1c2VybmFtZSI6IlJPQ0taIiwiZW1haWwiOiJyb2NrekBnbWFpbC5jb20iLCJwcm9maWxlUGljIjoiaHR0cHM6Ly9mdW5kb29ub3RlLnMzLmFwLXNvdXRoLTEuYW1hem9uYXdzLmNvbS8xNTU0OTU3MTA5MjgwIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTU1MzkxMjg0LCJleHAiOjE1NTU0Nzc2ODR9.JBQwPANfL6HtwzAAY10MRbgwyyGKcORORENfcu9wct0"
+    },
+    "deleteLabel": {
+        "labelID": "5cac22771d632c1d6dd51293",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Y2E3MDUxNjQyZTU2NDRjM2UwZGViNWUiLCJ1c2VybmFtZSI6IlJPQ0taIiwiZW1haWwiOiJyb2NrekBnbWFpbC5jb20iLCJwcm9maWxlUGljIjoiaHR0cHM6Ly9mdW5kb29ub3RlLnMzLmFwLXNvdXRoLTEuYW1hem9uYXdzLmNvbS8xNTU0OTU3MTA5MjgwIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTU1MzkxMjg0LCJleHAiOjE1NTU0Nzc2ODR9.JBQwPANfL6HtwzAAY10MRbgwyyGKcORORENfcu9wct0"
+    },
+    "updateLabel": {
+        "labelID": "5cac22771d632c1d6dd51293",
+        "editLabel": "hi hlo"
+    },
+    "saveLabelToNote": {
+        "noteID": "5cac32b0fcdc6223b7a79a69",
+        "label": "hooker"
+    },
+    "deleteLabelToNote": {
+        "noteID": "5cac32b0fcdc6223b7a79a69",
+        "label": "hooker"
+    },
+    "setProfilePic": {
+        "userId": "5c91ba7037f7a60ed234fc87",
+        "headers": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI1Y2E3MDUxNjQyZTU2NDRjM2UwZGViNWUiLCJ1c2VybmFtZSI6IlJPQ0taIiwiZW1haWwiOiJyb2NrekBnbWFpbC5jb20iLCJwcm9maWxlUGljIjoiaHR0cHM6Ly9mdW5kb29ub3RlLnMzLmFwLXNvdXRoLTEuYW1hem9uYXdzLmNvbS8xNTU0OTU3MTA5MjgwIiwic3VjZXNzIjp0cnVlfSwiaWF0IjoxNTU1MzkxMjg0LCJleHAiOjE1NTU0Nzc2ODR9.JBQwPANfL6HtwzAAY10MRbgwyyGKcORORENfcu9wct0",
+        "image": "hithu.jpg"
     }
 }
