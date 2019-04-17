@@ -6,6 +6,7 @@
  *  @since          : 23-02-2019
  ******************************************************************************/
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 const Schema = mongoose.Schema;
 /**
  * @description:Creating note schema using mongoose

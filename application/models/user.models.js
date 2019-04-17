@@ -10,6 +10,7 @@
  **/
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 let saltRounds = 10;
 /**
  * @description:Creating user schema using mongoose
