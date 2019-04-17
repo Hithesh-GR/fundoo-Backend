@@ -224,7 +224,7 @@ describe('Status and content', function () {
                                                                                                                                                   res.should.have.status(200);
                                                                                                                                                   /**
                                                                                                                                                    * @description:test script for update labels to note
-                                                                                                                                                  */
+                                                                                                                                                   */
                                                                                                                                                   describe('update label to note', function () {
                                                                                                                                                     it('status ', function (done) {
                                                                                                                                                       chai.request(server).put('/updateLabel').send(data1.updateLabel).end((err, res) => {
@@ -257,7 +257,7 @@ describe('Status and content', function () {
                                                                                                                                                                           res.should.have.status(200);
                                                                                                                                                                           /**
                                                                                                                                                                            * @description:test script for setting an user profile pic 
-                                                                                                                                                                          */
+                                                                                                                                                                           */
                                                                                                                                                                           describe('set an profile pic for user', function () {
                                                                                                                                                                             it('status ', function (done) {
                                                                                                                                                                               chai.request(server).put('/setProfilePic').send(data1.setProfilePic).end((err, res) => {
