@@ -23,4 +23,6 @@ router.put('/setProfilePic', middle.checkTokenAuth, upload.single('image'), user
 
 router.put('/setProfilePic1', middle.checkTokenAuth, upload.single('image'), userController.setProfilePic1);
 
+router.post('/logout', middle.checkTokenAuth, userController.logout);
+
 module.exports = router;

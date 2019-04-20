@@ -6,6 +6,9 @@
  *  @since          : 23-02-2019
  ******************************************************************************/
 const mongoose = require('mongoose');
+/**
+ * @Purpose :Used for avoiding deprecation warnings
+ */
 mongoose.set('useCreateIndex', true);
 const Schema = mongoose.Schema;
 /**
@@ -44,14 +47,14 @@ var noteSchema = new mongoose.Schema({
     label: [
         {
             type: String,
-            ref:"labelSchema"
+            ref: "labelSchema"
         }
     ]
 }, {
-    timestamps: true
-});
+        timestamps: true
+    });
 var note = mongoose.model('Note', noteSchema);
-function noteModel() {}
+function noteModel() { }
 /**
  * @description:it will add the notes data using note schema and save the data into the database
  * @param {*request from frontend} objectNote 
@@ -97,15 +100,15 @@ noteModel.prototype.getNotes = (id, callback) => {
     })
 }
 /**
- * @description:
- * @param {*} noteID 
- * @param {*} updateParams 
- * @param {*} callback 
+ * @description:it will update the color to individual note
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} updateParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.updateColor = (noteID, updateParams, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 color: updateParams
             }
@@ -119,9 +122,9 @@ noteModel.prototype.updateColor = (noteID, updateParams, callback) => {
         });
 };
 /**
- * @description:
- * @param {*} data 
- * @param {*} callback 
+ * @description:it will permanently delete the note
+ * @param {*request from frontend} data 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.deleteNote = (data, callback) => {
     note.deleteOne({
@@ -139,15 +142,15 @@ noteModel.prototype.deleteNote = (data, callback) => {
     })
 }
 /**
- * 
- * @param {*} noteID 
- * @param {*} archiveParams 
- * @param {*} callback 
+ * @description:it will archived the note
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} archiveParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.isArchived = (noteID, archiveNote, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 archive: archiveNote,
                 trash: false,
@@ -163,9 +166,9 @@ noteModel.prototype.isArchived = (noteID, archiveNote, callback) => {
         });
 };
 /**
- * 
- * @param {*} id 
- * @param {*} callback 
+ * @description:it will check the trash status
+ * @param {*request from frontend} id 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.getTrashStatus = (id, callback) => {
     note.findOne({
@@ -181,15 +184,15 @@ noteModel.prototype.getTrashStatus = (id, callback) => {
     })
 }
 /**
- * 
- * @param {*} noteID 
- * @param {*} trashStatus 
- * @param {*} callback 
+ * @description:it will trashed the note
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} trashStatus 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.isTrashed = (noteID, trashNote, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 trash: trashNote.status,
                 pinned: false,
@@ -205,15 +208,15 @@ noteModel.prototype.isTrashed = (noteID, trashNote, callback) => {
         });
 }
 /**
- * 
- * @param {*} noteID 
- * @param {*} reminderParams 
- * @param {*} callback 
+ * @description:it will set reminder to note and shows it in reminders
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} reminderParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.reminder = (noteID, reminderParams, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 reminder: reminderParams
             }
@@ -227,15 +230,15 @@ noteModel.prototype.reminder = (noteID, reminderParams, callback) => {
         });
 };
 /**
- * 
- * @param {*} noteID 
- * @param {*} titleParams 
- * @param {*} callback 
+ * @description:it will edit the note title
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} titleParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.editTitle = (noteID, titleParams, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 title: titleParams,
             }
@@ -250,15 +253,15 @@ noteModel.prototype.editTitle = (noteID, titleParams, callback) => {
         });
 };
 /**
- * 
- * @param {*} noteID 
- * @param {*} descParams 
- * @param {*} callback 
+ * @description:it will edit the note description
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} descParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.editDescription = (noteID, descParams, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 description: descParams,
             }
@@ -272,15 +275,15 @@ noteModel.prototype.editDescription = (noteID, descParams, callback) => {
         });
 };
 /**
- * 
- * @param {*} noteID 
- * @param {*} pinParams 
- * @param {*} callback 
+ * @description:it will pinned the note
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} pinParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.isPinned = (noteID, pinParams, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 pinned: pinParams,
                 trash: false,
@@ -296,15 +299,15 @@ noteModel.prototype.isPinned = (noteID, pinParams, callback) => {
         });
 };
 /**
- * 
- * @param {*} noteID 
- * @param {*} updateNote 
- * @param {*} callback 
+ * @description:it will add the image to note
+ * @param {*request from frontend} noteID 
+ * @param {*request from frontend} updateNote 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.updateImage = (noteID, updateNote, callback) => {
     note.findOneAndUpdate({
-            _id: noteID
-        }, {
+        _id: noteID
+    }, {
             $set: {
                 image: updateNote
             }
@@ -318,7 +321,9 @@ noteModel.prototype.updateImage = (noteID, updateNote, callback) => {
             }
         });
 };
-
+/**
+ * @description:Creating label schema using mongoose
+ **/
 var labelSchema = new mongoose.Schema({
     userID: {
         type: Schema.Types.ObjectId,
@@ -329,15 +334,15 @@ var labelSchema = new mongoose.Schema({
         require: [true, "Label require"],
         unique: true
     }
-},{
-    timestamps:true
-}
+}, {
+        timestamps: true
+    }
 )
 var label = mongoose.model('Label', labelSchema);
 /**
- * 
- * @param {*} labelData 
- * @param {*} callback 
+ * @description:it will add the label
+ * @param {*request from frontend} labelData 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.addLabel = (labelData, callback) => {
     console.log("ultimate save", labelData);
@@ -353,9 +358,9 @@ noteModel.prototype.addLabel = (labelData, callback) => {
     })
 };
 /**
- * 
- * @param {*} id 
- * @param {*} callback 
+ * @description:it will get the labels
+ * @param {*request from frontend} id 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.getLabels = (id, callback) => {
     console.log("in model", id);
@@ -369,9 +374,9 @@ noteModel.prototype.getLabels = (id, callback) => {
     })
 };
 /**
- * 
- * @param {*} id 
- * @param {*} callback 
+ * @description:it will delete the label
+ * @param {*request from frontend} id 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.deleteLabel = (id, callback) => {
     console.log("in model", id);
@@ -385,9 +390,9 @@ noteModel.prototype.deleteLabel = (id, callback) => {
     })
 };
 /**
- * 
- * @param {*} changedLabel 
- * @param {*} callback 
+ * @description:it will update the exixting label
+ * @param {*request from frontend} changedLabel 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.updateLabel = (changedLabel, callback) => {
     var editLabel = null;
@@ -419,9 +424,9 @@ noteModel.prototype.updateLabel = (changedLabel, callback) => {
         });
 };
 /**
- * 
- * @param {*} labelParams 
- * @param {*} callback 
+ * @description:it will save the label to note
+ * @param {*request from frontend} labelParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.saveLabelToNote = (labelParams, callback) => {
     console.log("in model", labelParams.noteID);
@@ -431,8 +436,6 @@ noteModel.prototype.saveLabelToNote = (labelParams, callback) => {
         labelledNote = labelParams.label;
         noteID = labelParams.noteID;
     } else {
-        console.log("in modelerr");
-
         callback("Pinned note not found")
     }
     note.findOneAndUpdate(
@@ -456,9 +459,9 @@ noteModel.prototype.saveLabelToNote = (labelParams, callback) => {
         });
 };
 /**
- * 
- * @param {*} labelParams 
- * @param {*} callback 
+ * @description:it will delete the label from note
+ * @param {*request from frontend} labelParams 
+ * @param {*response to backend} callback 
  */
 noteModel.prototype.deleteLabelToNote = (labelParams, callback) => {
     console.log("in model", labelParams.noteID);
@@ -468,8 +471,6 @@ noteModel.prototype.deleteLabelToNote = (labelParams, callback) => {
         labelledNote = labelParams.value;
         noteID = labelParams.noteID;
     } else {
-        console.log("in modelerr");
-
         callback("Pinned note not found")
     }
     note.findOneAndUpdate(
@@ -486,7 +487,7 @@ noteModel.prototype.deleteLabelToNote = (labelParams, callback) => {
                 callback(err)
             } else {
                 let newArray = result.label;
-                console.log("in model success result",result);
+                console.log("in model success result", result);
 
                 for (let i = 0; i < newArray.length; i++) {
                     if (newArray[i] === labelledNote) {

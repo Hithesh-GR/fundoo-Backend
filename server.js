@@ -50,7 +50,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use('/', userRouter);
 app.use('/', noteRouter);
-// app.use('/', noteRouter);
 /**
  *  @description:Configuring the database
  **/
@@ -76,7 +75,7 @@ mongoose.connect(databaseConfig.url, {
  * @description:define a simple route
  **/
 app.get('/', (req, res) => {
-    res.json("Welcome to fundoo Notes App");
+    res.json("Message: Welcome to fundoo Notes App");
 });
 /**
  * @description:listen for requests

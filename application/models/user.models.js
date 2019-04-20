@@ -78,7 +78,7 @@ userModel.prototype.registration = (body, callback) => {
                 })
                 newUser.save((err, result) => {
                     if (err) {
-                        console.log("Model not found");
+                        console.log("User not found");
                         callback(err);
                     } else {
                         console.log("Registered Successfully");
@@ -95,7 +95,6 @@ userModel.prototype.registration = (body, callback) => {
  * @param {*response to backend} callback 
  */
 userModel.prototype.login = (body, callback) => {
-    console.log("model===> ", body.password);
     user.findOne({
         "email": body.email
     }, (err, result) => {
@@ -143,32 +142,26 @@ userModel.prototype.findUserEmail = (data, callback) => {
  * @param {*response to backend} callback 
  */
 userModel.prototype.updateUserPassword = (req, callback) => {
-    console.log("request===>", req.decoded);
     let newpassword = bcrypt.hashSync(req.body.password, saltRounds);
-    console.log('new pass bcrypt==>', newpassword);
     user.updateOne({
         _id: req.decoded.payload.user_id
     }, {
         password: newpassword
     }, (err, result) => {
-        console.log("result ==>", result.newpassword)
         if (err) {
             callback(err);
         } else {
-            console.log("result ==>", result);
             callback(null, result);
         }
     });
 }
 /**
- * 
- * @param {*} userID 
- * @param {*} image 
- * @param {*} callback 
+ * @description:update the profille pic image and store it in database 
+ * @param {*request from frontend} userID 
+ * @param {*request from frontend} image 
+ * @param {*response to backend} callback 
  */
 userModel.prototype.setProfilePic = (userID, image, callback) => {
-    // console.log("ID=====================",userID);
-    // console.log("image=====================",image);
     user.findOneAndUpdate({
             _id: userID
         }, {

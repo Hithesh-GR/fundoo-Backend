@@ -27,8 +27,8 @@ exports.sendEMailFunction = (url) => {
     };
     transporter.sendMail(mailOptions, (err, info) => {
         if (err)
-            console.log('error while sending mails==> ', err);
+            console.log('error while sending mail==> ', err);
         else
-            console.log('result on sending mails==> ', info);
+            console.log('result on sending mail==> ', info);
     });
 }

@@ -1,6 +1,6 @@
 /******************************************************************************************
  *  @Purpose        : Here we have to write the test scripts in Mocha for testing backend 
-                    using the tool chai.
+                      using the tool chai.
  *  @file           : test.js        
  *  @author         : HITHESH G R
  *  @version        : v0.1

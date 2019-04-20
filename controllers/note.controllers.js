@@ -71,9 +71,9 @@ exports.getNotes = (req, res) => {
     }
 }
 /**
- * @description: 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the updating color to note
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.updateColor = (req, res) => {
     try {
@@ -106,9 +106,9 @@ exports.updateColor = (req, res) => {
     }
 }
 /**
- * @description: 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the deleting notes permanently 
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.deleteNote = (req, res) => {
     try {
@@ -140,9 +140,9 @@ exports.deleteNote = (req, res) => {
     }
 }
 /**
- * @description: 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the trashed notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.isTrashed = (req, res) => {
     try {
@@ -173,9 +173,9 @@ exports.isTrashed = (req, res) => {
     }
 }
 /**
- * @description: 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the archived notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.isArchived = (req, res) => {
     try {
@@ -208,9 +208,9 @@ exports.isArchived = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the reminder notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.reminder = (req, res) => {
     try {
@@ -242,9 +242,9 @@ exports.reminder = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the edit title to notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.editTitle = (req, res) => {
     try {
@@ -276,9 +276,9 @@ exports.editTitle = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the edit description to notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.editDescription = (req, res) => {
     try {
@@ -310,9 +310,9 @@ exports.editDescription = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the pinned notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.isPinned = (req, res) => {
     try {
@@ -344,9 +344,9 @@ exports.isPinned = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the add image to note
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.updateImage = (req, res) => {
     try {
@@ -380,13 +380,12 @@ exports.updateImage = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the add labels to notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.addLabel = (req, res) => {
     try {
-        // console.log("req-------------------->", req);
         // req.checkBody('userID', 'userID required').not().isEmpty();
         req.checkBody('label', 'label required').not().isEmpty();
         var errors = req.validationErrors();
@@ -419,13 +418,12 @@ exports.addLabel = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the get labels
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.getLabels = (req, res) => {
     try {
-        // console.log("req-------------------->", req);
         // req.checkBody('userID', 'userID required').not().isEmpty();
         var errors = req.validationErrors();
         var response = {};
@@ -456,13 +454,12 @@ exports.getLabels = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the delete labels from notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.deleteLabel = (req, res) => {
     try {
-        // console.log("req-------------------->", req);
         req.checkBody('labelID', 'labelID required').not().isEmpty();
         var errors = req.validationErrors();
         var response = {};
@@ -493,13 +490,12 @@ exports.deleteLabel = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the update the labels
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.updateLabel = (req, res) => {
     try {
-        // console.log("req-------------------->", req);
         req.checkBody('labelID', 'labelID required').not().isEmpty();
         req.checkBody('editLabel', 'editLabel required').not().isEmpty();
         var errors = req.validationErrors();
@@ -531,11 +527,10 @@ exports.updateLabel = (req, res) => {
         res.send(error);
     }
 }
-
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the save labels to notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.saveLabelToNote = (req, res) => {
     try {
@@ -566,9 +561,9 @@ exports.saveLabelToNote = (req, res) => {
     }
 }
 /**
- * 
- * @param {*} req 
- * @param {*} res 
+ * @description:It handles the delete labels from notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
  */
 exports.deleteLabelToNote = (req, res) => {
     try {

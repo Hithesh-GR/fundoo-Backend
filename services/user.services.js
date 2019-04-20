@@ -15,7 +15,6 @@ const userModel = require('../application/models/user.models')
  */
 exports.login = (data, callback) => {
     try {
-        //  console.log("services use data:", data);
         userModel.login(data, (err, result) => {
             if (err) {
                 console.log("service error in login");
@@ -90,20 +89,20 @@ exports.resetpassword = (data, callback) => {
     }
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} image 
- * @param {*} callback 
+ * @description:it will send setProfilePic data to model
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} image 
+ * @param {*response to backend} callback 
  */
 exports.setProfilePic = (paramID, image, callback) => {
-    // console.log("in services");
     try {
         userModel.setProfilePic(paramID, image, (err, result) => {
             if (err) {
                 console.log("service error in setProfile pic");
                 callback(err);
             } else {
-                 callback(null, result)
+                // console.log("In service", result);
+                callback(null, result)
             }
         })
     } catch (error) {

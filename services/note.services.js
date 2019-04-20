@@ -1,7 +1,7 @@
 /******************************************************************************
  *  @Purpose        : To create note services that will send the incoming data 
-                    to noteModel and save that data to database and at login 
-                    time fetching correct information from database.
+                      to noteModel and save that data to database and at login 
+                      time fetching correct information from database.
  *  @file           : note.services.js        
  *  @author         : HITHESH G R
  *  @version        : v0.1
@@ -9,13 +9,12 @@
  ******************************************************************************/
 const noteModel = require('../application/models/note.models');
 /**
- * 
- * @param {*} data 
- * @param {*} callback 
+ * @description:it will send createNote data to model
+ * @param {*request from frontend} data 
+ * @param {*response to backend} callback
  */
 exports.createNote = (data, callback) => {
     noteModel.addNotes(data, (err, result) => {
-        // console.log("=================",data);
         if (err) {
             console.log("service error");
             callback(err);
@@ -26,9 +25,9 @@ exports.createNote = (data, callback) => {
     });
 }
 /**
- * 
- * @param {*} data 
- * @param {*} callback 
+ * @description:it will send getNotes data to model
+ * @param {*request from frontend} data 
+ * @param {*response to backend} callback
  */
 exports.getNotes = (data, callback) => {
     noteModel.getNotes(data, (err, result) => {
@@ -42,13 +41,12 @@ exports.getNotes = (data, callback) => {
     });
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send updateColor data to model 
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
 exports.updateColor = (paramID, paramData, callback) => {
-    // console.log("in services", paramID, paramData);
     noteModel.updateColor(paramID, paramData, (err, result) => {
         if (err) {
             console.log("service error");
@@ -59,9 +57,9 @@ exports.updateColor = (paramID, paramData, callback) => {
     })
 }
 /**
- * 
- * @param {*} noteID 
- * @param {*} callback 
+ * @description:it will send deleteNote data to model
+ * @param {*request from frontend} noteID 
+ * @param {*response to backend} callback 
  */
 exports.deleteNote = (noteID, callback) => {
     noteModel.deleteNote(noteID, (err, result) => {
@@ -74,12 +72,11 @@ exports.deleteNote = (noteID, callback) => {
     })
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} callback 
+ * @description:it will send trashed data to model
+ * @param {*request from frontend} paramID 
+ * @param {*response to backend} callback 
  */
 exports.isTrashed = (paramID, callback) => {
-    console.log("in services", paramID);
     noteModel.getTrashStatus(paramID, (err, status) => {
         if (err) {
             callback(err);
@@ -114,13 +111,12 @@ exports.isTrashed = (paramID, callback) => {
     })
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send archived data to model
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
 exports.isArchived = (paramID, paramData, callback) => {
-    console.log("in services", paramID, paramData);
     noteModel.isArchived(paramID, paramData, (err, result) => {
         if (err) {
             console.log("service error");
@@ -131,13 +127,12 @@ exports.isArchived = (paramID, paramData, callback) => {
     })
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send reminder data to model
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
 exports.reminder = (paramID, paramData, callback) => {
-    console.log("in services", paramID, paramData);
     noteModel.reminder(paramID, paramData, (err, result) => {
         if (err) {
             console.log("service error");
@@ -148,13 +143,12 @@ exports.reminder = (paramID, paramData, callback) => {
     })
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send editTitle data to model
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
 exports.editTitle = (paramID, paramData, callback) => {
-    console.log("in services", paramID, paramData);
     noteModel.editTitle(paramID, paramData, (err, result) => {
         if (err) {
             console.log("service error");
@@ -165,13 +159,12 @@ exports.editTitle = (paramID, paramData, callback) => {
     })
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send editDescription data to model
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
 exports.editDescription = (paramID, paramData, callback) => {
-    console.log("in services", paramID, paramData);
     noteModel.editDescription(paramID, paramData, (err, result) => {
         if (err) {
             console.log("service error");
@@ -182,13 +175,12 @@ exports.editDescription = (paramID, paramData, callback) => {
     })
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send pinned data to model
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
 exports.isPinned = (paramID, paramData, callback) => {
-    console.log("in services", paramID, paramData);
     noteModel.isPinned(paramID, paramData, (err, result) => {
         if (err) {
             console.log("service error");
@@ -199,14 +191,13 @@ exports.isPinned = (paramID, paramData, callback) => {
     })
 }
 /**
- * 
- * @param {*} paramID 
- * @param {*} image 
- * @param {*} callback 
+ * @description:it will send updateImage data to model
+ * @param {*request from frontend} paramID 
+ * @param {*request from frontend} image 
+ * @param {*response to backend} callback 
  */
 exports.updateImage = (paramID, image, callback) => {
     noteModel.updateImage(paramID, image, (err, result) => {
-        // console.log("in services result in note image",result);
         if (err) {
             console.log("service error");
             callback(err);
@@ -217,14 +208,14 @@ exports.updateImage = (paramID, image, callback) => {
     })
 }
 /**
- * 
- * @param {*} labelData 
- * @param {*} callback 
+ * @description:it will send add label data to model
+ * @param {*request from frontend} labelData 
+ * @param {*response to backend} callback 
  */
 exports.addLabel = (labelData, callback) => {
-    console.log("in services",labelData);
     noteModel.addLabel(labelData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
@@ -232,14 +223,14 @@ exports.addLabel = (labelData, callback) => {
     })
 }
 /**
- * 
- * @param {*} labelData 
- * @param {*} callback 
+ * @description:it will send get label data to model
+ * @param {*request from frontend} labelData 
+ * @param {*response to backend} callback 
  */
 exports.getLabels = (labelData, callback) => {
-    console.log("in services",labelData);
     noteModel.getLabels(labelData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
@@ -247,14 +238,14 @@ exports.getLabels = (labelData, callback) => {
     })
 }
 /**
- * 
- * @param {*} labelData 
- * @param {*} callback 
+ * @description:it will send delete label data to model
+ * @param {*request from frontend} labelData 
+ * @param {*response to backend} callback 
  */
 exports.deleteLabel = (labelData, callback) => {
-    console.log("in services",labelData);
     noteModel.deleteLabel(labelData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
@@ -262,40 +253,40 @@ exports.deleteLabel = (labelData, callback) => {
     })
 }
 /**
- * 
- * @param {*} labelData 
- * @param {*} callback 
+ * @description:it will send update label data to model
+ * @param {*request from frontend} labelData 
+ * @param {*response to backend} callback 
  */
 exports.updateLabel = (labelData, callback) => {
-    console.log("in services",labelData);
-    noteModel.updateLabel( labelData,(err, result) => {
+    noteModel.updateLabel(labelData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
         }
     })
 }
-
 /**
- * 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send save label data to model
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
-exports.saveLabelToNote = ( paramData, callback) => {
-    console.log("in services", paramData);
-    if(paramData.pull){
+exports.saveLabelToNote = (paramData, callback) => {
+    if (paramData.pull) {
         noteModel.deleteLabelToNote(paramData, (err, result) => {
             if (err) {
+                console.log("service error");
                 callback(err);
             } else {
                 return callback(null, result)
             }
         })
     }
-    else{
+    else {
         noteModel.saveLabelToNote(paramData, (err, result) => {
             if (err) {
+                console.log("service error");
                 callback(err);
             } else {
                 return callback(null, result)
@@ -304,14 +295,14 @@ exports.saveLabelToNote = ( paramData, callback) => {
     }
 }
 /**
- * 
- * @param {*} paramData 
- * @param {*} callback 
+ * @description:it will send delete label data to model
+ * @param {*request from frontend} paramData 
+ * @param {*response to backend} callback 
  */
-exports.deleteLabelToNote = ( paramData, callback) => {
-    console.log("in services", paramData);
+exports.deleteLabelToNote = (paramData, callback) => {
     noteModel.deleteLabelToNote(paramData, (err, result) => {
         if (err) {
+            console.log("service error");
             callback(err);
         } else {
             return callback(null, result)
