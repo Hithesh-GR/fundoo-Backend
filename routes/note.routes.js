@@ -8,6 +8,8 @@
 const express = require('express');
 const router = express.Router();
 const noteController = require("../controllers/note.controllers");
+const labelController = require("../controllers/note.controllers");
+const collaboratorController = require("../controllers/note.controllers");
 const middle = require('../middleware/authentication');
 const upload = require('../middleware/fileUpload');
 
@@ -33,16 +35,20 @@ router.put('/isPinned', middle.checkTokenAuth, noteController.isPinned);
 
 router.put('/uploadImage', middle.checkTokenAuth, noteController.updateImage);
 
-router.post('/addLabel', middle.checkTokenAuth, noteController.addLabel);
+router.post('/addLabel', middle.checkTokenAuth, labelController.addLabel);
 
-router.get('/getLabels', middle.checkTokenAuth, noteController.getLabels);
+router.get('/getLabels', middle.checkTokenAuth, labelController.getLabels);
 
-router.post('/deleteLabel', middle.checkTokenAuth, noteController.deleteLabel);
+router.post('/deleteLabel', middle.checkTokenAuth, labelController.deleteLabel);
 
-router.put('/updateLabel', middle.checkTokenAuth, noteController.updateLabel);
+router.put('/updateLabel', middle.checkTokenAuth, labelController.updateLabel);
 
-router.post('/saveLabelToNote', middle.checkTokenAuth, noteController.saveLabelToNote);
+router.post('/saveLabelToNote', middle.checkTokenAuth, labelController.saveLabelToNote);
 
-router.post('/deleteLabelToNote', middle.checkTokenAuth, noteController.deleteLabelToNote)
+router.post('/deleteLabelToNote', middle.checkTokenAuth, labelController.deleteLabelToNote);
+
+router.post('/saveCollaborator', middle.checkTokenAuth, collaboratorController.saveCollaborator);
+
+router.get('/getCollaboratorDetails', middle.checkTokenAuth, collaboratorController.getCollaboratorDetails);
 
 module.exports = router;

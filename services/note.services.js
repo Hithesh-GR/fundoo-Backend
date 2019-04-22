@@ -8,6 +8,8 @@
  *  @since          : 23-02-2019
  ******************************************************************************/
 const noteModel = require('../application/models/note.models');
+const collaboratorModel = require('../application/models/note.models');
+const userModel = require('../application/models/user.models');
 /**
  * @description:it will send createNote data to model
  * @param {*request from frontend} data 
@@ -306,6 +308,51 @@ exports.deleteLabelToNote = (paramData, callback) => {
             callback(err);
         } else {
             return callback(null, result)
+        }
+    })
+}
+/**
+ * 
+ * @param {*} collabData 
+ * @param {*} callback 
+ */
+exports.saveCollaborator = (collabData, callback) => {
+    collaboratorModel.saveCollaborator(collabData, (err, result) => {
+        if (err) {
+            console.log("service error");
+            callback(err);
+        } else {
+            return callback(null, result)
+        }
+    })
+}
+/**
+ * 
+ * @param {*} userId 
+ * @param {*} callback 
+ */
+exports.getCollabNotesUserId = (userId, callback) => {
+    collaboratorModel.getCollabNotesUserId(userId, (err, result) => {
+        if (err) {
+            console.log("service error");
+            callback(err);
+        } else {
+            callback(null, result);
+        }
+    })
+}
+/**
+ * 
+ * @param {*} callback 
+ */
+exports.getCollaboratorDetails = (callback) => {
+    console.log("get collab details::");
+    userModel.getUserDetails((err, result) => {
+        if (err) {
+            console.log("service error");
+            callback(err);
+        } else {
+            callback(null, result);
         }
     })
 }

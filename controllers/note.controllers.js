@@ -6,6 +6,9 @@
  *  @since          : 23-02-2019
  *****************************************************************************************/
 const noteService = require('../services/note.services');
+const labelService = require('../services/note.services');
+const collaboratorService = require('../services/note.services');
+const sent = require('../middleware/nodemailer');
 /**
  * @description:it handles the creating note data
  * @param {*request from frontend} req 
@@ -380,154 +383,6 @@ exports.updateImage = (req, res) => {
     }
 }
 /**
- * @description:It handles the add labels to notes
- * @param {*request from frontend} req 
- * @param {*response from backend} res 
- */
-exports.addLabel = (req, res) => {
-    try {
-        // req.checkBody('userID', 'userID required').not().isEmpty();
-        req.checkBody('label', 'label required').not().isEmpty();
-        var errors = req.validationErrors();
-        var response = {};
-        if (errors) {
-            response.status = false;
-            response.error = errors;
-            return res.status(422).send(response);
-        } else {
-            var responseResult = {};
-            const labelData = {
-                userID: req.decoded.payload.user_id,
-                label: req.body.label
-            }
-            noteService.addLabel(labelData, (err, result) => {
-                if (err) {
-                    responseResult.status = false;
-                    responseResult.error = err;
-                    res.status(500).send(responseResult);
-                }
-                else {
-                    responseResult.status = true;
-                    responseResult.data = result;
-                    res.status(200).send(responseResult);
-                }
-            })
-        }
-    } catch (error) {
-        res.send(error);
-    }
-}
-/**
- * @description:It handles the get labels
- * @param {*request from frontend} req 
- * @param {*response from backend} res 
- */
-exports.getLabels = (req, res) => {
-    try {
-        // req.checkBody('userID', 'userID required').not().isEmpty();
-        var errors = req.validationErrors();
-        var response = {};
-        if (errors) {
-            response.status = false;
-            response.error = errors;
-            return res.status(422).send(response);
-        } else {
-            var responseResult = {};
-            const labelData = {
-                userID: req.decoded.payload.user_id,
-            }
-            noteService.getLabels(labelData, (err, result) => {
-                if (err) {
-                    responseResult.status = false;
-                    responseResult.error = err;
-                    res.status(500).send(responseResult);
-                }
-                else {
-                    responseResult.status = true;
-                    responseResult.data = result;
-                    res.status(200).send(responseResult);
-                }
-            })
-        }
-    } catch (error) {
-        res.send(error);
-    }
-}
-/**
- * @description:It handles the delete labels from notes
- * @param {*request from frontend} req 
- * @param {*response from backend} res 
- */
-exports.deleteLabel = (req, res) => {
-    try {
-        req.checkBody('labelID', 'labelID required').not().isEmpty();
-        var errors = req.validationErrors();
-        var response = {};
-        if (errors) {
-            response.status = false;
-            response.error = errors;
-            return res.status(422).send(response);
-        } else {
-            var responseResult = {};
-            const labelData = {
-                labelID: req.body.labelID,
-            }
-            noteService.deleteLabel(labelData, (err, result) => {
-                if (err) {
-                    responseResult.status = false;
-                    responseResult.error = err;
-                    res.status(500).send(responseResult);
-                }
-                else {
-                    responseResult.status = true;
-                    responseResult.data = result;
-                    res.status(200).send(responseResult);
-                }
-            })
-        }
-    } catch (error) {
-        res.send(error);
-    }
-}
-/**
- * @description:It handles the update the labels
- * @param {*request from frontend} req 
- * @param {*response from backend} res 
- */
-exports.updateLabel = (req, res) => {
-    try {
-        req.checkBody('labelID', 'labelID required').not().isEmpty();
-        req.checkBody('editLabel', 'editLabel required').not().isEmpty();
-        var errors = req.validationErrors();
-        var response = {};
-        if (errors) {
-            response.status = false;
-            response.error = errors;
-            return res.status(422).send(response);
-        } else {
-            var responseResult = {};
-            const labelData = {
-                editLabel: req.body.editLabel,
-                labelID: req.body.labelID
-            }
-            noteService.updateLabel(labelData, (err, result) => {
-                if (err) {
-                    responseResult.status = false;
-                    responseResult.error = err;
-                    res.status(500).send(responseResult);
-                }
-                else {
-                    responseResult.status = true;
-                    responseResult.data = result;
-                    res.status(200).send(responseResult);
-                }
-            })
-        }
-    } catch (error) {
-        res.send(error);
-    }
-}
-/**
  * @description:It handles the save labels to notes
  * @param {*request from frontend} req 
  * @param {*response from backend} res 
@@ -590,6 +445,227 @@ exports.deleteLabelToNote = (req, res) => {
             })
         }
     } catch (error) {
+        res.send(error)
+    }
+}
+/**
+ * @description:It handles the add labels to notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
+ */
+exports.addLabel = (req, res) => {
+    try {
+        // req.checkBody('userID', 'userID required').not().isEmpty();
+        req.checkBody('label', 'label required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            const labelData = {
+                userID: req.decoded.payload.user_id,
+                label: req.body.label
+            }
+            labelService.addLabel(labelData, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                }
+                else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+        res.send(error);
+    }
+}
+/**
+ * @description:It handles the get labels
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
+ */
+exports.getLabels = (req, res) => {
+    try {
+        // req.checkBody('userID', 'userID required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            const labelData = {
+                userID: req.decoded.payload.user_id,
+            }
+            labelService.getLabels(labelData, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                }
+                else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+        res.send(error);
+    }
+}
+/**
+ * @description:It handles the delete labels from notes
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
+ */
+exports.deleteLabel = (req, res) => {
+    try {
+        req.checkBody('labelID', 'labelID required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            const labelData = {
+                labelID: req.body.labelID,
+            }
+            labelService.deleteLabel(labelData, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                }
+                else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+        res.send(error);
+    }
+}
+/**
+ * @description:It handles the update the labels
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
+ */
+exports.updateLabel = (req, res) => {
+    try {
+        req.checkBody('labelID', 'labelID required').not().isEmpty();
+        req.checkBody('editLabel', 'editLabel required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            const labelData = {
+                editLabel: req.body.editLabel,
+                labelID: req.body.labelID
+            }
+            labelService.updateLabel(labelData, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                }
+                else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } catch (error) {
+        res.send(error);
+    }
+}
+/**
+ * @description:It handles save the collaborators
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
+ */
+exports.saveCollaborator = (req, res) => {
+    // console.log("colabbbbbb=====================",req.body);
+    try {
+        req.checkBody('userID', 'userID required').not().isEmpty();
+        req.checkBody('noteID', 'noteID required').not().isEmpty();
+        // req.checkBody('collaboratorID', 'collaboratorID required').not().isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
+        } else {
+            var responseResult = {};
+            const collabData = {
+                userID: req.decoded.payload.user_id,
+                noteID: req.body.noteID,
+                collabUserID: req.body.collabID
+            }
+            collaboratorService.saveCollaborator(collabData, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                }
+                else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    const url = `you have been successfully collabed with one fundooNotes user`;
+                    sent.sendEMailFunction(url);
+                    res.status(200).send(url);
+                    //res.status(200).send(responseResult);
+                }
+            })
+        }
+    }
+    catch (error) {
+        res.send(error)
+    }
+}
+/**
+ * @description:It handles get the collaborator details
+ * @param {*request from frontend} req 
+ * @param {*response from backend} res 
+ */
+exports.getCollaboratorDetails = (req, res) => {
+    try {
+        var responseResult = {};
+        // console.log("in collab noteController", req.body);
+        collaboratorService.getCollaboratorDetails((err, result) => {
+            console.log(err);
+            console.log(result);
+            if (err) {
+                responseResult.status = false;
+                responseResult.error = err;
+                res.status(500).send(responseResult);
+            }
+            else {
+                responseResult.status = true;
+                responseResult.data = result;
+                res.status(200).send(responseResult);
+            }
+        })
+    }
+    catch (error) {
         res.send(error)
     }
 }

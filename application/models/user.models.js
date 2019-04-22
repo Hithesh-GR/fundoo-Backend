@@ -36,11 +36,11 @@ const UserSchema = mongoose.Schema({
         type: String,
     }
 }, {
-    timestamps: true
-});
+        timestamps: true
+    });
 var user = mongoose.model('User', UserSchema);
 
-function userModel() {}
+function userModel() { }
 
 function hash(password) {
     var pass = bcrypt.hashSync(password, saltRounds);
@@ -146,14 +146,14 @@ userModel.prototype.updateUserPassword = (req, callback) => {
     user.updateOne({
         _id: req.decoded.payload.user_id
     }, {
-        password: newpassword
-    }, (err, result) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, result);
-        }
-    });
+            password: newpassword
+        }, (err, result) => {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
 }
 /**
  * @description:update the profille pic image and store it in database 
@@ -163,8 +163,8 @@ userModel.prototype.updateUserPassword = (req, callback) => {
  */
 userModel.prototype.setProfilePic = (userID, image, callback) => {
     user.findOneAndUpdate({
-            _id: userID
-        }, {
+        _id: userID
+    }, {
             $set: {
                 profilePic: image
             }
@@ -178,4 +178,18 @@ userModel.prototype.setProfilePic = (userID, image, callback) => {
             }
         });
 };
+userModel.prototype.getUserDetails = (callback) => {
+    console.log("ultimate save");
+    user.find({},
+        {
+            notes: 0, password: 0
+        },
+        function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        })
+}
 module.exports = new userModel();

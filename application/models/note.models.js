@@ -322,6 +322,82 @@ noteModel.prototype.updateImage = (noteID, updateNote, callback) => {
         });
 };
 /**
+ * @description:it will save the label to note
+ * @param {*request from frontend} labelParams 
+ * @param {*response to backend} callback 
+ */
+noteModel.prototype.saveLabelToNote = (labelParams, callback) => {
+    console.log("in model", labelParams.noteID);
+    var labelledNote = null;
+    var noteID = null;
+    if (labelParams != null) {
+        labelledNote = labelParams.label;
+        noteID = labelParams.noteID;
+    } else {
+        callback("Pinned note not found")
+    }
+    note.findOneAndUpdate(
+        {
+            _id: noteID
+        },
+        {
+            $push: {
+                label: labelledNote,
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                console.log("in model success");
+                let res = result.label;
+                res.push(labelledNote);
+                return callback(null, res)
+            }
+        });
+};
+/**
+ * @description:it will delete the label from note
+ * @param {*request from frontend} labelParams 
+ * @param {*response to backend} callback 
+ */
+noteModel.prototype.deleteLabelToNote = (labelParams, callback) => {
+    console.log("in model", labelParams.noteID);
+    var labelledNote = null;
+    var noteID = null;
+    if (labelParams != null) {
+        labelledNote = labelParams.value;
+        noteID = labelParams.noteID;
+    } else {
+        callback("Pinned note not found")
+    }
+    note.findOneAndUpdate(
+        {
+            _id: noteID
+        },
+        {
+            $pull: {
+                label: labelledNote,
+            }
+        },
+        (err, result) => {
+            if (err) {
+                callback(err)
+            } else {
+                let newArray = result.label;
+                console.log("in model success result", result);
+
+                for (let i = 0; i < newArray.length; i++) {
+                    if (newArray[i] === labelledNote) {
+                        newArray.splice(i, 1);
+                        return callback(null, newArray)
+                    }
+                }
+            }
+        });
+};
+
+/**
  * @description:Creating label schema using mongoose
  **/
 var labelSchema = new mongoose.Schema({
@@ -423,79 +499,80 @@ noteModel.prototype.updateLabel = (changedLabel, callback) => {
             }
         });
 };
-/**
- * @description:it will save the label to note
- * @param {*request from frontend} labelParams 
- * @param {*response to backend} callback 
- */
-noteModel.prototype.saveLabelToNote = (labelParams, callback) => {
-    console.log("in model", labelParams.noteID);
-    var labelledNote = null;
-    var noteID = null;
-    if (labelParams != null) {
-        labelledNote = labelParams.label;
-        noteID = labelParams.noteID;
-    } else {
-        callback("Pinned note not found")
-    }
-    note.findOneAndUpdate(
-        {
-            _id: noteID
-        },
-        {
-            $push: {
-                label: labelledNote,
-            }
-        },
-        (err, result) => {
-            if (err) {
-                callback(err)
-            } else {
-                console.log("in model success");
-                let res = result.label;
-                res.push(labelledNote);
-                return callback(null, res)
-            }
-        });
-};
-/**
- * @description:it will delete the label from note
- * @param {*request from frontend} labelParams 
- * @param {*response to backend} callback 
- */
-noteModel.prototype.deleteLabelToNote = (labelParams, callback) => {
-    console.log("in model", labelParams.noteID);
-    var labelledNote = null;
-    var noteID = null;
-    if (labelParams != null) {
-        labelledNote = labelParams.value;
-        noteID = labelParams.noteID;
-    } else {
-        callback("Pinned note not found")
-    }
-    note.findOneAndUpdate(
-        {
-            _id: noteID
-        },
-        {
-            $pull: {
-                label: labelledNote,
-            }
-        },
-        (err, result) => {
-            if (err) {
-                callback(err)
-            } else {
-                let newArray = result.label;
-                console.log("in model success result", result);
 
-                for (let i = 0; i < newArray.length; i++) {
-                    if (newArray[i] === labelledNote) {
-                        newArray.splice(i, 1);
-                        return callback(null, newArray)
-                    }
-                }
+/**
+ * @description:Creating collaborator schema using mongoose
+ */
+const collabSchema = mongoose.Schema({
+    userID: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+    noteID: {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
+    },
+    collabUserID: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+},
+    {
+        timestamps: true
+    })
+const Collab = mongoose.model('Collaborator', collabSchema);
+/**
+ * 
+ * @param {*} collabData 
+ * @param {*} callback 
+ */
+noteModel.prototype.saveCollaborator = (collabData, callback) => {
+    console.log("ultimate save", collabData);
+    const Data = new Collab(collabData);
+    Data.save((err, result) => {
+        if (err) {
+            console.log(err);
+            callback(err);
+        } else {
+            return callback(null, result);
+        }
+    })
+}
+
+noteModel.prototype.getCollabNotesUserId = (userID, callback) => {
+    Collab.find({ collabUserID: userID }, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, result);
+        }
+    })
+}
+
+noteModel.prototype.getDataByNoteId = (noteID, callback) => {
+    Collab.find({ noteID: noteID })
+        .populate('userID', { notes: 0, password: 0, __v: 0, resetPasswordExpires: 0, resetPasswordToken: 0 })
+        .populate('collabUserID', { notes: 0, password: 0, __v: 0, resetPasswordExpires: 0, resetPasswordToken: 0 })
+        .populate('noteID')
+        .exec(function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
             }
-        });
-};
+        })
+}
+
+noteModel.prototype.getCollabOwnerUserId = (ownerUserId, callback) => {
+    Collab.find({ userID: ownerUserId })
+        .populate('collabUserID', { notes: 0, password: 0, __v: 0, resetPasswordExpires: 0, resetPasswordToken: 0 })
+        .exec(function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        })
+}
+
 module.exports = new noteModel();
