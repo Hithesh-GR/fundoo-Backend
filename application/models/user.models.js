@@ -162,6 +162,8 @@ userModel.prototype.updateUserPassword = (req, callback) => {
  * @param {*response to backend} callback 
  */
 userModel.prototype.setProfilePic = (userID, image, callback) => {
+    console.log("dtaaaaaaaaa=>",userID,image);
+    
     user.findOneAndUpdate({
         _id: userID
     }, {
