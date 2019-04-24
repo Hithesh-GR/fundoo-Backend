@@ -44,6 +44,12 @@ var noteSchema = new mongoose.Schema({
     trash: {
         type: Boolean,
     },
+    collab:[
+        {
+            type: String,
+            ref: "collabSchema"
+        }
+    ],
     label: [
         {
             type: String,
