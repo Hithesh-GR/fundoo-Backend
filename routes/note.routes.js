@@ -1,10 +1,10 @@
-/****************************************************************************************
+/**********************************************************************************************************
  *  @Purpose        : To provide routes to each webpages. 
  *  @file           : note.routes.js        
  *  @author         : HITHESH G R
  *  @version        : v0.1
  *  @since          : 02-02-2019
- *****************************************************************************************/
+ *********************************************************************************************************/
 const express = require('express');
 const router = express.Router();
 const noteController = require("../controllers/note.controllers");
@@ -50,5 +50,10 @@ router.post('/deleteLabelToNote', middle.checkTokenAuth, labelController.deleteL
 router.post('/saveCollaborator', middle.checkTokenAuth, collaboratorController.saveCollaborator);
 
 router.get('/getCollaboratorDetails', middle.checkTokenAuth, collaboratorController.getCollaboratorDetails);
+
+router.post('/pushNotification', middle.checkTokenAuth, noteController.pushNotification);
+
+router.get('/sendNotification/:userid', noteController.sendPushNotification),
+
 
 module.exports = router;

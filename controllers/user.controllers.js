@@ -49,6 +49,7 @@ exports.login = (req, res) => {
         } else {
             var responseResult = {};
             userService.login(req.body, (err, result) => {
+                console.log("login enter====================>",result);
                 if (err) {
                     responseResult.status = false;
                     responseResult.message = 'Login Failed';

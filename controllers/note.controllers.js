@@ -54,7 +54,6 @@ exports.createNote = (req, res) => {
  */
 exports.getNotes = (req, res) => {
     try {
-        // console.log("note Controller", req);
         var responseResult = {};
         noteService.getNotes(req, (err, result) => {
             if (err) {
@@ -602,11 +601,10 @@ exports.updateLabel = (req, res) => {
  * @param {*response from backend} res 
  */
 exports.saveCollaborator = (req, res) => {
-    // console.log("colabbbbbb=====================",req.body);
     try {
         req.checkBody('userID', 'userID required').not().isEmpty();
         req.checkBody('noteID', 'noteID required').not().isEmpty();
-        // req.checkBody('collaboratorID', 'collaboratorID required').not().isEmpty();
+        req.checkBody('collabUserID', 'collabUserID required').not().isEmpty();
         var errors = req.validationErrors();
         var response = {};
         if (errors) {
@@ -669,3 +667,60 @@ exports.getCollaboratorDetails = (req, res) => {
         res.send(error)
     }
 }
+exports.pushNotification = (req, res) => {
+    try {
+      console.log(
+        "Reqest from backend in pushNotification==================",
+        req.body
+      );
+      req
+        .checkBody("pushToken", "pushToken required")
+        .not()
+        .isEmpty();
+      var errors = req.validationErrors();
+      var response = {};
+      if (errors) {
+        response.status = false;
+        response.error = errors;
+        return res.status(422).send(response);
+      } else {
+        var responseResult = {};
+        noteService.pushNotification(req, (err, result) => {
+          if (err) {
+            responseResult.status = false;
+            responseResult.error = err;
+            res.status(500).send(responseResult);
+          } else {
+            responseResult.status = true;
+            responseResult.data = result;
+            res.status(200).send(responseResult);
+          }
+        });
+      }
+    } catch (error) {
+      res.send(error);
+    }
+  };
+
+  exports.sendPushNotification = (req, res) => {
+    try {
+      console.log("USER ID GIVEN IS ", req.params.userid);
+  
+      var responseResult = {};
+      var user_id = req.params.userid;
+      noteService.sendPushNotification(user_id, (err, result) => {
+        if (err) {
+          responseResult.status = false;
+          responseResult.error = err;
+          res.status(500).send(responseResult);
+        } else {
+          responseResult.status = true; 
+          responseResult.data = "Notification sent successfully!!"
+          res.status(200).send(responseResult);
+        }
+      });
+    } catch (error) {
+      res.send(error);
+    }
+  };
+  

@@ -10,6 +10,9 @@
 const noteModel = require('../application/models/note.models');
 const collaboratorModel = require('../application/models/note.models');
 const userModel = require('../application/models/user.models');
+const NotificationModel = require('../application/models/notification')
+const sendPush = require('../sendpush')
+const async = require('async');
 /**
  * @description:it will send createNote data to model
  * @param {*request from frontend} data 
@@ -345,9 +348,9 @@ exports.getCollabNotesUserId = (userId, callback) => {
  * 
  * @param {*} callback 
  */
-exports.getCollaboratorDetails = (callback) => {
+exports.getCollaboratorDetails =  (callback) => {
     console.log("get collab details::");
-    userModel.getUserDetails((err, result) => {
+     userModel.getUserDetails((err, result) => {
         if (err) {
             console.log("service error");
             callback(err);
@@ -356,3 +359,112 @@ exports.getCollaboratorDetails = (callback) => {
         }
     })
 }
+exports.pushNotification = (req, callback) => {
+    NotificationModel.updatePushNotification(req, (err, result) => {
+      if (err) {
+        console.log("service error");
+        callback(err);
+      } else {
+        return callback(null, result);
+      }
+    });
+  };
+  exports.sendPushNotification = (user_id, callback)=>{
+    NotificationModel.sendPushNotification(user_id, (err, result) => {
+      if (err) {
+        console.log("service error");
+        callback(err);
+      } else {
+        console.log("IN SERVICE RESUT IS ",result);
+        sendPush.SendPushNotify(result)
+        return callback(null, result);
+      }
+    });
+    
+  }
+/*************************************************************************************** */
+
+// exports.getNotes = (data, callback) => {
+//     var finalResult = [];
+//     noteModel.getNotes(data, (err, result) => {
+//         if (err) {
+//             callback(err);
+//         } else {
+//             userModel.findByUserId(data, (errorUser, resultUser) => {
+//                 if (errorUser) {
+//                     callback(errorUser);
+//                 } else {
+//                     const noteOwner = {
+//                         firstName: resultUser.firstName,
+//                         lastName: resultUser.lastName,
+//                         username: resultUser.username,
+//                         _id: resultUser._id
+//                     }
+//                     for (var i = 0; i < result.length; i++) {
+//                         var userNote = {
+//                             note: result[i],
+//                             owner: noteOwner,
+//                             collab: []
+//                         }
+//                         finalResult.push(userNote);
+//                     }
+//                     collaboratorModel.getCollabOwnerUserId(data, (errorCollab, resultOwnerCollab) => {
+//                         if (errorCollab) {
+//                             callback(errorCollab);
+//                         } else {
+//                             console.log("resulcollabowner  ", resultOwnerCollab);
+//                             for (var i = 0; i < finalResult.length; i++) {
+//                                 for (var j = 0; j < resultOwnerCollab.length; j++) {
+//                                     if (finalResult[i].note._id.equals(resultOwnerCollab[j].noteID)) {
+//                                         finalResult[i].collab.push(resultOwnerCollab[j].collabUserID)
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     })
+//                     collaboratorModel.getCollabNotesUserId(data, (errorCollab, resultCollab) => {
+//                         if (errorCollab) {
+//                             callback(errorCollab);
+//                         } else {
+//                             var operations = [];
+//                             for (var i = 0; i < resultCollab.length; i++) {
+//                                 operations.push((function (collabData) {
+//                                     return function (callback) {
+//                                         collaboratorModel.getDataByNoteId(collabData.noteID, (errorNote, resultNote) => {
+//                                             console.log("123 : ", resultNote);
+//                                             if (errorNote) {
+//                                                 callback(errorNote)
+//                                             } else {
+//                                                 var collabUserArray = [];
+//                                                 for (var i = 0; i < resultNote.length; i++) {
+//                                                     collabUserArray.push(resultNote[i].collabUserID)
+//                                                 }
+//                                                 var collabNote = {
+//                                                     note: resultNote[0].noteID,
+//                                                     owner: resultNote[0].userID,
+//                                                     collab: collabUserArray
+//                                                 }
+//                                                 finalResult.push(collabNote);
+//                                                 callback(null, collabNote)
+//                                             }
+//                                         })
+//                                     }
+//                                 })(resultCollab[i]))
+//                             }
+//                             async.series(operations, (errorAsync, resultAsync) => {
+//                                 console.log(resultAsync);
+//                                 if (errorAsync) {
+//                                     callback(errorAsync);
+//                                 } else {
+//                                     console.log("final result ", finalResult);
+//                                     callback(null, finalResult)
+//                                 }
+//                             })
+//                         }
+//                     })
+//                 }
+//             })
+//         }
+//     })
+
+// }

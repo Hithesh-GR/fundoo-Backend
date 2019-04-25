@@ -44,12 +44,12 @@ var noteSchema = new mongoose.Schema({
     trash: {
         type: Boolean,
     },
-    collab:[
-        {
-            type: String,
-            ref: "collabSchema"
-        }
-    ],
+    // collab:[
+    //     {
+    //         type: String,
+    //         ref: "collabSchema"
+    //     }
+    // ],
     label: [
         {
             type: String,
@@ -111,8 +111,8 @@ noteModel.prototype.getNotes = (id, callback) => {
  * @param {*request from frontend} updateParams 
  * @param {*response to backend} callback 
  */
-noteModel.prototype.updateColor = (noteID, updateParams, callback) => {
-    note.findOneAndUpdate({
+noteModel.prototype.updateColor = async (noteID, updateParams, callback) => {
+    await note.findOneAndUpdate({
         _id: noteID
     }, {
             $set: {
@@ -512,7 +512,7 @@ noteModel.prototype.updateLabel = (changedLabel, callback) => {
 const collabSchema = mongoose.Schema({
     userID: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "UserSchema"
     },
     noteID: {
         type: Schema.Types.ObjectId,
@@ -520,7 +520,7 @@ const collabSchema = mongoose.Schema({
     },
     collabUserID: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "UserSchema"
     },
 },
     {

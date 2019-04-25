@@ -162,8 +162,8 @@ userModel.prototype.updateUserPassword = (req, callback) => {
  * @param {*response to backend} callback 
  */
 userModel.prototype.setProfilePic = (userID, image, callback) => {
-    console.log("dtaaaaaaaaa=>",userID,image);
-    
+    console.log("dtaaaaaaaaa=>", userID, image);
+
     user.findOneAndUpdate({
         _id: userID
     }, {
@@ -193,5 +193,14 @@ userModel.prototype.getUserDetails = (callback) => {
                 callback(null, result);
             }
         })
+};
+userModel.prototype.findByUserId = (data, callback) => {
+    user.findOne({ "_id": data }, { password: 0 }, (err, result) => {
+        if (err) {
+            callback(err);
+        }
+        else
+            return callback(null, result);
+    })
 }
 module.exports = new userModel();
