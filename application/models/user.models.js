@@ -195,7 +195,7 @@ userModel.prototype.getUserDetails = (callback) => {
         })
 };
 userModel.prototype.findByUserId = (data, callback) => {
-    user.findOne({ "_id": data }, { password: 0 }, (err, result) => {
+    user.findOne({ "_id": data.decoded.payload.user_id }, { password: 0 }, (err, result) => {
         if (err) {
             callback(err);
         }

@@ -51,15 +51,20 @@ exports.getNotes = (data, callback) => {
  * @param {*request from frontend} paramData 
  * @param {*response to backend} callback 
  */
-exports.updateColor = (paramID, paramData, callback) => {
-    noteModel.updateColor(paramID, paramData, (err, result) => {
-        if (err) {
-            console.log("service error");
-            callback(err);
-        } else {
-            return callback(null, result);
-        }
-    })
+exports.updateColor = (paramID, paramData) => {
+    try {
+        return new Promise((resolve, reject) => {
+            noteModel.updateColor(paramID, paramData)
+                .then((result) => {
+                    resolve(result)
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        })
+    } catch (err) {
+        console.log('errors in serivces', err)
+    }
 }
 /**
  * @description:it will send deleteNote data to model
@@ -348,9 +353,9 @@ exports.getCollabNotesUserId = (userId, callback) => {
  * 
  * @param {*} callback 
  */
-exports.getCollaboratorDetails =  (callback) => {
+exports.getCollaboratorDetails = (callback) => {
     console.log("get collab details::");
-     userModel.getUserDetails((err, result) => {
+    userModel.getUserDetails((err, result) => {
         if (err) {
             console.log("service error");
             callback(err);
@@ -361,28 +366,27 @@ exports.getCollaboratorDetails =  (callback) => {
 }
 exports.pushNotification = (req, callback) => {
     NotificationModel.updatePushNotification(req, (err, result) => {
-      if (err) {
-        console.log("service error");
-        callback(err);
-      } else {
-        return callback(null, result);
-      }
+        if (err) {
+            console.log("service error");
+            callback(err);
+        } else {
+            return callback(null, result);
+        }
     });
-  };
-  exports.sendPushNotification = (user_id, callback)=>{
+};
+exports.sendPushNotification = (user_id, callback) => {
     NotificationModel.sendPushNotification(user_id, (err, result) => {
-      if (err) {
-        console.log("service error");
-        callback(err);
-      } else {
-        console.log("IN SERVICE RESUT IS ",result);
-        sendPush.SendPushNotify(result)
-        return callback(null, result);
-      }
+        if (err) {
+            console.log("service error");
+            callback(err);
+        } else {
+            console.log("IN SERVICE RESUT IS ", result);
+            sendPush.SendPushNotify(result)
+            return callback(null, result);
+        }
     });
-    
-  }
-/*************************************************************************************** */
+}
+/*******************************************************************************************/
 
 // exports.getNotes = (data, callback) => {
 //     var finalResult = [];
@@ -391,6 +395,8 @@ exports.pushNotification = (req, callback) => {
 //             callback(err);
 //         } else {
 //             userModel.findByUserId(data, (errorUser, resultUser) => {
+//                 console.log(resultUser);
+                
 //                 if (errorUser) {
 //                     callback(errorUser);
 //                 } else {
@@ -398,7 +404,7 @@ exports.pushNotification = (req, callback) => {
 //                         firstName: resultUser.firstName,
 //                         lastName: resultUser.lastName,
 //                         username: resultUser.username,
-//                         _id: resultUser._id
+//                         user_id: resultUser.user_id
 //                     }
 //                     for (var i = 0; i < result.length; i++) {
 //                         var userNote = {
@@ -409,6 +415,7 @@ exports.pushNotification = (req, callback) => {
 //                         finalResult.push(userNote);
 //                     }
 //                     collaboratorModel.getCollabOwnerUserId(data, (errorCollab, resultOwnerCollab) => {
+//                         // console.log("lllllllllllllllllllllllllllllll",resultOwnerCollab);
 //                         if (errorCollab) {
 //                             callback(errorCollab);
 //                         } else {

@@ -35,6 +35,10 @@ router.put('/isPinned', middle.checkTokenAuth, noteController.isPinned);
 
 router.put('/uploadImage', middle.checkTokenAuth, noteController.updateImage);
 
+router.post('/pushNotification', middle.checkTokenAuth, noteController.pushNotification);
+
+router.get('/sendNotification/:userid', noteController.sendPushNotification),
+
 router.post('/addLabel', middle.checkTokenAuth, labelController.addLabel);
 
 router.get('/getLabels', middle.checkTokenAuth, labelController.getLabels);
@@ -50,10 +54,5 @@ router.post('/deleteLabelToNote', middle.checkTokenAuth, labelController.deleteL
 router.post('/saveCollaborator', middle.checkTokenAuth, collaboratorController.saveCollaborator);
 
 router.get('/getCollaboratorDetails', middle.checkTokenAuth, collaboratorController.getCollaboratorDetails);
-
-router.post('/pushNotification', middle.checkTokenAuth, noteController.pushNotification);
-
-router.get('/sendNotification/:userid', noteController.sendPushNotification),
-
 
 module.exports = router;

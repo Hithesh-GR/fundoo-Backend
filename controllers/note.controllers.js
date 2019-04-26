@@ -69,7 +69,7 @@ exports.getNotes = (req, res) => {
             }
         })
     } catch (error) {
-        res.send(err)
+        res.send(error)
     }
 }
 /**
@@ -91,17 +91,17 @@ exports.updateColor = (req, res) => {
             var responseResult = {};
             noteID = req.body.noteID;
             color = req.body.color;
-            noteService.updateColor(noteID, color, (err, result) => {
-                if (err) {
-                    responseResult.status = false;
-                    responseResult.error = err;
-                    res.status(500).send(responseResult);
-                } else {
+            noteService.updateColor(noteID, color)
+                .then((result) => {
                     responseResult.status = true;
                     responseResult.data = result;
                     res.status(200).send(responseResult);
-                }
-            })
+                })
+                .catch((err) => {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                })
         }
     } catch (error) {
         res.send(error);
@@ -137,7 +137,6 @@ exports.deleteNote = (req, res) => {
             })
         }
     } catch (error) {
-
         res.send(error)
     }
 }
@@ -628,7 +627,7 @@ exports.saveCollaborator = (req, res) => {
                     responseResult.status = true;
                     responseResult.data = result;
                     const url = `you have been successfully collabed with one fundooNotes user`;
-                    sent.sendEMailFunction(url);
+                    sent.sendEMailFunctionForCollaborator(url);
                     res.status(200).send(url);
                     //res.status(200).send(responseResult);
                 }
@@ -667,60 +666,70 @@ exports.getCollaboratorDetails = (req, res) => {
         res.send(error)
     }
 }
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.pushNotification = (req, res) => {
     try {
-      console.log(
-        "Reqest from backend in pushNotification==================",
-        req.body
-      );
-      req
-        .checkBody("pushToken", "pushToken required")
-        .not()
-        .isEmpty();
-      var errors = req.validationErrors();
-      var response = {};
-      if (errors) {
-        response.status = false;
-        response.error = errors;
-        return res.status(422).send(response);
-      } else {
-        var responseResult = {};
-        noteService.pushNotification(req, (err, result) => {
-          if (err) {
-            responseResult.status = false;
-            responseResult.error = err;
-            res.status(500).send(responseResult);
-          } else {
-            responseResult.status = true;
-            responseResult.data = result;
-            res.status(200).send(responseResult);
-          }
-        });
-      }
-    } catch (error) {
-      res.send(error);
-    }
-  };
-
-  exports.sendPushNotification = (req, res) => {
-    try {
-      console.log("USER ID GIVEN IS ", req.params.userid);
-  
-      var responseResult = {};
-      var user_id = req.params.userid;
-      noteService.sendPushNotification(user_id, (err, result) => {
-        if (err) {
-          responseResult.status = false;
-          responseResult.error = err;
-          res.status(500).send(responseResult);
+        console.log(
+            "Reqest from backend in pushNotification==================",
+            req.body
+        );
+        req
+            .checkBody("pushToken", "pushToken required")
+            .not()
+            .isEmpty();
+        var errors = req.validationErrors();
+        var response = {};
+        if (errors) {
+            response.status = false;
+            response.error = errors;
+            return res.status(422).send(response);
         } else {
-          responseResult.status = true; 
-          responseResult.data = "Notification sent successfully!!"
-          res.status(200).send(responseResult);
+            var responseResult = {};
+            noteService.pushNotification(req, (err, result) => {
+                if (err) {
+                    responseResult.status = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult);
+                } else {
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            });
         }
-      });
     } catch (error) {
-      res.send(error);
+        res.send(error);
     }
-  };
-  
+};
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.sendPushNotification = (req, res) => {
+    try {
+        console.log("USER ID GIVEN IS ", req.params.userid);
+
+        var responseResult = {};
+        var user_id = req.params.userid;
+        noteService.sendPushNotification(user_id, (err, result) => {
+            if (err) {
+                responseResult.status = false;
+                responseResult.error = err;
+                res.status(500).send(responseResult);
+            } else {
+                responseResult.status = true;
+                responseResult.data = "Notification sent successfully!!"
+                res.status(200).send(responseResult);
+            }
+        });
+    } catch (error) {
+        res.send(error);
+    }
+};
+
+

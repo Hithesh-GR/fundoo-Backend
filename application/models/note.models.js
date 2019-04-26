@@ -111,21 +111,25 @@ noteModel.prototype.getNotes = (id, callback) => {
  * @param {*request from frontend} updateParams 
  * @param {*response to backend} callback 
  */
-noteModel.prototype.updateColor = async (noteID, updateParams, callback) => {
-    await note.findOneAndUpdate({
-        _id: noteID
-    }, {
-            $set: {
-                color: updateParams
-            }
-        },
-        (err, result) => {
-            if (err) {
-                callback(err)
-            } else {
-                return callback(null, updateParams);
-            }
-        });
+noteModel.prototype.updateColor =  (noteID, updateParams, res) => {
+    return new Promise((resolve, reject) => {
+         note.findOneAndUpdate({
+            _id: noteID
+        }, {
+                $set: {
+                    color: updateParams
+                }
+            },
+            (err, result) => {
+                if (err) {
+                    console.log("color not updated");
+                    reject(err);
+                } else {
+                    console.log("color updated sucessfully");
+                    resolve(updateParams);
+                }
+            });
+    })
 };
 /**
  * @description:it will permanently delete the note
@@ -545,16 +549,6 @@ noteModel.prototype.saveCollaborator = (collabData, callback) => {
     })
 }
 
-noteModel.prototype.getCollabNotesUserId = (userID, callback) => {
-    Collab.find({ collabUserID: userID }, (err, result) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, result);
-        }
-    })
-}
-
 noteModel.prototype.getDataByNoteId = (noteID, callback) => {
     Collab.find({ noteID: noteID })
         .populate('userID', { notes: 0, password: 0, __v: 0, resetPasswordExpires: 0, resetPasswordToken: 0 })
@@ -567,6 +561,17 @@ noteModel.prototype.getDataByNoteId = (noteID, callback) => {
                 callback(null, result);
             }
         })
+}
+
+noteModel.prototype.getCollabNotesUserId = (userID, callback) => {
+    console.log("--------------------------",userID);
+    Collab.find({ collabUserID: userID }, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, result);
+        }
+    })
 }
 
 noteModel.prototype.getCollabOwnerUserId = (ownerUserId, callback) => {
