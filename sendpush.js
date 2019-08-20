@@ -1,10 +1,10 @@
 const admin = require("firebase-admin");
 
-const serviceAccount = require("../server/pushnotification-4e632-firebase-adminsdk-00x6q-6062fb9244.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://pushnotification-4e632.firebaseio.com"
-});
+// const serviceAccount = require("../server/pushnotification-4e632-firebase-adminsdk-00x6q-6062fb9244.json");
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://pushnotification-4e632.firebaseio.com"
+// });
 
 module.exports = {
   SendPushNotify(token) {
