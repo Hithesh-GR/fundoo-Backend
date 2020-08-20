@@ -15,7 +15,7 @@
     "async-series": "0.0.1",
     "aws-sdk": "^2.433.0",
     "axios": "^0.18.0",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "chai-json-schema": "^1.5.0",
     "config": "^3.0.1",
