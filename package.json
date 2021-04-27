@@ -33,7 +33,7 @@
     "multer-s3": "^2.9.0",
     "nodemailer": "^5.1.1",
     "nodemon": "^1.18.10",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "response-time": "^2.3.2"
   },
   "devDependencies": {
